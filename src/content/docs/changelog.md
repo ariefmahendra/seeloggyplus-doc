@@ -30,6 +30,8 @@ improves file navigation and text selection, and moves Help to the published doc
 - Remote locations restore after their dependencies are ready; file table keyboard navigation remains available.
 - Subfolder menus, download directory fields and breadcrumb arrows follow the selected theme.
 - Linux launchers resolve relative data and settings from the installation directory.
+- Windows launchers accept an empty Java override and Java paths containing spaces. Known older launcher scripts are repaired after upgrade without overwriting user configuration.
+- Linux launchers and bundled runtimes retain executable permissions after installation and update.
 
 ### Tests
 - Headless application regression suite and release build.

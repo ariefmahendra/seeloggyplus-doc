@@ -26,6 +26,8 @@ memperbaiki navigasi file dan pemilihan teks, serta memindahkan Help ke website 
 - Pemulihan lokasi remote dan navigasi keyboard tabel file diperbaiki.
 - Menu subfolder, field direktori unduhan dan posisi panah breadcrumb mengikuti tema.
 - Launcher Linux membaca data dan konfigurasi relatif terhadap direktori instalasi.
+- Launcher Windows menerima pengaturan Java kosong dan path Java dengan spasi. Script launcher lama yang dikenali diperbaiki setelah upgrade tanpa menimpa konfigurasi pengguna.
+- Launcher dan runtime bawaan Linux tetap memiliki izin eksekusi setelah instalasi dan update.
 
 ### Pengujian
 - Regression suite aplikasi headless dan build rilis.
