@@ -268,6 +268,8 @@ test.describe('dark chapters', () => {
 			await expect
 				.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth))
 				.toBeGreaterThan(0);
+			const current = await image.evaluate((element) => (element as HTMLImageElement).currentSrc);
+			expect(current).toContain('-dark');
 			expect(await meanLuminance(image)).toBeLessThan(0.35);
 		}
 	});
@@ -282,12 +284,15 @@ test.describe('dark chapters', () => {
 		expect(await textLuminance(page.locator('.journey-heading'))).toBeGreaterThan(0.6);
 
 		const slides = page.locator('[data-gallery] [data-slide] img');
-		for (const index of [6, 7]) {
+		await expect(slides).toHaveCount(8);
+		for (let index = 0; index < 8; index += 1) {
 			const image = slides.nth(index);
 			await image.scrollIntoViewIfNeeded();
 			await expect
 				.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth))
 				.toBeGreaterThan(0);
+			const current = await image.evaluate((element) => (element as HTMLImageElement).currentSrc);
+			expect(current).toContain('-dark');
 			expect(await meanLuminance(image)).toBeLessThan(0.35);
 		}
 	});
