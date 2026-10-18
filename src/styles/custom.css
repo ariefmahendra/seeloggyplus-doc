@@ -29,3 +29,133 @@
 	font-size: var(--sl-text-sm);
 	color: var(--sl-color-gray-3);
 }
+
+:root {
+	--lp-brand: #3871e1;
+	--lp-brand-hover: #2f5eb9;
+	--lp-brand-tint: #1d3668;
+	--lp-border: #33363c;
+	--lp-bg-soft: #26282c;
+	--lp-panel: #191a1c;
+	--lp-ink: #e8e9ec;
+	--lp-muted: #a3a7ae;
+	--lp-success: #4ade80;
+	--lp-warning: #fbbf24;
+	--lp-danger: #f87171;
+	--lp-radius: 0.75rem;
+}
+
+:root[data-theme='light'] {
+	--lp-brand-tint: #f0f5ff;
+	--lp-border: #e3e5e9;
+	--lp-bg-soft: #f7f8f9;
+	--lp-panel: #ffffff;
+	--lp-ink: #080808;
+	--lp-muted: #5f6269;
+	--lp-success: #2f855a;
+	--lp-warning: #92400e;
+	--lp-danger: #a03325;
+}
+
+body:has(.lp) .sl-container {
+	max-width: min(76rem, 100%);
+}
+
+body:has(.lp) .content-panel:has(> .sl-container > h1#_top) {
+	display: none;
+}
+
+.header select {
+	--sl-select-width: 9em;
+}
+
+.lp {
+	--lp-gap: 1.5rem;
+	color: var(--lp-ink);
+	line-height: 1.6;
+}
+
+.lp-wrap {
+	width: 100%;
+	max-width: 72rem;
+	margin-inline: auto;
+	padding-inline: 1.5rem;
+}
+
+.lp-section {
+	padding-block: 4.5rem;
+}
+
+.lp-section + .lp-section {
+	border-top: 1px solid var(--lp-border);
+}
+
+.lp-section-head {
+	max-width: 44rem;
+	margin-bottom: 2.25rem;
+}
+
+.lp-section-head h2 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.6rem, 3vw, 2.1rem);
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+}
+
+.lp-section-head p {
+	margin: 0;
+	color: var(--lp-muted);
+}
+
+.lp-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.65rem 1.15rem;
+	border: 1px solid var(--lp-border);
+	border-radius: 0.6rem;
+	background: var(--lp-panel);
+	color: var(--lp-ink);
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+
+.lp-btn:hover {
+	border-color: var(--lp-brand);
+	color: var(--lp-brand);
+}
+
+.lp-btn-primary {
+	border-color: var(--lp-brand);
+	background: var(--lp-brand);
+	color: #ffffff;
+}
+
+.lp-btn-primary:hover {
+	border-color: var(--lp-brand-hover);
+	background: var(--lp-brand-hover);
+	color: #ffffff;
+}
+
+.lp-btn-ghost {
+	border-color: transparent;
+	background: transparent;
+	color: var(--lp-muted);
+}
+
+.lp-btn-ghost:hover {
+	border-color: transparent;
+	background: transparent;
+	color: var(--lp-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lp-btn,
+	.lp * {
+		transition: none !important;
+		animation: none !important;
+	}
+}

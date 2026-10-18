@@ -1,0 +1,77 @@
+---
+import { landingCopy } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing };
+---
+
+<section class="lp-section">
+	<div class="lp-wrap">
+		<header class="lp-section-head">
+			<h2>{copy.faq.title}</h2>
+		</header>
+		<div class="faq">
+			{
+				copy.faq.items.map((item) => (
+					<details>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq {
+		display: grid;
+		gap: 0.6rem;
+		max-width: 52rem;
+	}
+
+	.faq details {
+		border: 1px solid var(--lp-border);
+		border-radius: var(--lp-radius);
+		background: var(--lp-panel);
+	}
+
+	.faq summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.95rem 1.25rem;
+		font-size: 0.95rem;
+		font-weight: 650;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq summary::after {
+		content: '';
+		flex: none;
+		width: 0.55rem;
+		height: 0.55rem;
+		border-right: 2px solid var(--lp-muted);
+		border-bottom: 2px solid var(--lp-muted);
+		transform: rotate(45deg);
+		transition: transform 150ms ease;
+	}
+
+	.faq details[open] summary::after {
+		transform: rotate(-135deg);
+	}
+
+	.faq details p {
+		margin: 0;
+		padding: 0 1.25rem 1.1rem;
+		color: var(--lp-muted);
+		font-size: 0.9rem;
+		line-height: 1.65;
+	}
+</style>

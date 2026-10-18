@@ -1,0 +1,29 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import Hero from '../../components/landing/Hero.astro';
+import FactsRow from '../../components/landing/FactsRow.astro';
+import FeatureGrid from '../../components/landing/FeatureGrid.astro';
+import ScreenshotCarousel from '../../components/landing/ScreenshotCarousel.astro';
+import QuickStart from '../../components/landing/QuickStart.astro';
+import DownloadSection from '../../components/landing/DownloadSection.astro';
+import FaqList from '../../components/landing/FaqList.astro';
+import { landingCopy } from '../../content/landing/copy';
+
+const copy = landingCopy.id;
+---
+
+<StarlightPage
+	frontmatter={{ title: copy.meta.title, description: copy.meta.description, template: 'splash' }}
+	hasSidebar={false}
+	lang="id"
+>
+	<div class="lp">
+		<Hero copy={copy} guideHref="/id/getting-started/" />
+		<FactsRow copy={copy} />
+		<FeatureGrid copy={copy} />
+		<ScreenshotCarousel copy={copy} />
+		<QuickStart copy={copy} guideHref="/id/getting-started/" />
+		<DownloadSection copy={copy} changelogHref="/id/changelog/" />
+		<FaqList copy={copy} />
+	</div>
+</StarlightPage>

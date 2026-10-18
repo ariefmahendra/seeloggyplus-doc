@@ -1,0 +1,290 @@
+---
+import { Image } from 'astro:assets';
+import fileManager from '../../assets/landing/file-manager.png';
+import remoteBrowser from '../../assets/landing/remote-browser.png';
+import tail from '../../assets/landing/tail.png';
+import search from '../../assets/landing/search.png';
+import detail from '../../assets/landing/detail.png';
+import findInFiles from '../../assets/landing/find-in-files.png';
+import preferences from '../../assets/landing/preferences.png';
+import serverManagement from '../../assets/landing/server-management.png';
+import { landingCopy } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing };
+
+const images: Record<string, ImageMetadata> = {
+	'file-manager': fileManager,
+	'remote-browser': remoteBrowser,
+	tail,
+	search,
+	detail,
+	'find-in-files': findInFiles,
+	preferences,
+	'server-management': serverManagement,
+};
+---
+
+<section class="lp-section">
+	<div class="lp-wrap">
+		<header class="lp-section-head">
+			<h2>{copy.carousel.title}</h2>
+			<p>{copy.carousel.subtitle}</p>
+		</header>
+		<div class="carousel" data-carousel>
+			<div
+				class="track"
+				data-track
+				tabindex="0"
+				role="group"
+				aria-label={copy.carousel.title}
+			>
+				{
+					copy.carousel.slides.map((slide) => (
+						<figure class="slide" data-slide>
+							<a
+								class="slide-media"
+								href={images[slide.image].src}
+								target="_blank"
+								rel="noopener"
+							>
+								<Image
+									src={images[slide.image]}
+									alt={slide.alt}
+									widths={[640, 960, 1440, 1920]}
+									sizes="(min-width: 60rem) 56rem, 92vw"
+									loading="lazy"
+								/>
+							</a>
+							<figcaption>
+								<strong>{slide.title}</strong>
+								<span>{slide.text}</span>
+							</figcaption>
+						</figure>
+					))
+				}
+			</div>
+			<div class="controls">
+				<button type="button" class="arrow" data-prev aria-label={copy.carousel.prev}>
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<polyline points="15 18 9 12 15 6"></polyline>
+					</svg>
+				</button>
+				<div class="dots">
+					{
+						copy.carousel.slides.map((slide, index) => (
+							<button
+								type="button"
+								class="dot"
+								data-dot
+								data-index={index}
+								aria-label={slide.title}
+								aria-current={index === 0 ? 'true' : 'false'}
+							/>
+						))
+					}
+				</div>
+				<button type="button" class="arrow" data-next aria-label={copy.carousel.next}>
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const setupCarousel = (carousel: HTMLElement) => {
+		const track = carousel.querySelector<HTMLElement>('[data-track]');
+		if (!track) return;
+
+		const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-slide]'));
+		const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		const setCurrent = (index: number) => {
+			dots.forEach((dot, dotIndex) => {
+				const current = dotIndex === index;
+				dot.classList.toggle('is-current', current);
+				dot.setAttribute('aria-current', current ? 'true' : 'false');
+			});
+		};
+
+		const goTo = (index: number) => {
+			const clamped = Math.max(0, Math.min(slides.length - 1, index));
+			slides[clamped]?.scrollIntoView({
+				behavior: reduceMotion ? 'auto' : 'smooth',
+				inline: 'center',
+				block: 'nearest',
+			});
+			setCurrent(clamped);
+		};
+
+		carousel.querySelector('[data-prev]')?.addEventListener('click', () => {
+			const current = dots.findIndex((dot) => dot.classList.contains('is-current'));
+			goTo(current - 1);
+		});
+
+		carousel.querySelector('[data-next]')?.addEventListener('click', () => {
+			const current = dots.findIndex((dot) => dot.classList.contains('is-current'));
+			goTo(current + 1);
+		});
+
+		dots.forEach((dot) => {
+			dot.addEventListener('click', () => goTo(Number(dot.dataset.index ?? 0)));
+		});
+
+		track.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowLeft') {
+				event.preventDefault();
+				const current = dots.findIndex((dot) => dot.classList.contains('is-current'));
+				goTo(current - 1);
+			}
+			if (event.key === 'ArrowRight') {
+				event.preventDefault();
+				const current = dots.findIndex((dot) => dot.classList.contains('is-current'));
+				goTo(current + 1);
+			}
+		});
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+						setCurrent(slides.indexOf(entry.target as HTMLElement));
+					}
+				});
+			},
+			{ root: track, threshold: [0.6] }
+		);
+		slides.forEach((slide) => observer.observe(slide));
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(setupCarousel);
+</script>
+
+<style>
+	.carousel {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.track {
+		display: flex;
+		gap: 1rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding-inline: 0.25rem;
+		padding-block: 0.25rem;
+		scrollbar-width: none;
+	}
+
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.slide {
+		flex: 0 0 min(56rem, 88%);
+		margin: 0;
+		scroll-snap-align: center;
+	}
+
+	.slide-media {
+		display: block;
+		border: 1px solid var(--lp-border);
+		border-radius: var(--lp-radius);
+		background: var(--lp-panel);
+		overflow: hidden;
+	}
+
+	.slide-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.slide figcaption {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin-top: 0.65rem;
+		font-size: 0.875rem;
+	}
+
+	.slide figcaption strong {
+		font-weight: 650;
+	}
+
+	.slide figcaption span {
+		color: var(--lp-muted);
+	}
+
+	.controls {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.arrow {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 1px solid var(--lp-border);
+		border-radius: 50%;
+		background: var(--lp-panel);
+		color: var(--lp-ink);
+		cursor: pointer;
+		transition: border-color 120ms ease, color 120ms ease;
+	}
+
+	.arrow:hover {
+		border-color: var(--lp-brand);
+		color: var(--lp-brand);
+	}
+
+	.arrow svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.dots {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		padding: 0;
+		border: 0;
+		border-radius: 999px;
+		background: var(--lp-border);
+		cursor: pointer;
+		transition: background-color 120ms ease, width 120ms ease;
+	}
+
+	.dot.is-current {
+		width: 1.35rem;
+		background: var(--lp-brand);
+	}
+
+	.track:focus-visible,
+	.arrow:focus-visible,
+	.dot:focus-visible {
+		outline: 2px solid var(--lp-brand);
+		outline-offset: 2px;
+	}
+
+	@media (max-width: 48rem) {
+		.slide figcaption {
+			flex-direction: column;
+			gap: 0.1rem;
+		}
+	}
+</style>

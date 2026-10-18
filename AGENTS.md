@@ -43,9 +43,17 @@ clear reason; **NEVER** = stop and choose another path.
 - Frontmatter MUST have `title` and `description`; `description` feeds SEO.
 - Use Starlight components first (`Steps`, `Asides`, `Cards`, `Badges`); keyboard
   shortcuts use `<kbd>` elements (styled in `custom.css`).
-- Screenshots use Markdown image syntax with localized alt text
+- Screenshots in docs pages use Markdown image syntax with localized alt text
   (`![Main window](../../assets/screenshots/main-window.png)`), optionally followed by a
-  `<p class="screenshot-caption">` caption. Never raw `<img>` except through Markdown.
+  `<p class="screenshot-caption">` caption. Landing components use `<Image>` from
+  `astro:assets`. Never raw `<img>`.
+- The landing page lives in `src/pages/index.astro` and `src/pages/id/index.astro`,
+  built from `src/components/landing/` with all copy in `src/content/landing/copy.ts`
+  (both languages must stay in sync). Landing screenshots come from the app repository's
+  `LandingScreenshotGeneratorTest` (1440×900 at 2×) and live in `src/assets/landing/`;
+  never hand-edit them.
+- Starlight's automatic page title is hidden on landing pages via a CSS rule scoped with
+  `body:has(.lp)`; keep the `.lp` wrapper when editing the landing pages.
 - Internal links use absolute site paths (`/guides/tail/`) so the link validator can check
   them. Pages in the Indonesian tree link to their `/id/` counterparts
   (`/id/guides/tail/`); inconsistent-locale links fail the build.

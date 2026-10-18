@@ -17,10 +17,15 @@ deployed on Vercel. The content is bilingual: English (default, `/`) and Indones
 
 ## Structure
 
+- `src/pages/` — custom landing pages: `/` (English) and `/id/` (Indonesian), built with
+  Starlight's `<StarlightPage>`
+- `src/components/landing/` — landing sections (hero, features, carousel, FAQ, ...)
+- `src/content/landing/copy.ts` — all landing copy, both languages in one file
 - `src/content/docs/` — English pages (root locale)
 - `src/content/docs/id/` — Indonesian pages (same slugs; keep both in sync)
 - `src/content/i18n/` — Starlight UI translation strings per language
 - `src/assets/screenshots/` — screenshots used throughout the guides
+- `src/assets/landing/` — landing screenshots (generated from the application repo)
 - `src/styles/custom.css` — brand tokens ported from the application theme
 - `.agents/skills/` — project skills for AI agents (see `AGENTS.md`)
 
