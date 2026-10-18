@@ -50,6 +50,11 @@ const shots: Record<string, ImageMetadata> = {
 <style>
 	.features {
 		padding-block: clamp(5rem, 12vh, 8.5rem);
+		--lp-ink: #eef1f5;
+		--lp-soft: #9aa3af;
+		--lp-surface: #171c23;
+		background: #10141a;
+		color: var(--lp-ink);
 	}
 
 	.features-head {
@@ -58,6 +63,7 @@ const shots: Record<string, ImageMetadata> = {
 		font-weight: 500;
 		line-height: 1;
 		letter-spacing: -0.02em;
+		color: inherit;
 	}
 
 	.modules {
@@ -94,6 +100,7 @@ const shots: Record<string, ImageMetadata> = {
 		font-size: var(--step-body);
 		font-weight: 500;
 		line-height: 1.35;
+		color: inherit;
 	}
 
 	.module-text p {

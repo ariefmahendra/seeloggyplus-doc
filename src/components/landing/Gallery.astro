@@ -99,6 +99,47 @@ const images: Record<string, ImageMetadata> = {
 		const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-dot]'));
 		const counter = gallery.querySelector<HTMLElement>('[data-counter]');
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let glideFrame: number | undefined;
+
+		const cancelGlide = () => {
+			if (glideFrame !== undefined) {
+				cancelAnimationFrame(glideFrame);
+				glideFrame = undefined;
+			}
+			track.removeAttribute('data-gliding');
+		};
+
+		const glideTo = (target: number) => {
+			if (reduceMotion) {
+				track.scrollLeft = target;
+				return;
+			}
+			cancelGlide();
+			const from = track.scrollLeft;
+			const distance = target - from;
+			if (Math.abs(distance) < 1) {
+				return;
+			}
+			const duration = 550;
+			const started = performance.now();
+			const easeInOut = (progress: number) =>
+				progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+			track.setAttribute('data-gliding', 'true');
+			const frame = (now: number) => {
+				const progress = Math.min(1, (now - started) / duration);
+				track.scrollLeft = from + distance * easeInOut(progress);
+				if (progress < 1) {
+					glideFrame = requestAnimationFrame(frame);
+				} else {
+					glideFrame = undefined;
+					track.removeAttribute('data-gliding');
+				}
+			};
+			glideFrame = requestAnimationFrame(frame);
+		};
+
+		track.addEventListener('pointerdown', cancelGlide, { passive: true });
+		track.addEventListener('wheel', cancelGlide, { passive: true });
 
 		const setCurrent = (index: number) => {
 			dots.forEach((dot, dotIndex) => {
@@ -117,10 +158,7 @@ const images: Record<string, ImageMetadata> = {
 				const slideRect = slide.getBoundingClientRect();
 				const target =
 					track.scrollLeft + (slideRect.left - trackRect.left) - (track.clientWidth - slideRect.width) / 2;
-				track.scrollTo({
-					left: target,
-					behavior: reduceMotion ? 'auto' : 'smooth',
-				});
+				glideTo(target);
 			}
 			setCurrent(clamped);
 		};
@@ -164,6 +202,11 @@ const images: Record<string, ImageMetadata> = {
 <style>
 	.gallery {
 		padding-block: clamp(5rem, 12vh, 8.5rem);
+		--lp-ink: #eef1f5;
+		--lp-soft: #9aa3af;
+		--lp-surface: #171c23;
+		background: #10141a;
+		color: var(--lp-ink);
 	}
 
 	.gallery-head {
@@ -176,6 +219,7 @@ const images: Record<string, ImageMetadata> = {
 		font-weight: 500;
 		line-height: 1;
 		letter-spacing: -0.02em;
+		color: inherit;
 	}
 
 	.gallery-head p {
@@ -198,6 +242,10 @@ const images: Record<string, ImageMetadata> = {
 
 	.track::-webkit-scrollbar {
 		display: none;
+	}
+
+	.track[data-gliding] {
+		scroll-snap-type: none;
 	}
 
 	.slide {
