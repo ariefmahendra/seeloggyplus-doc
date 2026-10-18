@@ -26,7 +26,7 @@ export default defineConfig({
 			defaultLocale: 'root',
 			locales: {
 				root: { label: 'English', lang: 'en' },
-				id: { label: 'Bahasa Indonesia', lang: 'id' },
+				id: { label: 'Indonesia', lang: 'id' },
 			},
 			plugins: [starlightLinksValidator({ errorOnInconsistentLocale: true }), starlightImageZoom()],
 			sidebar: [
