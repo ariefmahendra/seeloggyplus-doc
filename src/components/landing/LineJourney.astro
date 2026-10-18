@@ -14,7 +14,7 @@ const message = line.slice(29).replace(/^- /, '');
 		<div class="field field-ink">
 			<h2 class="journey-heading">{copy.journey.heading}</h2>
 			<p class="clause">{copy.journey.fields[0].clause}</p>
-			<div class="card" data-ui data-reveal>
+			<div class="card" data-ui>
 				<p class="card-line">
 					<span class="t">{time}</span> <span class="lv">ERROR</span> <span class="m">{message}</span>
 				</p>
@@ -22,7 +22,7 @@ const message = line.slice(29).replace(/^- /, '');
 		</div>
 		<div class="field field-graphite">
 			<p class="clause">{copy.journey.fields[1].clause}</p>
-			<div class="card" data-ui data-reveal style="--i:1">
+			<div class="card" data-ui>
 				<p class="card-line">
 					<span class="t">{time}</span> <mark class="lv">ERROR</mark>
 					<span class="m">{message}</span>
@@ -32,13 +32,13 @@ const message = line.slice(29).replace(/^- /, '');
 		</div>
 		<div class="field field-pale">
 			<p class="clause">{copy.journey.fields[2].clause}</p>
-			<div class="card" data-ui data-reveal style="--i:2">
+			<div class="card" data-ui>
 				<pre class="card-json">{journeyPayload}</pre>
 			</div>
 		</div>
 		<div class="field field-accent">
 			<p class="clause">{copy.journey.fields[3].clause}</p>
-			<div class="card" data-ui data-reveal style="--i:3">
+			<div class="card" data-ui>
 				<p class="card-line">
 					<span class="t">{time}</span> <span class="lv">ERROR</span> <span class="m">{message}</span>
 				</p>
@@ -64,9 +64,12 @@ const message = line.slice(29).replace(/^- /, '');
 	}
 
 	.field {
+		--field-padding: 1.75rem;
 		position: relative;
+		container-type: inline-size;
+		margin: 0;
 		min-height: 84svh;
-		padding: 1.75rem;
+		padding: var(--field-padding);
 		overflow: hidden;
 	}
 
@@ -122,21 +125,34 @@ const message = line.slice(29).replace(/^- /, '');
 
 	.card {
 		position: absolute;
-		top: 38%;
-		left: 50%;
-		transform: translateX(-50%);
+		top: 33%;
+		left: 0;
+		right: 0;
+		margin-inline: auto;
 		width: 16.25rem;
+		max-width: calc(100% - 2rem);
+		min-height: 18rem;
 		padding: 0.7rem 0.8rem;
 		background: #fbfcfd;
 		border: 1px solid rgba(16, 20, 26, 0.14); /* taste-skill-ignore */
 		color: #10141a;
 		font-family: var(--sl-font-mono); /* taste-skill-ignore */
-		transition: transform 150ms ease;
+		transition: transform 600ms var(--ease-out);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
+		.card {
+			transform: translateX(calc(-50cqw - var(--field-padding)));
+		}
+
 		.field:hover .card {
-			transform: translateX(-50%) translateY(-6px);
+			transform: translateX(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.card {
+			transition: none;
 		}
 	}
 
@@ -196,8 +212,9 @@ const message = line.slice(29).replace(/^- /, '');
 		}
 
 		.field {
+			--field-padding: 1.25rem;
 			min-height: 60svh;
-			padding: 1.25rem;
+			padding: var(--field-padding);
 		}
 
 		.journey-heading {
@@ -212,15 +229,9 @@ const message = line.slice(29).replace(/^- /, '');
 
 		.card {
 			position: static;
-			transform: none;
 			margin-top: 2rem;
 			width: 16.25rem;
 		}
 
-		@media (hover: hover) {
-			.field:hover .card {
-				transform: translateY(-6px);
-			}
-		}
 	}
 </style>
