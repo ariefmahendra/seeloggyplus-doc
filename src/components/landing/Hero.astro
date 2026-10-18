@@ -7,7 +7,7 @@ type Landing = typeof landingCopy.en;
 const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 ---
 
-<section class="hero">
+<section class="hero lp-bleed">
 	<div class="lp-wrap">
 		<div class="hero-copy">
 			<h1 class="hero-title">
@@ -22,7 +22,7 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 			<p class="hero-note" data-rise style="--i:2">{copy.hero.note}</p>
 		</div>
 	</div>
-	<div class="stage-outer">
+	<div class="lp-wrap lp-media-wrap stage-outer">
 		<div class="hero-stage">
 			<div class="hero-stage-body">
 				<div class="hero-stage-shot">
@@ -31,7 +31,7 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 						src={heroDark}
 						alt={copy.hero.alt}
 						widths={[720, 1080, 1440, 2160, 2880]}
-						sizes="(min-width: 76rem) 1120px, calc(100vw - 2rem)"
+						sizes="(min-width: 50rem) min(1296px, 146vh, 96vw), 100vw"
 						quality={90}
 						loading="eager"
 						fetchpriority="high"
@@ -108,19 +108,16 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 	.stage-outer {
 		position: relative;
 		margin-top: clamp(1.5rem, 4.5vh, 3rem);
-		margin-left: clamp(0rem, 8vw, 7rem);
-		margin-right: calc((100vw - 100%) / -2);
 	}
 
 	.hero-stage-body {
-		padding: clamp(1rem, 2.5vw, 2.75rem);
+		padding: 1rem;
 		background: var(--lp-stage);
-		clip-path: polygon(4.5rem 0, 100% 0, 100% 100%, 0 100%, 0 4.5rem);
+		clip-path: polygon(1rem 0, 100% 0, 100% 100%, 0 100%, 0 1rem);
 	}
 
 	.hero-stage-shot {
 		position: relative;
-		transition: transform var(--t-ui) var(--ease-out), box-shadow var(--t-ui) var(--ease-out);
 	}
 
 	.hero-stage-shot :global(img),
@@ -128,13 +125,6 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 		display: block;
 		width: 100%;
 		height: auto;
-	}
-
-	@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-		.hero-stage:hover .hero-stage-shot {
-			transform: translateY(-10px);
-			box-shadow: 0 42px 84px -48px rgba(4, 10, 26, 0.65); /* taste-skill-ignore */
-		}
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -157,16 +147,6 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 		}
 	}
 
-	@media (max-width: 56rem) {
-		.stage-outer {
-			margin-left: calc(clamp(1.25rem, 4vw, 2.5rem) * -1);
-			margin-right: calc(clamp(1.25rem, 4vw, 2.5rem) * -1);
-		}
-
-		.hero-stage-body {
-			padding: 1rem;
-		}
-	}
 </style>
 
 <style is:global>

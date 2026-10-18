@@ -76,6 +76,60 @@ for (const path of LOCALES) {
 	}
 }
 
+test.describe('proportional landing previews', () => {
+	test.use({ deviceScaleFactor: 2 });
+
+	for (const path of LOCALES) {
+		for (const width of [1920, 1440, 1366, 390]) {
+			test(`screenshots use the available width and stay sharp at ${width}px (${path})`, async ({ page }) => {
+				const height = width === 1366 ? 768 : 900;
+				await page.setViewportSize({ width, height });
+				await page.goto(path);
+				await revealAll(page);
+				for (const selector of ['.hero-shot', '.panel img', '[data-slide] img']) {
+					const images = page.locator(selector);
+					const count = selector === '[data-slide] img' ? 1 : await images.count();
+					for (let index = 0; index < count; index += 1) {
+						const image = images.nth(index);
+						await image.scrollIntoViewIfNeeded();
+						await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+						const metrics = await image.evaluate(async element => {
+							const img = element as HTMLImageElement;
+							const box = img.getBoundingClientRect();
+							const bitmap = await createImageBitmap(await (await fetch(img.currentSrc)).blob());
+							return { width: box.width, height: box.height, ratio: box.width / box.height,
+								sourceWidth: bitmap.width, sourceRatio: bitmap.width / bitmap.height };
+						});
+						expect(metrics.width).toBeGreaterThanOrEqual(width >= 1000 ? (width === 1366 ? 950 : 1100) : 300);
+						expect(metrics.height).toBeLessThanOrEqual(height * 0.83);
+						expect(metrics.width).toBeLessThanOrEqual(width);
+						expect(metrics.sourceWidth).toBeGreaterThanOrEqual(Math.floor(metrics.width * 2));
+						expect(Math.abs(metrics.ratio - metrics.sourceRatio)).toBeLessThan(0.02);
+					}
+				}
+				const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+				expect(overflow).toBe(false);
+			});
+		}
+	}
+});
+
+test('desktop gallery and its controls fit together below the site header', async ({ page }) => {
+	await page.setViewportSize({ width: 1366, height: 768 });
+	await page.goto('/');
+	await revealAll(page);
+	const height = await page.locator('[data-gallery]').evaluate(gallery => {
+		const heading = document.querySelector('.gallery-head')!;
+		return gallery.getBoundingClientRect().bottom - heading.getBoundingClientRect().top;
+	});
+	expect(height).toBeLessThanOrEqual(768 - 80);
+	const centers = await page.locator('[data-dot]').evaluateAll(dots => dots.map(dot => {
+		const box = dot.getBoundingClientRect();
+		return box.top + box.height / 2;
+	}));
+	expect(Math.max(...centers) - Math.min(...centers)).toBeLessThanOrEqual(1);
+});
+
 test.describe('hero screenshot', () => {
 	test.use({ deviceScaleFactor: 2 });
 
@@ -101,8 +155,8 @@ test.describe('hero screenshot', () => {
 			};
 		});
 
-		expect(metrics.fileWidth).toBeGreaterThanOrEqual(2240);
-		expect(metrics.displayedWidth).toBeGreaterThanOrEqual(1000);
+		expect(metrics.fileWidth).toBeGreaterThanOrEqual(Math.floor(metrics.displayedWidth * 2));
+		expect(metrics.displayedWidth).toBeGreaterThanOrEqual(900);
 		expect(Math.abs(metrics.fileWidth / metrics.fileHeight - metrics.displayedRatio)).toBeLessThan(0.05);
 	});
 });
@@ -184,7 +238,7 @@ test.describe('screenshot gallery', () => {
 		}
 	});
 
-	test('all slides share one size and a 16:10 ratio', async ({ page }) => {
+	test('all slides share one size and a 16:9 ratio', async ({ page }) => {
 		await page.setViewportSize({ width: 1440, height: 900 });
 		await page.goto('/');
 		await revealAll(page);
@@ -205,7 +259,7 @@ test.describe('screenshot gallery', () => {
 		for (const box of boxes) {
 			expect(Math.abs(box.width - first.width)).toBeLessThanOrEqual(1);
 			expect(Math.abs(box.height - first.height)).toBeLessThanOrEqual(1);
-			expect(Math.abs(box.ratio - 1.6)).toBeLessThan(0.02);
+			expect(Math.abs(box.ratio - 16 / 9)).toBeLessThan(0.02);
 		}
 	});
 
@@ -230,7 +284,7 @@ test.describe('screenshot gallery', () => {
 		await expect.poll(() => current.getAttribute('data-index')).toBe('5');
 		await expect(page.locator('[data-gallery] [data-counter]')).toHaveText('6 / 8');
 
-		const centered = await page
+		const centered = () => page
 			.locator('[data-gallery] [data-slide]')
 			.nth(5)
 			.evaluate((slide) => {
@@ -241,13 +295,26 @@ test.describe('screenshot gallery', () => {
 					slideRect.left + slideRect.width / 2 - (trackRect.left + trackRect.width / 2)
 				);
 			});
-		expect(centered).toBeLessThan(4);
+		await expect.poll(centered).toBeLessThan(4);
 
 		const endX = await track.evaluate((element) => element.scrollLeft);
 		await page.locator('[data-gallery] [data-prev]').click();
 		await expect.poll(() => current.getAttribute('data-index')).toBe('4');
 		await expect.poll(() => track.evaluate((element) => element.scrollLeft)).toBeLessThan(endX);
 	});
+});
+
+test('selected preview stays fully aligned when the viewport changes', async ({ page }) => {
+	await page.setViewportSize({ width: 1440, height: 900 });
+	await page.goto('/');
+	await revealAll(page);
+	await page.locator('[data-dot]').nth(3).click();
+	await expect(page.locator('[data-track]')).not.toHaveAttribute('data-gliding', 'true');
+	await page.setViewportSize({ width: 390, height: 844 });
+	await expect.poll(() => page.locator('[data-slide]').nth(3).evaluate(slide => {
+		return Math.abs(slide.getBoundingClientRect().left - slide.parentElement!.getBoundingClientRect().left);
+	})).toBeLessThan(1);
+	await expect(page.locator('[data-dot][aria-current="true"]')).toHaveAttribute('data-index', '3');
 });
 
 test.describe('dark chapters', () => {
@@ -301,7 +368,7 @@ test.describe('dark chapters', () => {
 test.describe('hero hover', () => {
 	test.use({ reducedMotion: 'no-preference' });
 
-	test('lifts the application screenshot and settles back', async ({ page }) => {
+	test('does not move or lift the application screenshot on hover', async ({ page }) => {
 		await page.setViewportSize({ width: 1440, height: 900 });
 		await page.goto('/');
 		await page.waitForTimeout(1800);
@@ -316,10 +383,9 @@ test.describe('hero hover', () => {
 
 		const before = await translateY();
 		await page.locator('.hero-stage').hover();
-		await expect.poll(translateY, { timeout: 3000 }).toBeLessThanOrEqual(before - 8);
-
-		await page.mouse.move(8, 8);
-		await expect.poll(translateY, { timeout: 3000 }).toBeGreaterThanOrEqual(before - 1);
+		await page.waitForTimeout(300);
+		const during = await translateY();
+		expect(during).toBe(before);
 	});
 });
 
@@ -347,6 +413,22 @@ test.describe('carousel motion', () => {
 		expect(settled).toBeGreaterThan(start + 100);
 		expect(mid).toBeGreaterThan(start + 1);
 		expect(mid).toBeLessThan(settled - 20);
+	});
+});
+
+test.describe('carousel interruption', () => {
+	test.use({ reducedMotion: 'no-preference' });
+
+	test('rapid next clicks retain the intended destination without reversing', async ({ page }) => {
+		await page.goto('/');
+		await revealAll(page);
+		await page.locator('[data-gallery]').scrollIntoViewIfNeeded();
+		await page.locator('[data-next]').click();
+		await page.waitForTimeout(200);
+		await page.locator('[data-next]').click();
+		await expect(page.locator('[data-counter]')).toHaveText('3 / 8');
+		await expect(page.locator('[data-track]')).not.toHaveAttribute('data-gliding', 'true');
+		await expect(page.locator('[data-dot][aria-current="true"]')).toHaveAttribute('data-index', '2');
 	});
 });
 

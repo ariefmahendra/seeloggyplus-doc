@@ -25,13 +25,42 @@ const images: Record<string, ImageMetadata> = {
 };
 ---
 
-<section class="gallery lp-bleed">
-	<div class="lp-wrap">
-		<header class="gallery-head" data-reveal>
-			<h2>{copy.gallery.heading}</h2>
-			<p>{copy.gallery.subtitle}</p>
-		</header>
+<section id="screenshots" class="gallery lp-bleed">
+	<div class="lp-wrap lp-media-wrap">
 		<div class="carousel" data-gallery data-reveal style="--i:1">
+			<div class="gallery-toolbar">
+				<header class="gallery-head">
+					<h2>{copy.gallery.heading}</h2>
+					<p>{copy.gallery.subtitle}</p>
+				</header>
+				<div class="controls">
+					<button type="button" class="arrow" data-prev aria-label={copy.gallery.prev}>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="15 18 9 12 15 6"></polyline>
+						</svg>
+					</button>
+					<div class="dots">
+						{
+							copy.gallery.slides.map((slide, index) => (
+								<button
+									type="button"
+									class="dot"
+									data-dot
+									data-index={index}
+									aria-label={slide.title}
+									aria-current={index === 0 ? 'true' : 'false'}
+								/>
+							))
+						}
+					</div>
+					<span class="counter" data-counter>{`1 / ${copy.gallery.slides.length}`}</span>
+					<button type="button" class="arrow" data-next aria-label={copy.gallery.next}>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="9 18 15 12 9 6"></polyline>
+						</svg>
+					</button>
+				</div>
+			</div>
 			<div class="track" data-track tabindex="0" role="group" aria-label={copy.gallery.heading}>
 				{
 					copy.gallery.slides.map((slide) => (
@@ -46,7 +75,7 @@ const images: Record<string, ImageMetadata> = {
 									src={images[slide.image]}
 									alt={slide.alt}
 									widths={[640, 960, 1440, 1920, 2880]}
-									sizes="(min-width: 60rem) 56rem, 92vw"
+									sizes="(min-width: 50rem) min(1296px, calc(177.777vh - 23.111rem), 96vw), 100vw"
 									quality={90}
 									loading="lazy"
 								/>
@@ -58,33 +87,6 @@ const images: Record<string, ImageMetadata> = {
 						</figure>
 					))
 				}
-			</div>
-			<div class="controls">
-				<button type="button" class="arrow" data-prev aria-label={copy.gallery.prev}>
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-				<div class="dots">
-					{
-						copy.gallery.slides.map((slide, index) => (
-							<button
-								type="button"
-								class="dot"
-								data-dot
-								data-index={index}
-								aria-label={slide.title}
-								aria-current={index === 0 ? 'true' : 'false'}
-							/>
-						))
-					}
-				</div>
-				<span class="counter" data-counter>{`1 / ${copy.gallery.slides.length}`}</span>
-				<button type="button" class="arrow" data-next aria-label={copy.gallery.next}>
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
 			</div>
 		</div>
 	</div>
@@ -100,6 +102,14 @@ const images: Record<string, ImageMetadata> = {
 		const counter = gallery.querySelector<HTMLElement>('[data-counter]');
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let glideFrame: number | undefined;
+		let navigation = 0;
+		let navigating = false;
+		const prepareImage = async (index: number) => {
+			const image = slides[index]?.querySelector('img');
+			if (!image) return;
+			image.loading = 'eager';
+			await image.decode().catch(() => {});
+		};
 
 		const cancelGlide = () => {
 			if (glideFrame !== undefined) {
@@ -112,12 +122,16 @@ const images: Record<string, ImageMetadata> = {
 		const glideTo = (target: number) => {
 			if (reduceMotion) {
 				track.scrollLeft = target;
+				track.removeAttribute('data-gliding');
+				navigating = false;
 				return;
 			}
 			cancelGlide();
 			const from = track.scrollLeft;
 			const distance = target - from;
 			if (Math.abs(distance) < 1) {
+				track.removeAttribute('data-gliding');
+				navigating = false;
 				return;
 			}
 			const duration = 550;
@@ -132,14 +146,20 @@ const images: Record<string, ImageMetadata> = {
 					glideFrame = requestAnimationFrame(frame);
 				} else {
 					glideFrame = undefined;
+					navigating = false;
 					track.removeAttribute('data-gliding');
 				}
 			};
 			glideFrame = requestAnimationFrame(frame);
 		};
 
-		track.addEventListener('pointerdown', cancelGlide, { passive: true });
-		track.addEventListener('wheel', cancelGlide, { passive: true });
+		const interrupt = () => {
+			navigation += 1;
+			navigating = false;
+			cancelGlide();
+		};
+		track.addEventListener('pointerdown', interrupt, { passive: true });
+		track.addEventListener('wheel', interrupt, { passive: true });
 
 		const setCurrent = (index: number) => {
 			dots.forEach((dot, dotIndex) => {
@@ -150,8 +170,17 @@ const images: Record<string, ImageMetadata> = {
 			if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
 		};
 
-		const goTo = (index: number) => {
+		const goTo = async (index: number) => {
 			const clamped = Math.max(0, Math.min(slides.length - 1, index));
+			const request = ++navigation;
+			navigating = true;
+			cancelGlide();
+			track.setAttribute('data-gliding', 'true');
+			setCurrent(clamped);
+			await prepareImage(clamped);
+			if (request !== navigation) return;
+			void prepareImage(clamped + 1);
+			void prepareImage(clamped - 1);
 			const slide = slides[clamped];
 			if (slide) {
 				const trackRect = track.getBoundingClientRect();
@@ -185,6 +214,7 @@ const images: Record<string, ImageMetadata> = {
 
 		const observer = new IntersectionObserver(
 			(entries) => {
+				if (navigating) return;
 				for (const entry of entries) {
 					if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
 						setCurrent(slides.indexOf(entry.target as HTMLElement));
@@ -194,6 +224,8 @@ const images: Record<string, ImageMetadata> = {
 			{ root: track, threshold: [0.6] }
 		);
 		slides.forEach((slide) => observer.observe(slide));
+		void prepareImage(0);
+		void prepareImage(1);
 	};
 
 	document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(setupGallery);
@@ -209,13 +241,25 @@ const images: Record<string, ImageMetadata> = {
 		color: var(--lp-ink);
 	}
 
+	.gallery .lp-media-wrap {
+		max-width: min(var(--lp-media-width), calc(177.777svh - 20.111rem));
+	}
+
+	.gallery-toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
 	.gallery-head {
-		margin-bottom: 2.5rem;
+		margin: 0;
 	}
 
 	.gallery-head h2 {
 		margin: 0 0 0.5rem;
-		font-size: var(--step-head);
+		font-size: clamp(1.75rem, 2.5vw, 2rem);
 		font-weight: 500;
 		line-height: 1;
 		letter-spacing: -0.02em;
@@ -234,8 +278,9 @@ const images: Record<string, ImageMetadata> = {
 		gap: 1.25rem;
 		overflow-x: auto;
 		overscroll-behavior-x: contain;
+		scroll-behavior: auto;
 		scroll-snap-type: x mandatory;
-		scroll-padding-inline: 0.25rem;
+		scroll-padding-inline: 0;
 		padding-block: 0.25rem;
 		scrollbar-width: none;
 	}
@@ -249,7 +294,7 @@ const images: Record<string, ImageMetadata> = {
 	}
 
 	.slide {
-		flex: 0 0 min(56rem, 88%);
+		flex: 0 0 100%;
 		margin: 0;
 		scroll-snap-align: center;
 	}
@@ -284,10 +329,12 @@ const images: Record<string, ImageMetadata> = {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		margin-top: 1.75rem;
+		margin: 0;
+		flex-shrink: 0;
 	}
 
 	.arrow {
+		border-radius: var(--control-radius);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -321,7 +368,8 @@ const images: Record<string, ImageMetadata> = {
 		gap: 0.4rem;
 	}
 
-	.dot {
+	.dots > .dot {
+		margin: 0;
 		width: 0.5rem;
 		height: 0.5rem;
 		padding: 0;
@@ -351,11 +399,15 @@ const images: Record<string, ImageMetadata> = {
 		outline-offset: 3px;
 	}
 
-	@media (max-width: 48rem) {
-		.slide {
-			flex-basis: 92%;
+	@media (max-width: 60rem) {
+		.gallery-toolbar {
+			align-items: stretch;
+			flex-direction: column;
+			gap: 1rem;
 		}
+	}
 
+	@media (max-width: 48rem) {
 		.slide figcaption {
 			flex-direction: column;
 			gap: 0.15rem;

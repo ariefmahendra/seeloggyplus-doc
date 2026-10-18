@@ -1,0 +1,235 @@
+---
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import ThemeSelect from '../ThemeDropdown.astro';
+import LanguageSelect from '../LanguageDropdown.astro';
+import { Icon } from '@astrojs/starlight/components';
+import { landingCopy, releasesUrl } from '../../content/landing/copy';
+
+const { locale } = Astro.props as { locale: 'en' | 'id' };
+const copy = landingCopy[locale].header;
+const prefix = locale === 'id' ? '/id' : '';
+const links = [
+	{ text: copy.features, href: '#features' },
+	{ text: copy.screenshots, href: '#screenshots' },
+	{ text: copy.documentation, href: `${prefix}/getting-started/` },
+	{ text: 'GitHub', href: releasesUrl.replace('/releases/latest', '') },
+];
+---
+
+<div class="landing-header">
+	<SiteTitle />
+	<nav class="product-nav" aria-label={copy.navigation}>
+		{links.map(link => <a href={link.href}>{link.text}</a>)}
+	</nav>
+	<div class="landing-actions">
+		<ThemeSelect />
+		<LanguageSelect />
+		<a class="download-link desktop-download" href={releasesUrl}>{copy.download}</a>
+		<details class="landing-menu">
+			<summary aria-label={copy.menu}><Icon name="bars" size="20" /></summary>
+			<nav aria-label={copy.navigation}>
+				{links.map(link => <a href={link.href}>{link.text}</a>)}
+				<a class="download-link" href={releasesUrl}>{copy.download}</a>
+			</nav>
+		</details>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll<HTMLDetailsElement>('.landing-menu').forEach(menu => {
+		menu.addEventListener('click', event => {
+			if ((event.target as Element).closest('a')) menu.open = false;
+		});
+		menu.addEventListener('keydown', event => {
+			if (event.key === 'Escape') {
+				menu.open = false;
+				menu.querySelector('summary')?.focus();
+			}
+		});
+	});
+</script>
+
+<style>
+	.landing-header {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		max-width: 84rem;
+		height: 100%;
+		margin-inline: auto;
+	}
+
+	.product-nav,
+	.landing-actions {
+		display: flex;
+		align-items: center;
+	}
+
+	.product-nav {
+		margin-inline: auto;
+		gap: 0.25rem;
+	}
+
+	.landing-actions {
+		gap: 0.25rem;
+	}
+
+	.product-nav a {
+		display: inline-flex;
+		align-items: center;
+		height: 2.25rem;
+		padding: 0.375rem 0.75rem;
+		border-radius: var(--control-radius);
+		color: var(--site-header-muted);
+		font-size: 0.875rem;
+		font-weight: 500;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background-color 150ms ease, color 150ms ease;
+	}
+
+	.product-nav a:hover {
+		background: var(--site-header-hover);
+		color: var(--site-header-ink);
+	}
+
+	.download-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 2.25rem;
+		padding: 0.375rem 1rem;
+		border-radius: var(--control-radius);
+		background: var(--sl-color-accent);
+		color: var(--site-header-on-accent);
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background-color 150ms ease, transform 100ms ease;
+	}
+
+	.landing-menu nav a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.5rem;
+		padding: 0.5rem 0.75rem;
+		border-radius: var(--control-radius);
+		color: var(--site-header-muted);
+		font-size: 0.875rem;
+		font-weight: 500;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background-color 150ms ease, color 150ms ease;
+	}
+
+	.landing-menu nav a:hover {
+		background: var(--site-header-hover);
+		color: var(--site-header-ink);
+	}
+
+	.landing-menu nav a.download-link {
+		background: var(--sl-color-accent);
+		color: var(--site-header-on-accent);
+	}
+
+	.landing-menu nav a.download-link:hover {
+		background: var(--site-header-accent-hover);
+	}
+
+	.landing-menu:not([open]) nav {
+		display: none;
+	}
+
+	.landing-menu {
+		display: none;
+		position: relative;
+	}
+
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 1px solid transparent;
+		border-radius: var(--control-radius);
+		background: transparent;
+		color: var(--site-header-ink);
+		cursor: pointer;
+		list-style: none;
+		transition: background-color 150ms ease, color 150ms ease;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.landing-menu nav {
+		position: absolute;
+		inset-inline-end: 0;
+		top: calc(100% + 0.75rem);
+		display: grid;
+		gap: 0.25rem;
+		width: min(22rem, calc(100vw - 2rem));
+		padding: 0.75rem;
+		background: var(--sl-color-bg);
+		border: 1px solid var(--site-header-line);
+		border-radius: var(--control-radius);
+	}
+
+	a:focus-visible,
+	summary:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 3px;
+	}
+
+	.landing-menu nav a:active,
+	summary:active,
+	details[open] summary {
+		background: var(--site-header-hover);
+		color: var(--site-header-ink);
+	}
+
+	@media (hover: hover) {
+		summary:hover {
+			background: var(--site-header-hover);
+		}
+
+		.download-link:hover {
+			background: var(--site-header-accent-hover);
+			transform: translateY(-1px);
+		}
+	}
+
+	@media (max-width: 71.999rem) {
+		.product-nav {
+			display: none;
+		}
+
+		.landing-actions {
+			margin-inline-start: auto;
+		}
+
+		.landing-menu {
+			display: block;
+		}
+	}
+
+	@media (max-width: 49.999rem) {
+		.landing-header {
+			gap: 0.5rem;
+		}
+
+		.desktop-download {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		nav a,
+		.download-link {
+			transition: none;
+		}
+	}
+</style>

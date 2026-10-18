@@ -19,8 +19,8 @@ const shots: Record<string, ImageMetadata> = {
 };
 ---
 
-<section class="lp-bleed features">
-	<div class="lp-wrap">
+<section id="features" class="lp-bleed features">
+	<div class="lp-wrap lp-media-wrap">
 		<h2 class="features-head" data-reveal>{copy.features.heading}</h2>
 		<ul class="modules">
 			{
@@ -30,8 +30,8 @@ const shots: Record<string, ImageMetadata> = {
 							<Image
 								src={shots[module.image]}
 								alt={module.alt}
-								widths={[560, 760, 1120, 1520, 2280]}
-								sizes="(min-width: 64rem) 38rem, calc(100vw - 2.5rem)"
+								widths={[560, 760, 1120, 1520, 2160, 2280, 2880]}
+								sizes="(min-width: 50rem) min(1296px, 146vh, 96vw), 100vw"
 								quality={90}
 								loading="lazy"
 							/>
@@ -49,11 +49,11 @@ const shots: Record<string, ImageMetadata> = {
 
 <style>
 	.features {
-		padding-block: clamp(5rem, 12vh, 8.5rem);
-		--lp-ink: #eef1f5;
-		--lp-soft: #9aa3af;
-		--lp-surface: #171c23;
-		background: #10141a;
+		padding-block: clamp(3rem, 7vh, 5rem);
+		--lp-ink: var(--lp-console-ink);
+		--lp-soft: var(--lp-console-soft);
+		--lp-surface: var(--lp-console-surface);
+		background: var(--lp-console-ground);
 		color: var(--lp-ink);
 	}
 
@@ -68,7 +68,7 @@ const shots: Record<string, ImageMetadata> = {
 
 	.modules {
 		display: grid;
-		gap: clamp(4rem, 10vh, 7rem);
+		gap: clamp(2.5rem, 6vh, 4rem);
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -76,9 +76,9 @@ const shots: Record<string, ImageMetadata> = {
 
 	.module {
 		display: grid;
-		grid-template-columns: minmax(0, 38rem) minmax(0, 22rem);
+		grid-template-columns: minmax(0, 1fr);
 		gap: 2rem;
-		max-width: 66rem;
+		max-width: none;
 	}
 
 	.panel {
@@ -92,7 +92,7 @@ const shots: Record<string, ImageMetadata> = {
 	}
 
 	.module-text {
-		max-width: 24rem;
+		max-width: 60ch;
 	}
 
 	.module-text h3 {

@@ -3,15 +3,30 @@ title: Pencarian & Pemfilteran
 description: Filter log dengan teks biasa, istilah boolean, atau regex, telusuri kecocokan dengan F3, dan gunakan Search Result Panel untuk melompat antarkecocokan.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Kolom pencarian di toolbar memfilter log dan menyorot setiap kecocokan.
+
+## Cari error timeout
+
+<Steps>
+
+1. **Masukkan kueri.** Ketik `ERROR AND timeout` di kolom pencarian. Biarkan **Regex** nonaktif agar `AND` diperlakukan sebagai operator boolean.
+2. **Terapkan pencarian.** Tekan <kbd>Enter</kbd> untuk langsung menampilkan baris yang memuat kedua istilah.
+3. **Telusuri hasil.** Gunakan <kbd>F3</kbd> untuk kecocokan berikutnya dan <kbd>Shift+F3</kbd> untuk sebelumnya, atau klik baris di **Search Result Panel** (panel hasil pencarian).
+4. **Hapus filter.** Tekan <kbd>Escape</kbd> saat fokus berada di kolom pencarian untuk kembali ke log lengkap.
+
+</Steps>
 
 ![Memfilter berdasarkan istilah: sorotan di log, penghitung kecocokan di toolbar, dan panel hasil di sebelah kanan](../../../../assets/screenshots/search.png)
 
-<p class="screenshot-caption">Memfilter berdasarkan istilah: sorotan di log, penghitung kecocokan di toolbar, dan panel hasil di sebelah kanan.</p>
+<p class="screenshot-caption">Memfilter berdasarkan istilah: sorotan di log, penghitung kecocokan di toolbar, dan panel hasil di sebelah kanan. Tekan gambar untuk memperbesar.</p>
+
+## Opsi pencarian
 
 | Fitur | Deskripsi |
 | --- | --- |
-| Pencarian inkremental | Hasil diperbarui sambil Anda mengetik (debounce 300 ms); <kbd>Enter</kbd> langsung menerapkannya. |
+| Pencarian inkremental | Hasil diperbarui sambil Anda mengetik (setelah jeda 300 ms); <kbd>Enter</kbd> langsung menerapkannya. |
 | Regex | Aktifkan **Regex** agar kueri diperlakukan sebagai regular expression. |
 | Case Sensitive | Aktifkan **Case Sensitive** untuk pencocokan huruf besar-kecil secara persis (nonaktif berarti tidak peka huruf besar-kecil). |
 | Istilah boolean | Gabungkan kata dengan `AND`, `OR`, dan `NOT` huruf kapital, misalnya `ERROR AND timeout` atau `WARN NOT retry`. |
@@ -25,9 +40,9 @@ Pencarian teks biasa dan boolean adalah yang tercepat. Gunakan regex saat memang
 hindari pola dengan backtracking berat pada file berukuran multi-gigabyte.
 :::
 
-## Search Result Panel
+## Panel hasil pencarian
 
-Selama pencarian aktif, sebuah panel mencantumkan setiap baris yang cocok.
+Selama pencarian aktif, **Search Result Panel** mencantumkan setiap baris yang cocok.
 
 ![Kecocokan dengan nomor baris dan kata kunci yang disorot](../../../../assets/screenshots/search-result-panel.png)
 

@@ -1,4 +1,12 @@
 const en = {
+	header: {
+		navigation: 'Product navigation',
+		menu: 'Open navigation',
+		features: 'Features',
+		screenshots: 'Screenshots',
+		documentation: 'Documentation',
+		download: 'Download',
+	},
 	meta: {
 		title: 'Every log, one window',
 		description:
@@ -8,7 +16,7 @@ const en = {
 		headline: ['Every log,', 'one window.'],
 		sentence:
 			'A fast desktop log viewer for files on your machine and logs on servers, over SSH.',
-		button: 'Download for Windows',
+		button: 'Download for Windows / Linux',
 		link: 'Getting started',
 		note: 'Free to use. Portable on Windows and Linux, with or without a bundled Java runtime.',
 		alt: 'The SeeLoggyPlus main window with local log files open, a search running, and a formatted JSON payload in the detail panel.',
@@ -19,8 +27,7 @@ const en = {
 			{
 				heading: 'Two places, one browser.',
 				paragraphs: [
-					'Open a file from your disk, or browse a server over SSH. Groups, favourites and recent files behave the same in both.',
-					'Recent files remember whether you were reading or tailing, and reopen that way.',
+					'Browse local files and SSH servers in one place, with groups, favourites and recent files that remember whether you were reading or tailing.',
 				],
 				image: 'file-manager',
 				alt: 'The Locations panel listing local drives and servers in groups.',
@@ -28,8 +35,7 @@ const en = {
 			{
 				heading: 'Search stops being scrolling.',
 				paragraphs: [
-					'Filter with plain text, regex, or uppercase AND, OR and NOT. Matches are highlighted and counted while you type.',
-					'The results panel lists every hit with its line number, and F3 walks through them.',
+					'Filter with text, regex, or uppercase AND, OR and NOT. Matches are highlighted and listed with line numbers; F3 takes you to the next hit.',
 				],
 				image: 'search',
 				alt: 'Search results listed with line numbers next to the highlighted log.',
@@ -37,8 +43,7 @@ const en = {
 			{
 				heading: 'Find the error, not the file.',
 				paragraphs: [
-					'Point Find in Files at a folder on a server and search every file under it, with context around each hit.',
-					'Open the match, or start tailing the file it came from.',
+					'Search every file under a remote folder, preview the context, then open the match or tail its source file.',
 				],
 				image: 'find-in-files',
 				alt: 'Matches across a remote folder with a context preview.',
@@ -46,17 +51,15 @@ const en = {
 			{
 				heading: 'A line opens into its payload.',
 				paragraphs: [
-					'Click a line to read it in full. JSON and XML inside it are formatted and syntax highlighted.',
-					'Long entries stay readable, and Copy takes exactly what you see.',
+					'Click a line to read it in full, with embedded JSON and XML formatted and syntax highlighted. Copy takes exactly what you see.',
 				],
 				image: 'detail',
 				alt: 'A log line opened into a formatted JSON payload.',
 			},
 			{
-				heading: 'Servers you can trust.',
+				heading: 'Secure SSH connections.',
 				paragraphs: [
-					'Passwords and keys are stored encrypted, and only if you ask. Host keys are checked against a known-hosts file.',
-					'A changed host key is refused outright, with the reason in plain language.',
+					'Save passwords and key passphrases encrypted only when you choose. Host keys are checked, and changed keys are refused with a clear explanation.',
 				],
 				image: 'server-management',
 				alt: 'The server list with groups and connection details.',
@@ -67,7 +70,7 @@ const en = {
 		headingRest: 'Logs at rest.',
 		headingMotion: 'Logs in motion.',
 		sentence:
-			'This is the app’s live tail running on its sample log. Switch it on and new lines stream the moment they are written.',
+			'Try a simulation of live tail with sample log entries. Switch it on to see new lines stream in.',
 		switchLabel: 'Live tail',
 		statusOn: 'Tailing payment-engine.log',
 		statusOff: 'payment-engine.log',
@@ -182,7 +185,7 @@ const en = {
 	},
 	cta: {
 		statement: 'Free, portable, and open on your desktop in two clicks.',
-		button: 'Download for Windows',
+		button: 'Download for Windows / Linux',
 		note: 'Also for Linux, with or without a bundled Java runtime.',
 		guide: 'Getting started',
 		changelog: 'Changelog',
@@ -190,6 +193,14 @@ const en = {
 };
 
 const id: typeof en = {
+	header: {
+		navigation: 'Navigasi produk',
+		menu: 'Buka navigasi',
+		features: 'Fitur',
+		screenshots: 'Screenshot',
+		documentation: 'Dokumentasi',
+		download: 'Unduh',
+	},
 	meta: {
 		title: 'Semua log, satu jendela',
 		description:
@@ -199,7 +210,7 @@ const id: typeof en = {
 		headline: ['Semua log,', 'satu jendela.'],
 		sentence:
 			'Log viewer desktop yang cepat untuk file di komputer Anda dan log di server, melalui SSH.',
-		button: 'Unduh untuk Windows',
+		button: 'Unduh untuk Windows / Linux',
 		link: 'Mulai',
 		note: 'Gratis. Portabel di Windows dan Linux, dengan atau tanpa Java bawaan.',
 		alt: 'Jendela utama SeeLoggyPlus dengan file log lokal terbuka, pencarian berjalan, dan payload JSON terformat di panel detail.',
@@ -210,17 +221,15 @@ const id: typeof en = {
 			{
 				heading: 'Dua tempat, satu penjelajah.',
 				paragraphs: [
-					'Buka file dari disk Anda, atau telusuri server melalui SSH. Grup, favorit, dan file terbaru berperilaku sama di keduanya.',
-					'File terbaru mengingat apakah Anda sedang membaca atau tail, lalu membukanya kembali dengan cara yang sama.',
+					'Telusuri file lokal dan server SSH dari satu tempat, lengkap dengan grup, favorit, dan file terbaru yang mengingat mode baca atau tail.',
 				],
 				image: 'file-manager',
 				alt: 'Panel Locations menampilkan drive lokal dan server dalam grup.',
 			},
 			{
-				heading: 'Pencarian mengakhiri gulir.',
+				heading: 'Temukan baris tanpa terus menggulir.',
 				paragraphs: [
-					'Filter dengan teks biasa, regex, atau istilah kapital AND, OR dan NOT. Kecocokan disorot dan dihitung saat Anda mengetik.',
-					'Panel hasil mendaftar setiap kecocokan dengan nomor barisnya, dan F3 menelusurinya.',
+					'Filter dengan teks, regex, atau AND, OR dan NOT huruf kapital. Kecocokan disorot dan didaftarkan beserta nomor barisnya; tekan F3 untuk berpindah ke hasil berikutnya.',
 				],
 				image: 'search',
 				alt: 'Hasil pencarian dengan nomor baris di samping log yang disorot.',
@@ -228,26 +237,23 @@ const id: typeof en = {
 			{
 				heading: 'Temukan error, bukan filenya.',
 				paragraphs: [
-					'Arahkan Find in Files ke sebuah folder di server dan cari di seluruh file di dalamnya, lengkap dengan konteks setiap kecocokan.',
-					'Buka kecocokannya, atau mulai tail file asalnya.',
+					'Cari di seluruh file dalam folder remote, lihat konteksnya, lalu buka kecocokan atau mulai tail file asalnya.',
 				],
 				image: 'find-in-files',
 				alt: 'Kecocokan di folder remote dengan pratinjau konteks.',
 			},
 			{
-				heading: 'Satu baris terbuka jadi payload.',
+				heading: 'Baca JSON dan XML dengan jelas.',
 				paragraphs: [
-					'Klik satu baris untuk membacanya utuh. JSON dan XML di dalamnya diformat dan diberi syntax highlighting.',
-					'Entri panjang tetap terbaca, dan Copy mengambil persis apa yang Anda lihat.',
+					'Klik baris untuk membacanya utuh, dengan JSON dan XML terformat serta syntax highlighting. Copy menyalin persis yang Anda lihat.',
 				],
 				image: 'detail',
 				alt: 'Baris log yang terbuka menjadi payload JSON terformat.',
 			},
 			{
-				heading: 'Server yang bisa dipercaya.',
+				heading: 'Koneksi SSH yang aman.',
 				paragraphs: [
-					'Password dan key disimpan terenkripsi, dan hanya jika Anda minta. Host key diperiksa terhadap file known-hosts.',
-					'Host key yang berubah langsung ditolak, dengan alasannya dalam bahasa yang jelas.',
+					'Simpan password dan passphrase key secara terenkripsi hanya jika Anda memilihnya. Host key diperiksa, dan perubahan key ditolak dengan alasan yang jelas.',
 				],
 				image: 'server-management',
 				alt: 'Daftar server dengan grup dan detail koneksinya.',
@@ -258,7 +264,7 @@ const id: typeof en = {
 		headingRest: 'Log diam.',
 		headingMotion: 'Log bergerak.',
 		sentence:
-			'Ini live tail aplikasi yang berjalan pada log contohnya. Nyalakan, dan baris baru mengalir begitu ditulis.',
+			'Coba simulasi live tail dengan contoh baris log. Nyalakan untuk melihat baris baru mengalir masuk.',
 		switchLabel: 'Live tail',
 		statusOn: 'Men-tail payment-engine.log',
 		statusOff: 'payment-engine.log',
@@ -373,7 +379,7 @@ const id: typeof en = {
 	},
 	cta: {
 		statement: 'Gratis, portabel, dan terbuka di desktop Anda dalam dua klik.',
-		button: 'Unduh untuk Windows',
+		button: 'Unduh untuk Windows / Linux',
 		note: 'Juga untuk Linux, dengan atau tanpa Java bawaan.',
 		guide: 'Mulai',
 		changelog: 'Changelog',

@@ -3,15 +3,30 @@ title: Search & Filtering
 description: Filter the log with plain text, boolean terms or regex, navigate matches with F3, and use the Search Result Panel to jump between hits.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 The search field in the toolbar filters the log and highlights every match.
+
+## Find timeout errors
+
+<Steps>
+
+1. **Enter a query.** Type `ERROR AND timeout` in the search field. Leave **Regex** off so `AND` is treated as a boolean operator.
+2. **Apply the search.** Press <kbd>Enter</kbd> to immediately show lines containing both terms.
+3. **Navigate results.** Use <kbd>F3</kbd> for the next match and <kbd>Shift+F3</kbd> for the previous one, or click a row in the **Search Result Panel**.
+4. **Clear the filter.** Press <kbd>Escape</kbd> while the search field has focus to return to the full log.
+
+</Steps>
 
 ![Filtering on a term: highlights in the log, match counter in the toolbar and the result panel on the right](../../../assets/screenshots/search.png)
 
-<p class="screenshot-caption">Filtering on a term: highlights in the log, match counter in the toolbar and the result panel on the right.</p>
+<p class="screenshot-caption">Filtering on a term: highlights in the log, match counter in the toolbar and the result panel on the right. Select the image to enlarge it.</p>
+
+## Search options
 
 | Feature | Description |
 | --- | --- |
-| Incremental search | Results update while you type (300 ms debounce); <kbd>Enter</kbd> applies immediately. |
+| Incremental search | Results update while you type (after a 300 ms pause); <kbd>Enter</kbd> applies immediately. |
 | Regex | Enable **Regex** to treat the query as a regular expression. |
 | Case Sensitive | Enable **Case Sensitive** for exact-case matching (off means case-insensitive). |
 | Boolean terms | Combine words with uppercase `AND`, `OR` and `NOT`, for example `ERROR AND timeout` or `WARN NOT retry`. |

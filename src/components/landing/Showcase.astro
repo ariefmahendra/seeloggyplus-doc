@@ -12,8 +12,8 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 ---
 
 <section class="lp-bleed show" data-showcase data-state="rest">
-	<div class="show-field">
-		<div class="lp-wrap show-top">
+	<div class="lp-wrap show-field">
+		<div class="show-top">
 			<h2 class="show-heading" data-reveal>
 				<span data-head-rest>{copy.showcase.headingRest}</span>
 				<span data-head-motion hidden>{copy.showcase.headingMotion}</span>
@@ -41,10 +41,10 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 			data-reveal
 			style="--i:3"
 		>
-			<span class="switch-track">
+			<span class="switch-track" aria-hidden="true">
 				<span class="switch-knob"></span>
-				<span class="switch-label">{copy.showcase.switchLabel}</span>
 			</span>
+			<span class="switch-label">{copy.showcase.switchLabel}</span>
 			<span
 				class="switch-status"
 				data-status
@@ -66,11 +66,7 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 		const headMotion = section.querySelector<HTMLElement>('[data-head-motion]');
 		if (!switchButton || !stream) return;
 
-		const source = Array.from(stream.children).map((child) => ({
-			level: (child as HTMLElement).dataset.level ?? 'INFO',
-			time: (child.querySelector('.t') as HTMLElement)?.textContent ?? '',
-			message: (child.querySelector('.m') as HTMLElement)?.textContent ?? '',
-		}));
+		const source = Array.from(stream.children);
 
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let timer: number | undefined;
@@ -78,20 +74,8 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 		let visible = false;
 
 		const append = () => {
-			const item = source[cursor % source.length];
+			const li = source[cursor % source.length].cloneNode(true);
 			cursor += 1;
-			const li = document.createElement('li');
-			li.dataset.level = item.level;
-			const time = document.createElement('span');
-			time.className = 't';
-			time.textContent = item.time;
-			const level = document.createElement('span');
-			level.className = `lv lv-${item.level.toLowerCase()}`;
-			level.textContent = item.level.padEnd(5, ' ');
-			const message = document.createElement('span');
-			message.className = 'm';
-			message.textContent = item.message;
-			li.append(time, level, message);
 			stream.appendChild(li);
 			while (stream.children.length > 11) stream.removeChild(stream.firstElementChild as Element);
 			stream.scrollTop = stream.scrollHeight;
@@ -147,61 +131,43 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 
 <style>
 	.show {
-		margin-block: clamp(4rem, 10vh, 7rem);
+		margin-block: clamp(3rem, 7vh, 5rem);
+		background: var(--lp-demo-ground);
+		color: var(--lp-demo-ink);
+	}
+
+	.show[data-state='motion'] {
+		--lp-demo-ground: var(--lp-console-ground);
+		--lp-demo-ink: var(--lp-console-ink);
+		--lp-demo-soft: var(--lp-console-soft);
 	}
 
 	.show-field {
-		position: relative;
-		height: 92svh;
-		min-height: 34rem;
-		overflow: hidden;
-		background: #e9edf3;
-		transition: background-color 320ms ease;
-	}
-
-	.show[data-state='motion'] .show-field {
-		background: #0e1116;
-	}
-
-	.show-top {
-		position: relative;
-		z-index: 2;
-		padding-top: clamp(3rem, 10vh, 6rem);
+		display: grid;
+		gap: 2rem;
+		padding-block: clamp(3rem, 7vh, 5rem);
 	}
 
 	.show-heading {
 		margin: 0 0 0.9rem;
 		font-size: var(--step-head);
 		font-weight: 500;
-		line-height: 1;
+		line-height: 1.1;
 		letter-spacing: -0.02em;
-		color: #10141a;
-		transition: color 320ms ease;
-	}
-
-	.show[data-state='motion'] .show-heading {
-		color: #eef1f5;
+		text-wrap: balance;
+		color: inherit;
 	}
 
 	.show-sentence {
-		max-width: 34ch;
+		max-width: 52ch;
 		margin: 0;
 		font-size: var(--step-body);
 		line-height: 1.5;
-		color: #4a505a;
-		transition: color 320ms ease;
-	}
-
-	.show[data-state='motion'] .show-sentence {
-		color: #9aa3af;
+		color: var(--lp-demo-soft);
 	}
 
 	.stream {
-		position: absolute;
-		left: clamp(1.25rem, 4vw, 2.5rem);
-		bottom: clamp(2rem, 6vh, 4rem);
-		width: min(30rem, 52vw);
-		height: 32vh;
+		height: 16rem;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -210,156 +176,106 @@ const parsed = logLines.slice(0, 8).map((line) => ({
 	}
 
 	.stream li {
-		padding: 1px 0;
-		font-size: 12.5px;
+		padding: 0.25rem 0;
+		font-size: var(--step-small);
 		line-height: 1.7;
 		white-space: normal;
 		overflow-wrap: anywhere;
-		color: #6b7280;
+		color: var(--lp-demo-ink);
 	}
 
 	.stream .t {
-		color: #9aa3af;
+		color: var(--lp-demo-soft);
 	}
 
-	.stream .m {
-		color: inherit;
-	}
-
-	.show[data-state='motion'] .stream li {
-		color: #c6cdd6;
-	}
-
-	.show[data-state='motion'] .stream .t {
-		color: #7d8590;
+	.stream .t,
+	.stream .lv {
+		margin-inline-end: 0.5em;
 	}
 
 	.stream .lv {
-		font-weight: 500;
+		font-weight: 600;
 	}
 
-	.stream .lv-info {
-		color: #67d391;
-	}
-
-	.stream .lv-debug {
-		color: #7aa7ff;
-	}
-
-	.stream .lv-trace {
-		color: #9aa3af;
-	}
-
-	.stream .lv-warn {
-		color: #f0b34e;
-	}
-
-	.stream .lv-error {
-		color: #f2705f;
-	}
+	.stream .lv-info { color: var(--lp-log-info); }
+	.stream .lv-debug { color: var(--lp-log-debug); }
+	.stream .lv-trace { color: var(--lp-console-soft); }
+	.stream .lv-warn { color: var(--lp-log-warn); }
+	.stream .lv-error { color: var(--lp-log-error); }
 
 	.show[data-state='rest'] .stream .lv {
-		color: #8a929d;
+		color: var(--lp-demo-ink);
 	}
 
 	.switch {
-		position: absolute;
-		right: -5vw;
-		bottom: -6vh;
-		z-index: 3;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.5em;
-		padding: 0;
+		justify-self: start;
+		display: grid;
+		grid-template-columns: 4.5rem minmax(0, 1fr);
+		align-items: center;
+		gap: 0.5rem 1rem;
+		max-width: 100%;
+		padding: 0.5rem;
 		border: 0;
-		background: none;
-		font-size: clamp(2.5rem, 12vh, 6.5rem);
+		background: transparent;
+		color: inherit;
+		font: inherit;
+		text-align: start;
 		cursor: pointer;
+		touch-action: manipulation;
 	}
 
 	.switch-track {
 		position: relative;
 		display: block;
-		width: 5.4em;
-		height: 2.8em;
+		width: 4.5rem;
+		height: 2.5rem;
 		border-radius: 999px;
-		background: #1c222b;
-		transition: background-color 240ms ease;
+		background: var(--lp-switch-off);
 	}
 
 	.switch[aria-checked='true'] .switch-track {
-		background: #3871e1;
+		background: var(--lp-accent);
 	}
 
 	.switch-knob {
 		position: absolute;
-		top: 0.2em;
-		left: 0.2em;
-		width: 2.4em;
-		height: 2.4em;
+		top: 0.25rem;
+		left: 0.25rem;
+		width: 2rem;
+		height: 2rem;
 		border-radius: 50%;
-		background: #ffffff;
-		transition: transform 320ms cubic-bezier(0.76, 0, 0.24, 1);
+		background: var(--lp-switch-knob);
+		transition: transform 240ms var(--ease-out);
 	}
 
 	.switch[aria-checked='true'] .switch-knob {
-		transform: translateX(2.6em);
+		transform: translateX(2rem);
 	}
 
 	.switch-label {
-		position: absolute;
-		inset: 0;
-		display: flex;
-		align-items: center;
-		padding-left: 3.2em;
-		font-size: 0.42em;
-		font-weight: 500;
-		color: #ffffff;
-		white-space: nowrap;
+		font-size: var(--step-body);
+		font-weight: 600;
 	}
 
 	.switch-status {
-		padding-left: 0.4em;
+		grid-column: 1 / -1;
 		font-family: var(--sl-font-mono); /* taste-skill-ignore */
 		font-size: var(--step-small);
-		color: #4a505a;
-		transition: color 320ms ease;
+		color: var(--lp-demo-soft);
+		overflow-wrap: anywhere;
 	}
 
-	.show[data-state='motion'] .switch-status {
-		color: #9aa3af;
-	}
-
-	.switch:active .switch-track {
-		transform: scale(0.98);
+	.switch:hover .switch-label {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
 	}
 
 	.switch:focus-visible {
-		outline: 2px solid #ffffff;
+		outline: 2px solid currentColor;
 		outline-offset: 4px;
 	}
 
-	@media (max-width: 56rem) {
-		.show-field {
-			height: 86svh;
-		}
-
-		.stream {
-			width: calc(100vw - 2.5rem);
-			height: 26vh;
-			bottom: clamp(9rem, 30vh, 15rem);
-		}
-
-		.switch {
-			right: auto;
-			left: -8vw;
-			bottom: -4vh;
-			font-size: 26vw;
-		}
-
-		.switch-status {
-			display: none;
-		}
+	@media (prefers-reduced-motion: reduce) {
+		.switch-knob { transition: none; }
 	}
 </style>

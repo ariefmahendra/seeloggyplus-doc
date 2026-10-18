@@ -1,0 +1,96 @@
+---
+const accessibleLabel = Astro.locals.t('languageSelect.accessibleLabel');
+const currentLocale = Astro.locals.starlightRoute.locale === 'id' ? 'id' : 'root';
+const pathname = Astro.url.pathname;
+
+let enPath = pathname.replace(/^\/id(\/|$)/, '/');
+if (!enPath.endsWith('/') && !enPath.includes('.')) enPath += '/';
+
+let idPath = pathname.startsWith('/id/') || pathname === '/id' ? pathname : `/id${pathname.startsWith('/') ? '' : '/'}${pathname}`;
+if (!idPath.endsWith('/') && !idPath.includes('.')) idPath += '/';
+
+const options = [
+	{ code: 'root', badge: 'EN', label: 'English', href: enPath, isSelected: currentLocale === 'root' },
+	{ code: 'id', badge: 'ID', label: 'Indonesia', href: idPath, isSelected: currentLocale === 'id' },
+];
+
+const currentLabel = currentLocale === 'id' ? 'Indonesia' : 'English';
+---
+
+<starlight-lang-select>
+	<select class="sr-only" aria-label={accessibleLabel} tabindex="-1">
+		{
+			options.map((opt) => (
+				<option value={opt.href} selected={opt.isSelected}>
+					{opt.label}
+				</option>
+			))
+		}
+	</select>
+
+	<details class="lang-dropdown header-dropdown">
+		<summary class="dropdown-trigger" aria-label={accessibleLabel}>
+			<span class="trigger-icon">
+				<svg class="dropdown-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+			</span>
+			<span class="trigger-label">{currentLabel}</span>
+			<svg class="trigger-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+		</summary>
+		<ul class="dropdown-menu" role="listbox">
+			{
+				options.map((opt) => (
+					<li>
+						<a
+							href={opt.href}
+							class="dropdown-item"
+							role="option"
+							aria-selected={opt.isSelected ? 'true' : 'false'}
+						>
+							<span class="lang-badge" aria-hidden="true">{opt.badge}</span>
+							<span class="item-label">{opt.label}</span>
+							<svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</details>
+</starlight-lang-select>
+
+<script>
+	class StarlightLanguageSelect extends HTMLElement {
+		constructor() {
+			super();
+			const details = this.querySelector<HTMLDetailsElement>('details');
+			const select = this.querySelector<HTMLSelectElement>('select');
+
+			select?.addEventListener('change', (e) => {
+				if (e.currentTarget instanceof HTMLSelectElement) {
+					window.location.pathname = e.currentTarget.value;
+				}
+			});
+
+			details?.addEventListener('toggle', () => {
+				if (details.open) {
+					document.querySelectorAll<HTMLDetailsElement>('details.header-dropdown[open]').forEach((other) => {
+						if (other !== details) other.open = false;
+					});
+				}
+			});
+
+			document.addEventListener('click', (e) => {
+				if (details?.open && !this.contains(e.target as Node)) {
+					details.open = false;
+				}
+			});
+
+			details?.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					details.open = false;
+					details.querySelector('summary')?.focus();
+				}
+			});
+		}
+	}
+	customElements.define('starlight-lang-select', StarlightLanguageSelect);
+</script>

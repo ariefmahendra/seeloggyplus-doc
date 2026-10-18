@@ -23,6 +23,11 @@ export default defineConfig({
 			},
 			lastUpdated: true,
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				Header: './src/components/SiteHeader.astro',
+				ThemeSelect: './src/components/ThemeDropdown.astro',
+				LanguageSelect: './src/components/LanguageDropdown.astro',
+			},
 			defaultLocale: 'root',
 			locales: {
 				root: { label: 'English', lang: 'en' },
