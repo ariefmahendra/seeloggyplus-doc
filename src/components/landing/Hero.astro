@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import heroLight from '../../assets/landing/hero-light.png';
 import heroDark from '../../assets/landing/hero-dark.png';
 import { landingCopy, releasesUrl } from '../../content/landing/copy';
 
@@ -28,24 +27,14 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 			<div class="hero-stage-body">
 				<div class="hero-stage-shot">
 					<Image
-						class="hero-shot hero-shot-light"
-						src={heroLight}
+						class="hero-shot hero-shot-dark"
+						src={heroDark}
 						alt={copy.hero.alt}
 						widths={[720, 1080, 1440, 2160, 2880]}
 						sizes="(min-width: 76rem) 1120px, calc(100vw - 2rem)"
 						quality={90}
 						loading="eager"
 						fetchpriority="high"
-					/>
-					<Image
-						class="hero-shot hero-shot-dark"
-						src={heroDark}
-						alt=""
-						aria-hidden="true"
-						widths={[720, 1080, 1440, 2160, 2880]}
-						sizes="(min-width: 76rem) 1120px, calc(100vw - 2rem)"
-						quality={90}
-						loading="lazy"
 					/>
 				</div>
 			</div>
@@ -138,18 +127,6 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 		display: block;
 		width: 100%;
 		height: auto;
-	}
-
-	.hero-shot-dark {
-		display: none;
-	}
-
-	:global([data-theme='dark']) .hero-shot-light {
-		display: none;
-	}
-
-	:global([data-theme='dark']) .hero-shot-dark {
-		display: block;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {

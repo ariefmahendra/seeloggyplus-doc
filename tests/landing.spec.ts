@@ -47,6 +47,7 @@ test.describe('hero screenshot', () => {
 
 		const shot = page.locator('.hero-shot:visible').first();
 		await expect(shot).toBeVisible();
+		await expect(shot).toHaveClass(/hero-shot-dark/);
 
 		const metrics = await shot.evaluate(async (element) => {
 			const img = element as HTMLImageElement;
@@ -104,6 +105,84 @@ test.describe('feature screenshots', () => {
 			expect(metrics.fileWidth).toBeGreaterThanOrEqual(1216);
 			expect(Math.abs(metrics.fileWidth / metrics.fileHeight - metrics.displayedRatio)).toBeLessThan(0.05);
 		}
+	});
+});
+
+test.describe('screenshot gallery', () => {
+	test.use({ deviceScaleFactor: 2 });
+
+	test('renders every app screen, HD and uncropped', async ({ page }) => {
+		await page.setViewportSize({ width: 1440, height: 900 });
+		await page.goto('/');
+		await revealAll(page);
+
+		const slides = page.locator('[data-gallery] [data-slide]');
+		await expect(slides).toHaveCount(8);
+
+		for (const index of [0, 7]) {
+			const image = slides.nth(index).locator('img');
+			await image.scrollIntoViewIfNeeded();
+			await expect
+				.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth), {
+					timeout: 10_000,
+				})
+				.toBeGreaterThan(0);
+
+			const metrics = await image.evaluate(async (element) => {
+				const img = element as HTMLImageElement;
+				const box = img.getBoundingClientRect();
+				const response = await fetch(img.currentSrc);
+				const bitmap = await createImageBitmap(await response.blob());
+				return {
+					fileWidth: bitmap.width,
+					fileHeight: bitmap.height,
+					displayedRatio: box.width / box.height,
+				};
+			});
+
+			expect(metrics.fileWidth).toBeGreaterThanOrEqual(1216);
+			expect(Math.abs(metrics.fileWidth / metrics.fileHeight - metrics.displayedRatio)).toBeLessThan(0.05);
+		}
+	});
+
+	test('arrows and dots navigate the gallery', async ({ page }) => {
+		await page.setViewportSize({ width: 1440, height: 900 });
+		await page.goto('/');
+		await revealAll(page);
+
+		const track = page.locator('[data-gallery] [data-track]');
+		const dots = page.locator('[data-gallery] [data-dot]');
+		const current = page.locator('[data-gallery] [data-dot][aria-current="true"]');
+		await expect(dots).toHaveCount(8);
+		await expect(current).toHaveCount(1);
+
+		const startX = await track.evaluate((element) => element.scrollLeft);
+		await page.locator('[data-gallery] [data-next]').click();
+		await expect.poll(() => track.evaluate((element) => element.scrollLeft)).toBeGreaterThan(startX);
+		await expect.poll(() => current.getAttribute('data-index')).toBe('1');
+		await expect(page.locator('[data-gallery] [data-counter]')).toHaveText('2 / 8');
+
+		await dots.nth(5).click();
+		await expect.poll(() => current.getAttribute('data-index')).toBe('5');
+		await expect(page.locator('[data-gallery] [data-counter]')).toHaveText('6 / 8');
+
+		const centered = await page
+			.locator('[data-gallery] [data-slide]')
+			.nth(5)
+			.evaluate((slide) => {
+				const track = slide.closest('[data-track]') as HTMLElement;
+				const slideRect = slide.getBoundingClientRect();
+				const trackRect = track.getBoundingClientRect();
+				return Math.abs(
+					slideRect.left + slideRect.width / 2 - (trackRect.left + trackRect.width / 2)
+				);
+			});
+		expect(centered).toBeLessThan(4);
+
+		const endX = await track.evaluate((element) => element.scrollLeft);
+		await page.locator('[data-gallery] [data-prev]').click();
+		await expect.poll(() => current.getAttribute('data-index')).toBe('4');
+		await expect.poll(() => track.evaluate((element) => element.scrollLeft)).toBeLessThan(endX);
 	});
 });
 

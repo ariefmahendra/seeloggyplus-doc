@@ -56,10 +56,11 @@ clear reason; **NEVER** = stop and choose another path.
   `astro:assets`. Never raw `<img>`.
 - The landing page lives in `src/pages/index.astro` and `src/pages/id/index.astro`,
   built from `src/components/landing/` with all copy in `src/content/landing/copy.ts`
-  (both languages must stay in sync). The hero shows the real, theme-matched application
-  screenshots (`hero-light.png` / `hero-dark.png`), and the feature panels show the full
-  window screenshots, never cropped. All landing screenshots come from the app
-  repository's `LandingScreenshotGeneratorTest` (1440×900 at 2×) and live in
+  (both languages must stay in sync). The hero and the gallery show the real application
+  screenshots captured in the app's DARK theme (the site itself still follows the visitor's
+  light/dark preference), and the feature panels show the full window screenshots, never
+  cropped. All landing screenshots come from the app repository's
+  `LandingScreenshotGeneratorTest` (1440×900 at 2×, dark theme) and live in
   `src/assets/landing/`; never hand-edit them. Images MUST keep `quality={90}` and
   width variants up to 2880 so retina screens get at least a 2× source.
 - The landing follows the "product performs" art direction: real, working interface

@@ -72,6 +72,62 @@ const en = {
 		statusOn: 'Tailing payment-engine.log',
 		statusOff: 'payment-engine.log',
 	},
+	gallery: {
+		heading: 'A tour of the app',
+		subtitle: 'Eight screens from the real application. Nothing staged.',
+		prev: 'Previous screenshot',
+		next: 'Next screenshot',
+		slides: [
+			{
+				image: 'file-manager',
+				title: 'Unified File Manager',
+				text: 'Local drives and SSH servers in one browser.',
+				alt: 'The file manager browsing a local directory with the Locations tree and file table.',
+			},
+			{
+				image: 'remote-browser',
+				title: 'Remote browsing',
+				text: 'Browse a server over SSH, then preview, download or tail a log file.',
+				alt: 'The file manager connected to a remote server over SSH.',
+			},
+			{
+				image: 'tail',
+				title: 'Live tail',
+				text: 'New lines stream in with the tab following the newest entries.',
+				alt: 'A log file open in tail mode showing the newest lines.',
+			},
+			{
+				image: 'search',
+				title: 'Search and results',
+				text: 'Every hit is highlighted, counted and listed with its line number.',
+				alt: 'A search with highlighted matches and the results panel.',
+			},
+			{
+				image: 'detail',
+				title: 'Detail panel',
+				text: 'The selected line opens in full, with JSON and XML formatted in place.',
+				alt: 'The detail panel showing a prettified JSON payload.',
+			},
+			{
+				image: 'find-in-files',
+				title: 'Find in Files',
+				text: 'Search every file under a remote folder, with context around each hit.',
+				alt: 'Find in Files results across a remote folder with a context preview.',
+			},
+			{
+				image: 'preferences',
+				title: 'Preferences',
+				text: 'Fonts, theme, tail window, download threads and memory limits.',
+				alt: 'The Preferences dialog showing the General tab.',
+			},
+			{
+				image: 'server-management',
+				title: 'Server Management',
+				text: 'Servers, groups and keys, with Test Connection before you save.',
+				alt: 'The Server Management dialog listing servers grouped on the left.',
+			},
+		],
+	},
 	journey: {
 		heading: 'How a line travels',
 		fields: [
@@ -206,6 +262,62 @@ const id: typeof en = {
 		switchLabel: 'Live tail',
 		statusOn: 'Men-tail payment-engine.log',
 		statusOff: 'payment-engine.log',
+	},
+	gallery: {
+		heading: 'Tur aplikasi',
+		subtitle: 'Delapan layar dari aplikasi aslinya. Tanpa rekayasa.',
+		prev: 'Tangkapan layar sebelumnya',
+		next: 'Tangkapan layar berikutnya',
+		slides: [
+			{
+				image: 'file-manager',
+				title: 'File Manager Terpadu',
+				text: 'Drive lokal dan server SSH dalam satu browser.',
+				alt: 'File manager menelusuri direktori lokal dengan pohon Locations dan tabel file.',
+			},
+			{
+				image: 'remote-browser',
+				title: 'Menelusuri remote',
+				text: 'Telusuri server melalui SSH, lalu pratinjau, unduh, atau tail file log.',
+				alt: 'File manager terhubung ke server remote melalui SSH.',
+			},
+			{
+				image: 'tail',
+				title: 'Live tail',
+				text: 'Baris baru mengalir masuk dan tab mengikuti entri terbaru.',
+				alt: 'File log terbuka dalam mode tail menampilkan baris-baris terbaru.',
+			},
+			{
+				image: 'search',
+				title: 'Pencarian dan hasil',
+				text: 'Setiap kecocokan disorot, dihitung, dan didaftarkan dengan nomor barisnya.',
+				alt: 'Pencarian dengan sorotan kecocokan dan panel hasil.',
+			},
+			{
+				image: 'detail',
+				title: 'Panel Detail',
+				text: 'Baris terpilih terbuka utuh, dengan JSON dan XML terformat langsung.',
+				alt: 'Panel Detail menampilkan payload JSON yang diformat.',
+			},
+			{
+				image: 'find-in-files',
+				title: 'Find in Files',
+				text: 'Cari di seluruh file dalam folder remote, lengkap dengan konteks tiap kecocokan.',
+				alt: 'Hasil Find in Files di folder remote dengan pratinjau konteks.',
+			},
+			{
+				image: 'preferences',
+				title: 'Preferensi',
+				text: 'Font, tema, tail window, thread unduhan, dan batas memori.',
+				alt: 'Dialog Preferensi menampilkan tab General.',
+			},
+			{
+				image: 'server-management',
+				title: 'Manajemen Server',
+				text: 'Server, grup, dan key, dengan Test Connection sebelum menyimpan.',
+				alt: 'Dialog Manajemen Server menampilkan daftar server yang dikelompokkan di kiri.',
+			},
+		],
 	},
 	journey: {
 		heading: 'Perjalanan satu baris',
