@@ -1,228 +1,195 @@
 ---
-import { Image } from 'astro:assets';
-import heroLight from '../../assets/landing/hero-light.png';
-import heroDark from '../../assets/landing/hero-dark.png';
-import { landingCopy, releasesUrl, repositoryUrl } from '../../content/landing/copy';
+import LiveLogDemo from './LiveLogDemo.astro';
+import { landingCopy, releasesUrl } from '../../content/landing/copy';
 
 type Landing = typeof landingCopy.en;
 const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 ---
 
 <section class="hero">
-	<div class="lp-wrap hero-inner">
-		<p class="hero-badge">
-			<span class="hero-version">{copy.hero.version}</span>
-			{copy.hero.versionNote}
-		</p>
-		<h1>{copy.hero.headline}</h1>
-		<p class="hero-lede">{copy.hero.lede}</p>
-		<div class="hero-cta">
-			<a class="lp-btn lp-btn-primary" href={releasesUrl}>{copy.hero.download}</a>
-			<a class="lp-btn" href={guideHref}>{copy.hero.guide}</a>
-			<a class="lp-btn lp-btn-ghost" href={repositoryUrl}>{copy.hero.github}</a>
-		</div>
-		<ul class="hero-meta">
-			{copy.hero.meta.map((item) => <li>{item}</li>)}
-		</ul>
-	</div>
 	<div class="lp-wrap">
-		<figure class="shot">
-			<span class="shot-rail" aria-hidden="true"></span>
-			<div class="shot-frame">
-				<Image
-					class="shot-img shot-light"
-					src={heroLight}
-					alt={copy.hero.alt}
-					widths={[720, 1080, 1440, 2160, 2880]}
-					sizes="(min-width: 76rem) 1168px, 100vw"
-					loading="eager"
-					fetchpriority="high"
-				/>
-				<Image
-					class="shot-img shot-dark"
-					src={heroDark}
-					alt=""
-					aria-hidden="true"
-					widths={[720, 1080, 1440, 2160, 2880]}
-					sizes="(min-width: 76rem) 1168px, 100vw"
-					loading="lazy"
-				/>
-				<div class="shot-strip">
-					{copy.hero.captionChips.map((chip) => <span class="chip">{chip}</span>)}
-					<span class="hint">{copy.hero.captionHint}</span>
+		<div class="hero-copy">
+			<h1 class="hero-title">
+				<span class="line"><span style="--li:0">{copy.hero.headline[0]}</span></span>
+				<span class="line"><span style="--li:1">{copy.hero.headline[1]}</span></span>
+			</h1>
+			<p class="hero-sentence" data-rise style="--i:0">{copy.hero.sentence}</p>
+			<div class="hero-actions" data-rise style="--i:1">
+				<a class="lp-btn lp-focus" href={releasesUrl}>{copy.hero.button}</a>
+				<a class="lp-link lp-focus" href={guideHref}>{copy.hero.link}</a>
+			</div>
+			<p class="hero-note" data-rise style="--i:2">{copy.hero.note}</p>
+		</div>
+	</div>
+	<div class="stage-outer">
+		<div class="hero-stage">
+			<div class="hero-stage-body">
+				<div class="hero-stage-fragment">
+					<LiveLogDemo copy={copy.hero.demo} />
 				</div>
 			</div>
-		</figure>
+		</div>
 	</div>
 </section>
 
 <style>
 	.hero {
 		position: relative;
-		padding-block: 4rem 3rem;
+		overflow: clip;
+		padding-top: clamp(1.75rem, 5vh, 3rem);
 	}
 
-	.hero::before {
-		content: '';
-		position: absolute;
-		inset: -7rem 0 auto;
-		height: 38rem;
-		background: radial-gradient(80rem 32rem at 50% -6rem, var(--lp-brand-tint), transparent 72%);
-		pointer-events: none;
-	}
-
-	.hero-inner {
+	.hero-copy {
 		position: relative;
-		max-width: 48rem;
-		margin-bottom: 2.75rem;
+		max-width: 46rem;
 	}
 
-	.hero-badge {
-		display: flex;
-		align-items: center;
-		gap: 0.6rem;
+	.hero-title {
 		margin: 0 0 1.1rem;
-		color: var(--lp-muted);
-		font-size: 0.85rem;
+		max-width: 12ch;
+		font-size: var(--step-display);
+		font-weight: 700;
+		line-height: 0.95;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
 	}
 
-	.hero-version {
-		padding: 0.1rem 0.5rem;
-		border: 1px solid var(--lp-border);
-		border-radius: 0.4rem;
-		background: var(--lp-panel);
-		color: var(--lp-ink);
-		font-family: var(--sl-font-mono);
-		font-size: 0.8rem;
-	}
-
-	.hero h1 {
-		margin: 0 0 1.1rem;
-		font-size: clamp(2.4rem, 6vw, 3.8rem);
-		font-weight: 800;
-		line-height: 1.04;
-		letter-spacing: -0.025em;
-	}
-
-	.hero-lede {
-		max-width: 40rem;
-		margin: 0 0 1.75rem;
-		color: var(--lp-muted);
-		font-size: 1.1rem;
-		line-height: 1.65;
-	}
-
-	.hero-cta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.hero-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem 1.5rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		color: var(--lp-muted);
-		font-size: 0.85rem;
-	}
-
-	.hero-meta li {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.hero-meta li::before {
-		content: '';
-		width: 0.375rem;
-		height: 0.375rem;
-		border-radius: 50%;
-		background: var(--lp-brand);
-		opacity: 0.55;
-	}
-
-	.shot {
-		position: relative;
-		display: flex;
-		gap: 0.75rem;
-		margin: 0;
-	}
-
-	.shot-rail {
-		flex: none;
-		width: 3px;
-		border-radius: 2px;
-		background: linear-gradient(
-			to bottom,
-			var(--lp-success),
-			var(--lp-success) 30%,
-			var(--lp-warning) 55%,
-			var(--lp-danger)
-		);
-		opacity: 0.75;
-	}
-
-	.shot-frame {
-		flex: 1;
-		min-width: 0;
-		border: 1px solid var(--lp-border);
-		border-radius: var(--lp-radius);
-		background: var(--lp-panel);
-		overflow: hidden;
-		box-shadow: 0 32px 64px -40px rgb(0 0 0 / 0.35);
-	}
-
-	.shot-img {
+	.hero-title .line {
 		display: block;
-		width: 100%;
-		height: auto;
+		overflow: hidden;
+		padding-bottom: 0.07em;
+		margin-bottom: -0.07em;
 	}
 
-	:global([data-theme='light']) .shot-dark {
-		display: none;
+	.hero-title .line > span {
+		display: block;
 	}
 
-	:global([data-theme='dark']) .shot-light {
-		display: none;
+	@media (prefers-reduced-motion: no-preference) {
+		:global(.js) .hero-title .line > span {
+			transform: translateY(105%);
+			animation: lp-line-up 900ms var(--ease-out) forwards;
+			animation-delay: calc(var(--li, 0) * 110ms + 150ms);
+		}
 	}
 
-	.shot-strip {
+	.hero-sentence {
+		max-width: 34ch;
+		margin: 0 0 1.75rem;
+		color: var(--lp-ink);
+		font-size: var(--step-lead);
+		line-height: 1.35;
+		text-wrap: pretty;
+	}
+
+	.hero-actions {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 0.75rem;
-		border-top: 1px solid var(--lp-border);
-		background: var(--lp-bg-soft);
-		font-size: 0.8rem;
+		gap: 1.5rem;
 	}
 
-	.chip {
-		padding: 0.1rem 0.5rem;
-		border: 1px solid var(--lp-border);
-		border-radius: 0.375rem;
-		background: var(--lp-panel);
-		font-family: var(--sl-font-mono);
-		font-size: 0.75rem;
+	.hero-note {
+		max-width: 44ch;
+		margin: 1.1rem 0 0;
+		color: var(--lp-soft);
+		font-size: var(--step-small);
 	}
 
-	.hint {
-		margin-inline-start: auto;
-		color: var(--lp-muted);
-		font-family: var(--sl-font-mono);
-		font-size: 0.75rem;
+	.stage-outer {
+		position: relative;
+		margin-top: clamp(1.5rem, 4.5vh, 3rem);
+		margin-left: clamp(0rem, 8vw, 7rem);
+		margin-right: calc((100vw - 100%) / -2);
 	}
 
-	@media (max-width: 48rem) {
-		.hero {
-			padding-block: 2.5rem 2rem;
+	.hero-stage {
+		margin-bottom: clamp(-4rem, -7vh, -2.5rem);
+	}
+
+	.hero-stage-body {
+		min-height: clamp(21rem, 46vh, 30rem);
+		padding: clamp(1rem, 3vw, 3.5rem);
+		padding-bottom: 3.5rem;
+		background: var(--lp-stage);
+		clip-path: polygon(4.5rem 0, 100% 0, 100% 100%, 0 100%, 0 4.5rem);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.hero-stage {
+			animation: lp-shutter 1100ms var(--ease-in-out) 200ms both;
 		}
 
-		.hint {
-			display: none;
+		.hero-stage-body {
+			animation: lp-settle-body 1500ms var(--ease-soft) 200ms both;
+		}
+	}
+
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.hero-stage-fragment {
+				animation: lp-drift linear both;
+				animation-timeline: view();
+				animation-range: entry 0% exit 100%;
+			}
+		}
+	}
+
+	.hero-stage-fragment {
+		width: min(38.75rem, 100%);
+	}
+
+	@media (max-width: 56rem) {
+		.stage-outer {
+			margin-left: calc(clamp(1.25rem, 4vw, 2.5rem) * -1);
+			margin-right: calc(clamp(1.25rem, 4vw, 2.5rem) * -1);
+		}
+
+		.hero-stage-body {
+			padding: 1rem;
+			padding-bottom: 5.5rem;
+		}
+
+		.hero-stage-fragment {
+			width: 38.75rem;
+			max-width: none;
+		}
+	}
+</style>
+
+<style is:global>
+	@keyframes lp-line-up {
+		to {
+			transform: none;
+		}
+	}
+
+	@keyframes lp-shutter {
+		from {
+			clip-path: inset(0 0 0 100%);
+		}
+
+		to {
+			clip-path: inset(0);
+		}
+	}
+
+	@keyframes lp-settle-body {
+		from {
+			transform: scale(1.06);
+		}
+
+		to {
+			transform: none;
+		}
+	}
+
+	@keyframes lp-drift {
+		from {
+			transform: translateY(-3%);
+		}
+
+		to {
+			transform: translateY(3%);
 		}
 	}
 </style>

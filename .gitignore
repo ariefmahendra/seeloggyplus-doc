@@ -17,5 +17,8 @@ pnpm-debug.log*
 .env
 .env.production
 
+# agent working files
+.taste-skill/
+
 # macOS-specific files
 .DS_Store

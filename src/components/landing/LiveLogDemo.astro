@@ -1,0 +1,277 @@
+---
+import { landingCopy, logLines } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing['hero']['demo'] };
+
+const parsed = logLines.map((line) => ({
+	time: line.slice(0, 23),
+	level: line.slice(23, 29).trim(),
+	message: line.slice(29).replace(/^- /, ''),
+	raw: line,
+}));
+---
+
+<div class="demo" data-ui data-log-demo>
+	<div class="demo-bar">
+		<span class="demo-file">{copy.filename}</span>
+		<span class="demo-count" data-count data-template={copy.count}>12 of 12 lines</span>
+	</div>
+	<div class="demo-search">
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+			<circle cx="11" cy="11" r="7"></circle>
+			<line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+		</svg>
+		<input
+			class="demo-input"
+			type="text"
+			data-input
+			placeholder={copy.placeholder}
+			aria-label={copy.placeholder}
+			autocomplete="off"
+			spellcheck="false"
+		/>
+	</div>
+	<ol class="demo-lines" data-lines>
+		{
+			parsed.map((line) => (
+				<li data-line data-text={line.raw} data-level={line.level}>
+					<span class="t">{line.time}</span>
+					<span class={'lv lv-' + line.level.toLowerCase()}>{line.level.padEnd(5, ' ')}</span>
+					<span class="m" data-msg data-raw={line.message}>{line.message}</span>
+				</li>
+			))
+		}
+	</ol>
+	<p class="demo-empty" data-empty hidden>{copy.empty}</p>
+	<p class="demo-foot">{copy.footnote}</p>
+</div>
+
+<script>
+	const decorate = (element: HTMLElement, text: string, query: string) => {
+		element.textContent = '';
+		if (!query || !text) {
+			element.textContent = text;
+			return;
+		}
+		const lower = text.toLowerCase();
+		let start = 0;
+		let index = lower.indexOf(query, start);
+		while (index !== -1) {
+			element.appendChild(document.createTextNode(text.slice(start, index)));
+			const mark = document.createElement('mark');
+			mark.textContent = text.slice(index, index + query.length);
+			element.appendChild(mark);
+			start = index + query.length;
+			index = lower.indexOf(query, start);
+		}
+		element.appendChild(document.createTextNode(text.slice(start)));
+	};
+
+	const setupDemo = (demo: HTMLElement) => {
+		const input = demo.querySelector<HTMLInputElement>('[data-input]');
+		const lines = Array.from(demo.querySelectorAll<HTMLElement>('[data-line]'));
+		const count = demo.querySelector<HTMLElement>('[data-count]');
+		const empty = demo.querySelector<HTMLElement>('[data-empty]');
+		if (!input || lines.length === 0) return;
+
+		const total = lines.length;
+		const template = count?.dataset.template ?? '{{shown}} / {{total}}';
+
+		const render = () => {
+			const query = input.value.trim().toLowerCase();
+			let shown = 0;
+			for (const line of lines) {
+				const text = line.dataset.text ?? '';
+				const matched = query === '' || text.toLowerCase().includes(query);
+				line.hidden = !matched;
+				if (matched) shown += 1;
+				const message = line.querySelector<HTMLElement>('[data-msg]');
+				if (message) decorate(message, message.dataset.raw ?? '', query);
+			}
+			if (empty) empty.hidden = shown > 0;
+			if (count) {
+				count.textContent = template
+					.replace('{{shown}}', String(shown))
+					.replace('{{total}}', String(total));
+			}
+		};
+
+		input.addEventListener('input', render);
+
+		for (const line of lines) {
+			line.addEventListener('click', () => {
+				for (const other of lines) other.classList.toggle('is-selected', other === line);
+			});
+		}
+
+		render();
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-log-demo]').forEach(setupDemo);
+</script>
+
+<style>
+	.demo {
+		--ui-border: rgba(16, 20, 26, 0.12);
+		--ui-soft: #5b616b;
+		--ui-ink: #10141a;
+		background: #fbfcfd;
+		border: 1px solid var(--ui-border); /* taste-skill-ignore */
+		font-family: var(--sl-font-mono); /* taste-skill-ignore */
+		box-shadow: 0 18px 40px -28px rgba(5, 12, 30, 0.55); /* taste-skill-ignore */
+	}
+
+	.demo-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.55rem 0.75rem;
+		border-bottom: 1px solid var(--ui-border); /* taste-skill-ignore */
+		font-size: 12.5px;
+	}
+
+	.demo-file {
+		color: var(--ui-ink);
+		font-weight: 500;
+	}
+
+	.demo-count {
+		color: var(--ui-soft);
+		font-size: 12.5px;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.demo-search {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0.6rem 0.75rem;
+		padding: 0.35rem 0.6rem;
+		background: #f1f3f6;
+		border: 1px solid var(--ui-border); /* taste-skill-ignore */
+		border-radius: 6px;
+	}
+
+	.demo-search svg {
+		flex: none;
+		width: 14px;
+		height: 14px;
+		color: var(--ui-soft);
+	}
+
+	.demo-input {
+		width: 100%;
+		border: 0;
+		background: transparent;
+		color: var(--ui-ink);
+		font-family: inherit;
+		font-size: 13.5px;
+		line-height: 1.4;
+	}
+
+	.demo-input::placeholder {
+		color: var(--ui-soft);
+	}
+
+	.demo-input:focus {
+		outline: none;
+	}
+
+	.demo-search:focus-within {
+		border-color: #3871e1;
+	}
+
+	.demo-lines {
+		margin: 0;
+		padding: 0 0 0.35rem;
+		list-style: none;
+	}
+
+	.demo-lines li {
+		display: flex;
+		gap: 0.6ch;
+		padding: 1px 0.75rem 1px 0.6rem;
+		border-left: 2px solid transparent;
+		color: var(--ui-ink);
+		font-size: 12.5px;
+		line-height: 1.7;
+		white-space: nowrap;
+		cursor: default;
+	}
+
+	.demo-lines li[hidden] {
+		display: none;
+	}
+
+	.demo-lines .t {
+		color: #6b7280;
+	}
+
+	.lv {
+		font-weight: 500;
+	}
+
+	.lv-info {
+		color: #177a42;
+	}
+
+	.lv-debug {
+		color: #3b6fd4;
+	}
+
+	.lv-trace {
+		color: #6b7280;
+	}
+
+	.demo-lines li[data-level='WARN'] {
+		border-left-color: #d97706;
+		background: rgba(217, 119, 6, 0.07);
+	}
+
+	.lv-warn {
+		color: #b45309;
+	}
+
+	.demo-lines li[data-level='ERROR'] {
+		border-left-color: #c0392b;
+		background: rgba(192, 57, 43, 0.07);
+	}
+
+	.lv-error {
+		color: #c0392b;
+	}
+
+	.demo-lines li:hover {
+		background: rgba(56, 113, 225, 0.08);
+	}
+
+	.demo-lines li.is-selected {
+		background: rgba(56, 113, 225, 0.16);
+	}
+
+	.demo-lines mark {
+		background: #ffe08a;
+		color: inherit;
+	}
+
+	.demo-empty {
+		margin: 0;
+		padding: 0.5rem 0.75rem 0.75rem;
+		color: var(--ui-soft);
+		font-size: 12.5px;
+	}
+
+	.demo-empty[hidden] {
+		display: none;
+	}
+
+	.demo-foot {
+		margin: 0;
+		padding: 0.5rem 0.75rem;
+		border-top: 1px solid var(--ui-border); /* taste-skill-ignore */
+		color: var(--ui-soft);
+		font-size: 12.5px;
+	}
+</style>

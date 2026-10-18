@@ -2,209 +2,140 @@ const en = {
 	meta: {
 		title: 'Every log, one window',
 		description:
-			'A fast desktop log viewer for local files and remote servers over SSH. Search with regex and boolean terms, tail in real time, and read embedded JSON and XML formatted in place.',
+			'A fast desktop log viewer for files on your machine and logs on servers, over SSH. Search with plain text or regex, tail in real time, and read the JSON and XML that log lines carry.',
 	},
 	hero: {
-		version: 'v0.7.0',
-		versionNote: 'Free for personal and professional use',
-		headline: 'Every log, one window.',
-		lede: 'SeeLoggyPlus reads log files from your disk and from servers over SSH — searching, filtering and tailing them in real time, and formatting embedded JSON and XML payloads as you go.',
-		download: 'Download for Windows',
-		guide: 'Getting Started',
-		github: 'View on GitHub',
-		meta: ['Windows & Linux', 'Java 21+ or bundled JRE', 'Portable, no installer'],
-		captionChips: ['nginx-access.log', 'payment-engine.log'],
-		captionHint: 'Ctrl+O opens the file manager',
-		alt: 'The SeeLoggyPlus main window with local log files open, a search running, and a formatted JSON payload in the detail panel.',
+		headline: ['Every log,', 'one window.'],
+		sentence:
+			'A fast desktop log viewer for files on your machine and logs on servers, over SSH.',
+		button: 'Download for Windows',
+		link: 'Getting started',
+		note: 'Free to use. Portable on Windows and Linux, with or without a bundled Java runtime.',
+		demo: {
+			filename: 'payment-engine.log',
+			placeholder: 'Search this log',
+			empty: 'No lines match.',
+			count: '{{shown}} of {{total}} lines',
+			footnote: 'This is the app’s sample log, running in your browser.',
+		},
 	},
-	facts: [
-		{
-			title: 'Local and remote',
-			text: 'Open files from your disk or over SSH in the same file browser.',
-		},
-		{
-			title: 'Multi-gigabyte files',
-			text: 'Background indexing and canvas rendering keep the window responsive.',
-		},
-		{
-			title: 'Real-time tail',
-			text: 'Smart Follow streams new lines and pauses when you scroll up.',
-		},
-		{
-			title: 'Verified SSH',
-			text: 'Password or key auth with host-key verification and an encrypted keystore.',
-		},
-	],
 	features: {
-		title: 'Built for reading logs, not fighting them',
-		subtitle: 'Everything a log viewer needs, without anything it does not.',
-		items: [
+		heading: 'What it does',
+		modules: [
 			{
-				icon: 'server',
-				title: 'Local and remote access',
-				text: 'One browser for local drives and SSH servers, with nested groups, favourites and recent files.',
-			},
-			{
-				icon: 'activity',
-				title: 'Live tail with Smart Follow',
-				text: 'New lines stream in as they are written; scrolling up pauses follow and scrolling back resumes it.',
-			},
-			{
-				icon: 'search',
-				title: 'Find in Files',
-				text: 'Search a keyword across every file in a remote folder, preview the context, then open or tail the hit.',
-			},
-			{
-				icon: 'filter',
-				title: 'Smart search and filtering',
-				text: 'Plain text, regex, case-sensitive matching, and uppercase AND, OR, NOT boolean terms.',
-			},
-			{
-				icon: 'braces',
-				title: 'Embedded JSON and XML',
-				text: 'Structured payloads inside log lines are prettified with syntax highlighting, ready to copy.',
-			},
-			{
-				icon: 'zap',
-				title: 'Built for speed',
-				text: 'Canvas rendering, background indexing and multi-threaded downloads keep large files smooth.',
-			},
-			{
-				icon: 'palette',
-				title: 'Light and dark themes',
-				text: 'Islands Light and Dark themes, configurable fonts, tail window size and memory limits.',
-			},
-			{
-				icon: 'shield',
-				title: 'Secure SSH',
-				text: 'Passwords and keys go through host-key verification; secrets are stored encrypted, only if you ask.',
-			},
-		],
-	},
-	carousel: {
-		title: 'See it in action',
-		subtitle: 'Every screenshot below is the real application.',
-		prev: 'Previous screenshot',
-		next: 'Next screenshot',
-		slides: [
-			{
+				heading: 'Two places, one browser.',
+				paragraphs: [
+					'Open a file from your disk, or browse a server over SSH. Groups, favourites and recent files behave the same in both.',
+					'Recent files remember whether you were reading or tailing, and reopen that way.',
+				],
 				image: 'file-manager',
-				title: 'Unified File Manager',
-				text: 'Local drives and SSH servers in one browser, with groups and favourite folders.',
-				alt: 'The file manager browsing a local directory with the Locations tree and file table.',
+				alt: 'The Locations panel listing local drives and servers in groups.',
 			},
 			{
-				image: 'remote-browser',
-				title: 'Remote browsing over SSH',
-				text: 'Browse a server file system, preview a log and download or tail it.',
-				alt: 'The file manager connected to a remote server over SSH.',
-			},
-			{
-				image: 'tail',
-				title: 'Live tail',
-				text: 'Follow a file in real time; the tab shows a live marker while new lines stream in.',
-				alt: 'A log file open in tail mode showing the newest lines.',
-			},
-			{
+				heading: 'Search stops being scrolling.',
+				paragraphs: [
+					'Filter with plain text, regex, or uppercase AND, OR and NOT. Matches are highlighted and counted while you type.',
+					'The results panel lists every hit with its line number, and F3 walks through them.',
+				],
 				image: 'search',
-				title: 'Search with results panel',
-				text: 'Matches are highlighted in the log and listed with line numbers on the right.',
-				alt: 'A search for ERROR with highlighted matches and the results panel.',
+				alt: 'Search results listed with line numbers next to the highlighted log.',
 			},
 			{
-				image: 'detail',
-				title: 'Detail panel',
-				text: 'Pick a line to read it in full; embedded JSON and XML are prettified in place.',
-				alt: 'The detail panel showing a prettified JSON payload from a log line.',
-			},
-			{
+				heading: 'Find the error, not the file.',
+				paragraphs: [
+					'Point Find in Files at a folder on a server and search every file under it, with context around each hit.',
+					'Open the match, or start tailing the file it came from.',
+				],
 				image: 'find-in-files',
-				title: 'Find in Files',
-				text: 'Scan a whole remote folder for a keyword and open the match with its context.',
-				alt: 'Find in Files results across a remote folder with a context preview.',
+				alt: 'Matches across a remote folder with a context preview.',
 			},
 			{
-				image: 'preferences',
-				title: 'Preferences',
-				text: 'Fonts, theme, tail window size, preview limits, download threads and memory.',
-				alt: 'The Preferences dialog showing the General tab.',
+				heading: 'A line opens into its payload.',
+				paragraphs: [
+					'Click a line to read it in full. JSON and XML inside it are formatted and syntax highlighted.',
+					'Long entries stay readable, and Copy takes exactly what you see.',
+				],
+				image: 'detail',
+				alt: 'A log line opened into a formatted JSON payload.',
 			},
 			{
+				heading: 'Servers you can trust.',
+				paragraphs: [
+					'Passwords and keys are stored encrypted, and only if you ask. Host keys are checked against a known-hosts file.',
+					'A changed host key is refused outright, with the reason in plain language.',
+				],
 				image: 'server-management',
-				title: 'Server Management',
-				text: 'Define servers, groups, keys and default paths, and test the connection before saving.',
-				alt: 'The Server Management dialog listing servers grouped on the left.',
+				alt: 'The server list with groups and connection details.',
 			},
 		],
 	},
-	quickstart: {
-		title: 'From download to your first log',
-		steps: [
-			{
-				title: 'Unzip and run',
-				text: 'Run launcher.bat on Windows or launcher.sh on Linux. The package with the bundled JRE needs no setup at all.',
-			},
-			{
-				title: 'Open a log',
-				text: 'Press Ctrl+O, drop a file onto the window, or reopen one from the recent files panel.',
-			},
-			{
-				title: 'Search and tail',
-				text: 'Filter with a keyword or regex, click a match to inspect it, then hit Tail to follow the file live.',
-			},
-		],
-		link: 'Read the full guide',
+	showcase: {
+		headingRest: 'Logs at rest.',
+		headingMotion: 'Logs in motion.',
+		sentence:
+			'This is the app’s live tail running on its sample log. Switch it on and new lines stream the moment they are written.',
+		switchLabel: 'Live tail',
+		statusOn: 'Tailing payment-engine.log',
+		statusOff: 'payment-engine.log',
 	},
-	download: {
-		title: 'Download',
-		subtitle: 'Portable packages for Windows and Linux. No installer, no admin rights.',
-		packages: [
+	journey: {
+		heading: 'How a line travels',
+		fields: [
 			{
-				name: 'With bundled JRE',
-				text: 'Runs as-is, nothing to install. The right choice for most people.',
-				cta: 'Download',
+				clause: 'First it is written.',
+				state: 'raw',
 			},
 			{
-				name: 'Without JRE',
-				text: 'A smaller download for machines that already have Java 21 or newer.',
-				cta: 'Download',
+				clause: 'Then it is found.',
+				state: 'found',
+			},
+			{
+				clause: 'Then it is read.',
+				state: 'read',
+			},
+			{
+				clause: 'Then it is copied.',
+				state: 'copied',
 			},
 		],
-		notes: [
-			'Remote logs need an SSH account on the server.',
-			'Java 21 or newer is required only for the package without the JRE.',
-		],
-		primaryCta: 'Download from GitHub',
-		changelog: 'See what changed in 0.7.0',
+		copiedLabel: 'Copied to clipboard',
+		matchLabel: 'match 3 of 12',
 	},
 	faq: {
-		title: 'Questions',
+		heading: 'Questions',
 		items: [
 			{
-				q: 'Is SeeLoggyPlus free?',
-				a: 'Yes — it is free to use for personal and professional purposes.',
+				q: 'Is it free?',
+				a: 'Yes. SeeLoggyPlus is free to use for personal and professional work.',
 			},
 			{
 				q: 'Does it work offline?',
-				a: 'Reading local files works fully offline. Remote logs need your server to be reachable, and update checks only happen when they are enabled.',
+				a: 'Reading local files works with no network at all. Remote logs need your server to be reachable, and update checks only run when they are enabled.',
 			},
 			{
-				q: 'Where are my SSH credentials stored?',
-				a: 'Passwords and key passphrases are only stored when you tick Save password or Save passphrase, and they are kept encrypted in the local keystore inside the data directory. Private key files stay where they are on disk.',
+				q: 'Where are credentials stored?',
+				a: 'Passwords and key passphrases are stored only when you tick Save, encrypted in a keystore inside the data directory. Private key files stay where they are on disk.',
 			},
 			{
-				q: 'How large can log files be?',
-				a: 'Multi-gigabyte files are indexed in the background. Tail or filter instead of scrolling everything, close tabs you no longer need, and raise Max Memory in Preferences if a file needs more room.',
+				q: 'How large can files be?',
+				a: 'Multi-gigabyte logs are indexed in the background. Tail or filter instead of scrolling everything, and raise Max memory if a file needs more room.',
 			},
 			{
-				q: 'Which SSH keys are supported?',
-				a: 'RSA, ECDSA and Ed25519 keys, including encrypted keys with a passphrase.',
+				q: 'Which keys are supported?',
+				a: 'RSA, ECDSA and Ed25519, including encrypted keys with a passphrase.',
 			},
 			{
 				q: 'How do updates work?',
-				a: 'The app checks in the background and can download and stage an update for the next restart. A failed download leaves the current installation untouched.',
+				a: 'The app checks in the background, stages a verified package, and installs it on the next restart. A failed download leaves your installation untouched.',
 			},
 		],
+	},
+	cta: {
+		statement: 'Free, portable, and open on your desktop in two clicks.',
+		button: 'Download for Windows',
+		note: 'Also for Linux, with or without a bundled Java runtime.',
+		guide: 'Getting started',
+		changelog: 'Changelog',
 	},
 };
 
@@ -212,209 +143,140 @@ const id: typeof en = {
 	meta: {
 		title: 'Semua log, satu jendela',
 		description:
-			'Log viewer desktop cepat untuk file lokal dan server remote melalui SSH. Cari dengan regex dan boolean, tail secara real time, dan baca payload JSON serta XML terformat langsung di tempat.',
+			'Log viewer desktop yang cepat untuk file di komputer Anda dan log di server, melalui SSH. Cari dengan teks biasa atau regex, tail secara real time, dan baca JSON serta XML yang dibawa baris log.',
 	},
 	hero: {
-		version: 'v0.7.0',
-		versionNote: 'Gratis untuk penggunaan pribadi dan profesional',
-		headline: 'Semua log, satu jendela.',
-		lede: 'SeeLoggyPlus membaca file log dari disk Anda dan dari server melalui SSH — mencari, memfilter, dan men-tail secara real time, sambil memformat payload JSON dan XML yang tertanam.',
-		download: 'Unduh untuk Windows',
-		guide: 'Memulai',
-		github: 'Lihat di GitHub',
-		meta: ['Windows & Linux', 'Java 21+ atau JRE bawaan', 'Portabel, tanpa installer'],
-		captionChips: ['nginx-access.log', 'payment-engine.log'],
-		captionHint: 'Ctrl+O membuka file manager',
-		alt: 'Jendela utama SeeLoggyPlus dengan file log lokal terbuka, pencarian berjalan, dan payload JSON terformat di panel detail.',
+		headline: ['Semua log,', 'satu jendela.'],
+		sentence:
+			'Log viewer desktop yang cepat untuk file di komputer Anda dan log di server, melalui SSH.',
+		button: 'Unduh untuk Windows',
+		link: 'Mulai',
+		note: 'Gratis. Portabel di Windows dan Linux, dengan atau tanpa Java bawaan.',
+		demo: {
+			filename: 'payment-engine.log',
+			placeholder: 'Cari di log ini',
+			empty: 'Tidak ada baris yang cocok.',
+			count: '{{shown}} dari {{total}} baris',
+			footnote: 'Ini log contoh aplikasi, berjalan langsung di browser Anda.',
+		},
 	},
-	facts: [
-		{
-			title: 'Lokal dan remote',
-			text: 'Buka file dari disk atau melalui SSH di file browser yang sama.',
-		},
-		{
-			title: 'File multi-gigabyte',
-			text: 'Indexing latar belakang dan rendering canvas menjaga jendela tetap responsif.',
-		},
-		{
-			title: 'Tail real time',
-			text: 'Smart Follow mengalirkan baris baru dan berhenti saat Anda menggulir ke atas.',
-		},
-		{
-			title: 'SSH terverifikasi',
-			text: 'Autentikasi password atau key dengan verifikasi host key dan keystore terenkripsi.',
-		},
-	],
 	features: {
-		title: 'Dibuat untuk membaca log, bukan melawannya',
-		subtitle: 'Semua yang dibutuhkan log viewer, tanpa hal yang tidak perlu.',
-		items: [
+		heading: 'Yang bisa dilakukannya',
+		modules: [
 			{
-				icon: 'server',
-				title: 'Akses lokal dan remote',
-				text: 'Satu browser untuk drive lokal dan server SSH, dengan grup bersarang, favorit, dan file terbaru.',
-			},
-			{
-				icon: 'activity',
-				title: 'Live tail dengan Smart Follow',
-				text: 'Baris baru mengalir saat ditulis; menggulir ke atas menjeda follow dan menggulir kembali melanjutkannya.',
-			},
-			{
-				icon: 'search',
-				title: 'Find in Files',
-				text: 'Cari kata kunci di seluruh file dalam folder remote, lihat konteksnya, lalu buka atau tail hasilnya.',
-			},
-			{
-				icon: 'filter',
-				title: 'Pencarian dan filter pintar',
-				text: 'Teks biasa, regex, pencocokan huruf besar-kecil, dan istilah boolean AND, OR, NOT huruf kapital.',
-			},
-			{
-				icon: 'braces',
-				title: 'JSON dan XML tertanam',
-				text: 'Payload terstruktur di dalam baris log diformat dengan syntax highlighting, siap disalin.',
-			},
-			{
-				icon: 'zap',
-				title: 'Dibuat untuk kecepatan',
-				text: 'Rendering canvas, indexing latar belakang, dan unduhan multi-thread menjaga file besar tetap mulus.',
-			},
-			{
-				icon: 'palette',
-				title: 'Tema terang dan gelap',
-				text: 'Tema Islands Light dan Dark, font yang bisa diatur, ukuran tail window, dan batas memori.',
-			},
-			{
-				icon: 'shield',
-				title: 'SSH yang aman',
-				text: 'Password dan key melewati verifikasi host key; kredensial disimpan terenkripsi, hanya jika Anda minta.',
-			},
-		],
-	},
-	carousel: {
-		title: 'Lihat langsung',
-		subtitle: 'Semua tangkapan layar di bawah adalah aplikasi aslinya.',
-		prev: 'Tangkapan layar sebelumnya',
-		next: 'Tangkapan layar berikutnya',
-		slides: [
-			{
+				heading: 'Dua tempat, satu penjelajah.',
+				paragraphs: [
+					'Buka file dari disk Anda, atau telusuri server melalui SSH. Grup, favorit, dan file terbaru berperilaku sama di keduanya.',
+					'File terbaru mengingat apakah Anda sedang membaca atau tail, lalu membukanya kembali dengan cara yang sama.',
+				],
 				image: 'file-manager',
-				title: 'File Manager Terpadu',
-				text: 'Drive lokal dan server SSH dalam satu browser, dengan grup dan folder favorit.',
-				alt: 'File manager menelusuri direktori lokal dengan pohon Locations dan tabel file.',
+				alt: 'Panel Locations menampilkan drive lokal dan server dalam grup.',
 			},
 			{
-				image: 'remote-browser',
-				title: 'Menelusuri remote via SSH',
-				text: 'Telusuri sistem file server, pratinjau log, lalu unduh atau tail file tersebut.',
-				alt: 'File manager terhubung ke server remote melalui SSH.',
-			},
-			{
-				image: 'tail',
-				title: 'Live tail',
-				text: 'Ikuti file secara real time; tab menampilkan penanda live sementara baris baru mengalir.',
-				alt: 'File log terbuka dalam mode tail menampilkan baris-baris terbaru.',
-			},
-			{
+				heading: 'Pencarian mengakhiri gulir.',
+				paragraphs: [
+					'Filter dengan teks biasa, regex, atau istilah kapital AND, OR dan NOT. Kecocokan disorot dan dihitung saat Anda mengetik.',
+					'Panel hasil mendaftar setiap kecocokan dengan nomor barisnya, dan F3 menelusurinya.',
+				],
 				image: 'search',
-				title: 'Pencarian dengan panel hasil',
-				text: 'Kecocokan disorot di log dan didaftarkan dengan nomor baris di sisi kanan.',
-				alt: 'Pencarian ERROR dengan sorotan kecocokan dan panel hasil.',
+				alt: 'Hasil pencarian dengan nomor baris di samping log yang disorot.',
 			},
 			{
-				image: 'detail',
-				title: 'Panel Detail',
-				text: 'Pilih satu baris untuk membacanya utuh; JSON dan XML tertanam diformat langsung.',
-				alt: 'Panel Detail menampilkan payload JSON yang diformat dari sebuah baris log.',
-			},
-			{
+				heading: 'Temukan error, bukan filenya.',
+				paragraphs: [
+					'Arahkan Find in Files ke sebuah folder di server dan cari di seluruh file di dalamnya, lengkap dengan konteks setiap kecocokan.',
+					'Buka kecocokannya, atau mulai tail file asalnya.',
+				],
 				image: 'find-in-files',
-				title: 'Find in Files',
-				text: 'Pindai seluruh folder remote untuk kata kunci dan buka kecocokan beserta konteksnya.',
-				alt: 'Hasil Find in Files di folder remote dengan pratinjau konteks.',
+				alt: 'Kecocokan di folder remote dengan pratinjau konteks.',
 			},
 			{
-				image: 'preferences',
-				title: 'Preferensi',
-				text: 'Font, tema, ukuran tail window, batas pratinjau, thread unduhan, dan memori.',
-				alt: 'Dialog Preferensi menampilkan tab General.',
+				heading: 'Satu baris terbuka jadi payload.',
+				paragraphs: [
+					'Klik satu baris untuk membacanya utuh. JSON dan XML di dalamnya diformat dan diberi syntax highlighting.',
+					'Entri panjang tetap terbaca, dan Copy mengambil persis apa yang Anda lihat.',
+				],
+				image: 'detail',
+				alt: 'Baris log yang terbuka menjadi payload JSON terformat.',
 			},
 			{
+				heading: 'Server yang bisa dipercaya.',
+				paragraphs: [
+					'Password dan key disimpan terenkripsi, dan hanya jika Anda minta. Host key diperiksa terhadap file known-hosts.',
+					'Host key yang berubah langsung ditolak, dengan alasannya dalam bahasa yang jelas.',
+				],
 				image: 'server-management',
-				title: 'Manajemen Server',
-				text: 'Atur server, grup, key, dan default path, lalu uji koneksi sebelum menyimpan.',
-				alt: 'Dialog Manajemen Server menampilkan daftar server yang dikelompokkan di kiri.',
+				alt: 'Daftar server dengan grup dan detail koneksinya.',
 			},
 		],
 	},
-	quickstart: {
-		title: 'Dari unduhan ke log pertama Anda',
-		steps: [
-			{
-				title: 'Ekstrak dan jalankan',
-				text: 'Jalankan launcher.bat di Windows atau launcher.sh di Linux. Paket dengan JRE bawaan tidak perlu setup sama sekali.',
-			},
-			{
-				title: 'Buka log',
-				text: 'Tekan Ctrl+O, jatuhkan file ke jendela, atau buka kembali dari panel file terbaru.',
-			},
-			{
-				title: 'Cari dan tail',
-				text: 'Filter dengan kata kunci atau regex, klik kecocokan untuk memeriksanya, lalu tekan Tail untuk mengikuti file secara live.',
-			},
-		],
-		link: 'Baca panduan lengkap',
+	showcase: {
+		headingRest: 'Log diam.',
+		headingMotion: 'Log bergerak.',
+		sentence:
+			'Ini live tail aplikasi yang berjalan pada log contohnya. Nyalakan, dan baris baru mengalir begitu ditulis.',
+		switchLabel: 'Live tail',
+		statusOn: 'Men-tail payment-engine.log',
+		statusOff: 'payment-engine.log',
 	},
-	download: {
-		title: 'Unduh',
-		subtitle: 'Paket portabel untuk Windows dan Linux. Tanpa installer, tanpa hak admin.',
-		packages: [
+	journey: {
+		heading: 'Perjalanan satu baris',
+		fields: [
 			{
-				name: 'Dengan JRE bawaan',
-				text: 'Langsung jalan, tanpa pemasangan. Pilihan tepat untuk sebagian besar pengguna.',
-				cta: 'Unduh',
+				clause: 'Pertama, ia ditulis.',
+				state: 'raw',
 			},
 			{
-				name: 'Tanpa JRE',
-				text: 'Unduhan lebih kecil untuk mesin yang sudah memiliki Java 21 atau lebih baru.',
-				cta: 'Unduh',
+				clause: 'Lalu ia ditemukan.',
+				state: 'found',
+			},
+			{
+				clause: 'Lalu ia dibaca.',
+				state: 'read',
+			},
+			{
+				clause: 'Lalu ia disalin.',
+				state: 'copied',
 			},
 		],
-		notes: [
-			'Log remote membutuhkan akun SSH di server.',
-			'Java 21 atau lebih baru hanya diperlukan untuk paket tanpa JRE.',
-		],
-		primaryCta: 'Unduh dari GitHub',
-		changelog: 'Lihat perubahan di 0.7.0',
+		copiedLabel: 'Tersalin ke clipboard',
+		matchLabel: 'kecocokan 3 dari 12',
 	},
 	faq: {
-		title: 'Pertanyaan',
+		heading: 'Pertanyaan',
 		items: [
 			{
-				q: 'Apakah SeeLoggyPlus gratis?',
-				a: 'Ya — gratis untuk penggunaan pribadi maupun profesional.',
+				q: 'Apakah gratis?',
+				a: 'Ya. SeeLoggyPlus gratis untuk kebutuhan pribadi maupun profesional.',
 			},
 			{
-				q: 'Apakah bisa dipakai offline?',
-				a: 'Membaca file lokal sepenuhnya offline. Log remote memerlukan server yang dapat dijangkau, dan pemeriksaan pembaruan hanya berjalan bila diaktifkan.',
+				q: 'Apakah bisa offline?',
+				a: 'Membaca file lokal sama sekali tidak butuh jaringan. Log remote memerlukan server yang dapat dijangkau, dan pemeriksaan pembaruan hanya berjalan bila diaktifkan.',
 			},
 			{
-				q: 'Di mana kredensial SSH saya disimpan?',
-				a: 'Password dan passphrase key hanya disimpan saat Anda mencentang Save password atau Save passphrase, lalu disimpan terenkripsi di keystore lokal dalam direktori data. File private key tetap berada di disk Anda.',
+				q: 'Di mana kredensial disimpan?',
+				a: 'Password dan passphrase key disimpan hanya saat Anda mencentang Save, terenkripsi di keystore dalam direktori data. File private key tetap berada di disk Anda.',
 			},
 			{
-				q: 'Seberapa besar file log yang didukung?',
-				a: 'File multi-gigabyte diindeks di latar belakang. Gunakan Tail atau filter alih-alih menggulir semuanya, tutup tab yang tidak perlu, dan naikkan Max Memory di Preferensi bila file butuh ruang lebih.',
+				q: 'Seberapa besar filenya?',
+				a: 'Log multi-gigabyte diindeks di latar belakang. Gunakan tail atau filter alih-alih menggulir semuanya, dan naikkan Max memory bila file butuh ruang lebih.',
 			},
 			{
-				q: 'Key SSH apa saja yang didukung?',
-				a: 'Key RSA, ECDSA, dan Ed25519, termasuk key terenkripsi dengan passphrase.',
+				q: 'Key apa saja yang didukung?',
+				a: 'RSA, ECDSA dan Ed25519, termasuk key terenkripsi dengan passphrase.',
 			},
 			{
-				q: 'Bagaimana pembaruannya bekerja?',
-				a: 'Aplikasi memeriksa di latar belakang dan dapat mengunduh serta menyiapkan pembaruan untuk restart berikutnya. Unduhan yang gagal tidak mengubah instalasi Anda.',
+				q: 'Bagaimana pembaruannya?',
+				a: 'Aplikasi memeriksa di latar belakang, menyiapkan paket yang terverifikasi, lalu memasangnya saat restart berikutnya. Unduhan yang gagal tidak mengubah instalasi Anda.',
 			},
 		],
+	},
+	cta: {
+		statement: 'Gratis, portabel, dan terbuka di desktop Anda dalam dua klik.',
+		button: 'Unduh untuk Windows',
+		note: 'Juga untuk Linux, dengan atau tanpa Java bawaan.',
+		guide: 'Mulai',
+		changelog: 'Changelog',
 	},
 };
 
@@ -422,3 +284,26 @@ export const landingCopy = { en, id };
 
 export const releasesUrl = 'https://github.com/ariefmahendra/seeloggyplus/releases/latest';
 export const repositoryUrl = 'https://github.com/ariefmahendra/seeloggyplus';
+
+export const logLines = [
+	'2026-10-17 13:04:15,945 INFO  [http-nio-8080-exec-5] c.a.p.PaymentService - Handling request POST /v1/payments/authorize',
+	'2026-10-17 13:04:15,982 INFO  [http-nio-8080-exec-7] c.a.p.Gateway - Payment authorization received for order ORD-88213',
+	'2026-10-17 13:04:16,105 TRACE [http-nio-8080-exec-7] c.a.p.PaymentService - Connection pool in-use 18/50, waiting 0 ms',
+	'2026-10-17 13:04:16,213 WARN  [http-nio-8080-exec-2] c.a.p.Gateway - Upstream gateway latency 812 ms exceeds the 800 ms budget',
+	'2026-10-17 13:04:16,952 ERROR [http-nio-8080-exec-1] c.a.p.PaymentService - Payment authorization failed for order ORD-88213: upstream timeout',
+	'2026-10-17 13:04:16,953 ERROR [http-nio-8080-exec-1] c.a.p.PaymentService - java.lang.IllegalStateException: upstream timeout',
+	'2026-10-17 13:04:17,004 INFO  [http-nio-8080-exec-3] c.a.p.Telemetry - Metrics flushed to collector (12 series)',
+	'2026-10-17 13:04:17,118 DEBUG [http-nio-8080-exec-4] c.a.p.Gateway - Retrying webhook delivery for order ORD-88213 attempt 2/3',
+	'2026-10-17 13:04:17,209 INFO  [http-nio-8080-exec-6] c.a.p.PaymentService - Emitted audit event payment.authorized id EVT-90231',
+	'2026-10-17 13:04:17,331 WARN  [http-nio-8080-exec-8] c.a.p.Gateway - Cache hit for tenant TNT-4410 (ttl 300s)',
+	'2026-10-17 13:04:17,447 DEBUG [http-nio-8080-exec-5] c.a.p.Telemetry - Upstream gateway latency 780 ms',
+	'2026-10-17 13:04:17,556 ERROR [http-nio-8080-exec-2] c.a.p.Gateway - Payment authorization failed for order ORD-88213: retry budget exhausted',
+];
+
+export const journeyPayload = `{
+  "timestamp": "2026-10-17T13:04:16.952+0200",
+  "level": "ERROR",
+  "service": "payment-engine",
+  "order": "ORD-88213",
+  "error": { "type": "UpstreamTimeout", "retryable": true }
+}`;

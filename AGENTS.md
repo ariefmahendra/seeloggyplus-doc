@@ -51,7 +51,17 @@ clear reason; **NEVER** = stop and choose another path.
   built from `src/components/landing/` with all copy in `src/content/landing/copy.ts`
   (both languages must stay in sync). Landing screenshots come from the app repository's
   `LandingScreenshotGeneratorTest` (1440×900 at 2×) and live in `src/assets/landing/`;
-  never hand-edit them.
+  never hand-edit them. The feature panels use pre-cropped regions in
+  `src/assets/landing/crops/`, cropped from those screenshots.
+- The landing follows the "product performs" art direction: real, working interface
+  fragments marked with `data-ui` (their product conventions, monospace and 1px borders,
+  are intentional and exempt from the design house rules via `taste-skill-ignore`
+  comments). Design tokens are `--lp-*` and the five type steps `--step-*` in
+  `custom.css`; motion uses `[data-rise]`, `[data-reveal]` and the hero shutter CSS
+  animation. Before shipping visual changes to the landing, run the design gate:
+  `node .agents/skills/design-taste-frontend/scripts/lint.mjs src/components/landing src/pages`
+  and `node .agents/skills/design-taste-frontend/scripts/inspect.mjs <url>` (expect
+  0 FAIL).
 - Starlight's automatic page title is hidden on landing pages via a CSS rule scoped with
   `body:has(.lp)`; keep the `.lp` wrapper when editing the landing pages.
 - Internal links use absolute site paths (`/guides/tail/`) so the link validator can check

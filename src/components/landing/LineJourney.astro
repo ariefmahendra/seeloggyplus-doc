@@ -1,0 +1,225 @@
+---
+import { landingCopy, logLines, journeyPayload } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing };
+
+const line = logLines[4];
+const time = line.slice(0, 23);
+const message = line.slice(29).replace(/^- /, '');
+---
+
+<section class="lp-bleed journey">
+	<div class="fields">
+		<div class="field field-ink">
+			<h2 class="journey-heading">{copy.journey.heading}</h2>
+			<p class="clause">{copy.journey.fields[0].clause}</p>
+			<div class="card" data-ui data-reveal>
+				<p class="card-line">
+					<span class="t">{time}</span> <span class="lv">ERROR</span> <span class="m">{message}</span>
+				</p>
+			</div>
+		</div>
+		<div class="field field-graphite">
+			<p class="clause">{copy.journey.fields[1].clause}</p>
+			<div class="card" data-ui data-reveal style="--i:1">
+				<p class="card-line">
+					<span class="t">{time}</span> <mark class="lv">ERROR</mark>
+					<span class="m">{message}</span>
+				</p>
+				<p class="card-foot">{copy.journey.matchLabel}</p>
+			</div>
+		</div>
+		<div class="field field-pale">
+			<p class="clause">{copy.journey.fields[2].clause}</p>
+			<div class="card" data-ui data-reveal style="--i:2">
+				<pre class="card-json">{journeyPayload}</pre>
+			</div>
+		</div>
+		<div class="field field-accent">
+			<p class="clause">{copy.journey.fields[3].clause}</p>
+			<div class="card" data-ui data-reveal style="--i:3">
+				<p class="card-line">
+					<span class="t">{time}</span> <span class="lv">ERROR</span> <span class="m">{message}</span>
+				</p>
+				<p class="card-foot card-foot-done">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<polyline points="20 6 9 17 4 12"></polyline>
+					</svg>
+					{copy.journey.copiedLabel}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.fields {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.journey {
+		margin-block: clamp(4rem, 10vh, 7rem);
+	}
+
+	.field {
+		position: relative;
+		min-height: 84svh;
+		padding: 1.75rem;
+		overflow: hidden;
+	}
+
+	.field-ink {
+		background: #0e1116;
+		color: #eef1f5;
+	}
+
+	.field-graphite {
+		background: #39414d;
+		color: #eef1f5;
+	}
+
+	.field-pale {
+		background: #e6ecf6;
+		color: #10141a;
+	}
+
+	.field-accent {
+		background: #3871e1;
+		color: #ffffff;
+	}
+
+	.journey-heading {
+		margin: 0;
+		font-size: var(--step-lead);
+		font-weight: 700;
+		line-height: 1.15;
+		letter-spacing: -0.01em;
+	}
+
+	.clause {
+		margin: 0;
+		font-size: var(--step-lead);
+		line-height: 1.15;
+		text-wrap: balance;
+	}
+
+	.field-ink .clause {
+		position: absolute;
+		left: 1.75rem;
+		bottom: 1.75rem;
+		right: 1.75rem;
+	}
+
+	.field:not(.field-ink) .clause {
+		position: absolute;
+		left: 1.75rem;
+		bottom: 1.75rem;
+		right: 1.75rem;
+	}
+
+	.card {
+		position: absolute;
+		top: 38%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 16.25rem;
+		padding: 0.7rem 0.8rem;
+		background: #fbfcfd;
+		border: 1px solid rgba(16, 20, 26, 0.14); /* taste-skill-ignore */
+		color: #10141a;
+		font-family: var(--sl-font-mono); /* taste-skill-ignore */
+		transition: transform 150ms ease;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.field:hover .card {
+			transform: translateX(-50%) translateY(-6px);
+		}
+	}
+
+	.card-line {
+		margin: 0;
+		font-size: 12.5px;
+		line-height: 1.6;
+		word-break: break-word;
+	}
+
+	.card-line .t {
+		color: #6b7280;
+	}
+
+	.card-line .lv {
+		color: #c0392b;
+		font-weight: 500;
+	}
+
+	.card-line mark.lv {
+		background: #ffe08a;
+		color: #8a2f22;
+	}
+
+	.card-line .m {
+		color: #10141a;
+	}
+
+	.card-foot {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin: 0.55rem 0 0;
+		padding-top: 0.5rem;
+		border-top: 1px solid rgba(16, 20, 26, 0.1); /* taste-skill-ignore */
+		color: #5b616b;
+		font-size: 12.5px;
+	}
+
+	.card-foot svg {
+		width: 0.75rem;
+		height: 0.75rem;
+		color: #1f8a4c;
+	}
+
+	.card-json {
+		margin: 0;
+		font-size: 12.5px;
+		line-height: 1.65;
+		color: #24417e;
+		white-space: pre-wrap;
+	}
+
+	@media (max-width: 56rem) {
+		.fields {
+			grid-template-columns: 1fr;
+		}
+
+		.field {
+			min-height: 60svh;
+			padding: 1.25rem;
+		}
+
+		.journey-heading {
+			margin-bottom: 0.5rem;
+		}
+
+		.field-ink .clause,
+		.field:not(.field-ink) .clause {
+			position: static;
+			margin-top: 0;
+		}
+
+		.card {
+			position: static;
+			transform: none;
+			margin-top: 2rem;
+			width: 16.25rem;
+		}
+
+		@media (hover: hover) {
+			.field:hover .card {
+				transform: translateY(-6px);
+			}
+		}
+	}
+</style>

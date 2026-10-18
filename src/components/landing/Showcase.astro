@@ -1,0 +1,364 @@
+---
+import { landingCopy, logLines } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing };
+
+const parsed = logLines.slice(0, 8).map((line) => ({
+	time: line.slice(0, 23),
+	level: line.slice(23, 29).trim(),
+	message: line.slice(29).replace(/^- /, ''),
+}));
+---
+
+<section class="lp-bleed show" data-showcase data-state="rest">
+	<div class="show-field">
+		<div class="lp-wrap show-top">
+			<h2 class="show-heading" data-reveal>
+				<span data-head-rest>{copy.showcase.headingRest}</span>
+				<span data-head-motion hidden>{copy.showcase.headingMotion}</span>
+			</h2>
+			<p class="show-sentence" data-reveal style="--i:1">{copy.showcase.sentence}</p>
+		</div>
+		<ol class="stream" data-ui data-stream aria-hidden="true" data-reveal style="--i:2">
+			{
+				parsed.map((line) => (
+					<li data-level={line.level}>
+						<span class="t">{line.time}</span>
+						<span class={'lv lv-' + line.level.toLowerCase()}>{line.level.padEnd(5, ' ')}</span>
+						<span class="m">{line.message}</span>
+					</li>
+				))
+			}
+		</ol>
+		<button
+			class="switch"
+			type="button"
+			role="switch"
+			aria-checked="false"
+			data-switch
+			data-ui
+			data-reveal
+			style="--i:3"
+		>
+			<span class="switch-track">
+				<span class="switch-knob"></span>
+				<span class="switch-label">{copy.showcase.switchLabel}</span>
+			</span>
+			<span
+				class="switch-status"
+				data-status
+				data-on={copy.showcase.statusOn}
+				data-off={copy.showcase.statusOff}
+			>
+				{copy.showcase.statusOff}
+			</span>
+		</button>
+	</div>
+</section>
+
+<script>
+	const setupShowcase = (section: HTMLElement) => {
+		const switchButton = section.querySelector<HTMLButtonElement>('[data-switch]');
+		const stream = section.querySelector<HTMLElement>('[data-stream]');
+		const status = section.querySelector<HTMLElement>('[data-status]');
+		const headRest = section.querySelector<HTMLElement>('[data-head-rest]');
+		const headMotion = section.querySelector<HTMLElement>('[data-head-motion]');
+		if (!switchButton || !stream) return;
+
+		const source = Array.from(stream.children).map((child) => ({
+			level: (child as HTMLElement).dataset.level ?? 'INFO',
+			time: (child.querySelector('.t') as HTMLElement)?.textContent ?? '',
+			message: (child.querySelector('.m') as HTMLElement)?.textContent ?? '',
+		}));
+
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let timer: number | undefined;
+		let cursor = 4;
+		let visible = false;
+
+		const append = () => {
+			const item = source[cursor % source.length];
+			cursor += 1;
+			const li = document.createElement('li');
+			li.dataset.level = item.level;
+			const time = document.createElement('span');
+			time.className = 't';
+			time.textContent = item.time;
+			const level = document.createElement('span');
+			level.className = `lv lv-${item.level.toLowerCase()}`;
+			level.textContent = item.level.padEnd(5, ' ');
+			const message = document.createElement('span');
+			message.className = 'm';
+			message.textContent = item.message;
+			li.append(time, level, message);
+			stream.appendChild(li);
+			while (stream.children.length > 11) stream.removeChild(stream.firstElementChild as Element);
+			stream.scrollTop = stream.scrollHeight;
+		};
+
+		const start = () => {
+			if (reduceMotion || timer !== undefined) return;
+			timer = window.setInterval(append, 520);
+		};
+
+		const stop = () => {
+			if (timer !== undefined) {
+				window.clearInterval(timer);
+				timer = undefined;
+			}
+		};
+
+		const setState = (on: boolean) => {
+			switchButton.setAttribute('aria-checked', String(on));
+			section.dataset.state = on ? 'motion' : 'rest';
+			if (headRest) headRest.hidden = on;
+			if (headMotion) headMotion.hidden = !on;
+			if (status) {
+				status.textContent = on ? status.dataset.on ?? '' : status.dataset.off ?? '';
+			}
+			if (on) {
+				if (visible) start();
+			} else {
+				stop();
+			}
+		};
+
+		switchButton.addEventListener('click', () => {
+			const on = switchButton.getAttribute('aria-checked') !== 'true';
+			setState(on);
+		});
+
+		const observer = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				visible = entry.isIntersecting;
+				if (visible) {
+					if (switchButton.getAttribute('aria-checked') === 'true') start();
+				} else {
+					stop();
+				}
+			}
+		});
+		observer.observe(section);
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-showcase]').forEach(setupShowcase);
+</script>
+
+<style>
+	.show {
+		margin-block: clamp(4rem, 10vh, 7rem);
+	}
+
+	.show-field {
+		position: relative;
+		height: 92svh;
+		min-height: 34rem;
+		overflow: hidden;
+		background: #e9edf3;
+		transition: background-color 320ms ease;
+	}
+
+	.show[data-state='motion'] .show-field {
+		background: #0e1116;
+	}
+
+	.show-top {
+		position: relative;
+		z-index: 2;
+		padding-top: clamp(3rem, 10vh, 6rem);
+	}
+
+	.show-heading {
+		margin: 0 0 0.9rem;
+		font-size: var(--step-head);
+		font-weight: 500;
+		line-height: 1;
+		letter-spacing: -0.02em;
+		color: #10141a;
+		transition: color 320ms ease;
+	}
+
+	.show[data-state='motion'] .show-heading {
+		color: #eef1f5;
+	}
+
+	.show-sentence {
+		max-width: 34ch;
+		margin: 0;
+		font-size: var(--step-body);
+		line-height: 1.5;
+		color: #4a505a;
+		transition: color 320ms ease;
+	}
+
+	.show[data-state='motion'] .show-sentence {
+		color: #9aa3af;
+	}
+
+	.stream {
+		position: absolute;
+		left: clamp(1.25rem, 4vw, 2.5rem);
+		bottom: clamp(2rem, 6vh, 4rem);
+		width: min(30rem, 52vw);
+		height: 32vh;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow: hidden;
+		font-family: var(--sl-font-mono); /* taste-skill-ignore */
+	}
+
+	.stream li {
+		padding: 1px 0;
+		font-size: 12.5px;
+		line-height: 1.7;
+		white-space: nowrap;
+		color: #6b7280;
+	}
+
+	.stream .t {
+		color: #9aa3af;
+	}
+
+	.stream .m {
+		color: inherit;
+	}
+
+	.show[data-state='motion'] .stream li {
+		color: #c6cdd6;
+	}
+
+	.show[data-state='motion'] .stream .t {
+		color: #7d8590;
+	}
+
+	.stream .lv {
+		font-weight: 500;
+	}
+
+	.stream .lv-info {
+		color: #67d391;
+	}
+
+	.stream .lv-debug {
+		color: #7aa7ff;
+	}
+
+	.stream .lv-trace {
+		color: #9aa3af;
+	}
+
+	.stream .lv-warn {
+		color: #f0b34e;
+	}
+
+	.stream .lv-error {
+		color: #f2705f;
+	}
+
+	.show[data-state='rest'] .stream .lv {
+		color: #8a929d;
+	}
+
+	.switch {
+		position: absolute;
+		right: -5vw;
+		bottom: -6vh;
+		z-index: 3;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5em;
+		padding: 0;
+		border: 0;
+		background: none;
+		font-size: clamp(2.5rem, 12vh, 6.5rem);
+		cursor: pointer;
+	}
+
+	.switch-track {
+		position: relative;
+		display: block;
+		width: 5.4em;
+		height: 2.8em;
+		border-radius: 999px;
+		background: #1c222b;
+		transition: background-color 240ms ease;
+	}
+
+	.switch[aria-checked='true'] .switch-track {
+		background: #3871e1;
+	}
+
+	.switch-knob {
+		position: absolute;
+		top: 0.2em;
+		left: 0.2em;
+		width: 2.4em;
+		height: 2.4em;
+		border-radius: 50%;
+		background: #ffffff;
+		transition: transform 320ms cubic-bezier(0.76, 0, 0.24, 1);
+	}
+
+	.switch[aria-checked='true'] .switch-knob {
+		transform: translateX(2.6em);
+	}
+
+	.switch-label {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		padding-left: 3.2em;
+		font-size: 0.42em;
+		font-weight: 500;
+		color: #ffffff;
+		white-space: nowrap;
+	}
+
+	.switch-status {
+		padding-left: 0.4em;
+		font-family: var(--sl-font-mono); /* taste-skill-ignore */
+		font-size: var(--step-small);
+		color: #4a505a;
+		transition: color 320ms ease;
+	}
+
+	.show[data-state='motion'] .switch-status {
+		color: #9aa3af;
+	}
+
+	.switch:active .switch-track {
+		transform: scale(0.98);
+	}
+
+	.switch:focus-visible {
+		outline: 2px solid #ffffff;
+		outline-offset: 4px;
+	}
+
+	@media (max-width: 56rem) {
+		.show-field {
+			height: 86svh;
+		}
+
+		.stream {
+			width: calc(100vw - 2.5rem);
+			height: 26vh;
+			bottom: clamp(9rem, 30vh, 15rem);
+		}
+
+		.switch {
+			right: auto;
+			left: -8vw;
+			bottom: -4vh;
+			font-size: 26vw;
+		}
+
+		.switch-status {
+			display: none;
+		}
+	}
+</style>

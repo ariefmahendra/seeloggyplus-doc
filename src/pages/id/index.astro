@@ -1,12 +1,12 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import LandingMotion from '../../components/landing/LandingMotion.astro';
 import Hero from '../../components/landing/Hero.astro';
-import FactsRow from '../../components/landing/FactsRow.astro';
-import FeatureGrid from '../../components/landing/FeatureGrid.astro';
-import ScreenshotCarousel from '../../components/landing/ScreenshotCarousel.astro';
-import QuickStart from '../../components/landing/QuickStart.astro';
-import DownloadSection from '../../components/landing/DownloadSection.astro';
-import FaqList from '../../components/landing/FaqList.astro';
+import ProofModules from '../../components/landing/ProofModules.astro';
+import Showcase from '../../components/landing/Showcase.astro';
+import LineJourney from '../../components/landing/LineJourney.astro';
+import FaqIndex from '../../components/landing/FaqIndex.astro';
+import CtaClose from '../../components/landing/CtaClose.astro';
 import { landingCopy } from '../../content/landing/copy';
 
 const copy = landingCopy.id;
@@ -17,13 +17,13 @@ const copy = landingCopy.id;
 	hasSidebar={false}
 	lang="id"
 >
+	<LandingMotion />
 	<div class="lp">
 		<Hero copy={copy} guideHref="/id/getting-started/" />
-		<FactsRow copy={copy} />
-		<FeatureGrid copy={copy} />
-		<ScreenshotCarousel copy={copy} />
-		<QuickStart copy={copy} guideHref="/id/getting-started/" />
-		<DownloadSection copy={copy} changelogHref="/id/changelog/" />
-		<FaqList copy={copy} />
+		<ProofModules copy={copy} />
+		<Showcase copy={copy} />
+		<LineJourney copy={copy} />
+		<FaqIndex copy={copy} />
+		<CtaClose copy={copy} guideHref="/id/getting-started/" changelogHref="/id/changelog/" />
 	</div>
 </StarlightPage>

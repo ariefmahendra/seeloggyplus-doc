@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import cropFileManager from '../../assets/landing/crops/file-manager.png';
+import cropSearch from '../../assets/landing/crops/search.png';
+import cropFindInFiles from '../../assets/landing/crops/find-in-files.png';
+import cropDetail from '../../assets/landing/crops/detail.png';
+import cropServers from '../../assets/landing/crops/server-management.png';
+import { landingCopy } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy } = Astro.props as { copy: Landing };
+
+const shots: Record<string, ImageMetadata> = {
+	'file-manager': cropFileManager,
+	search: cropSearch,
+	'find-in-files': cropFindInFiles,
+	detail: cropDetail,
+	'server-management': cropServers,
+};
+---
+
+<section class="lp-bleed features">
+	<div class="lp-wrap">
+		<h2 class="features-head" data-reveal>{copy.features.heading}</h2>
+		<ul class="modules">
+			{
+				copy.features.modules.map((module, index) => (
+					<li class="module" data-reveal style={`--i:${index}`}>
+						<div class="panel">
+							<Image
+								src={shots[module.image]}
+								alt={module.alt}
+								widths={[380, 760]}
+								sizes="23.75rem"
+								loading="lazy"
+							/>
+						</div>
+						<div class="module-text">
+							<h3>{module.heading}</h3>
+							{module.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.features {
+		padding-block: clamp(5rem, 12vh, 8.5rem);
+	}
+
+	.features-head {
+		margin: 0 0 4rem;
+		font-size: var(--step-head);
+		font-weight: 500;
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.modules {
+		display: grid;
+		gap: clamp(4rem, 10vh, 7rem);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.module {
+		display: grid;
+		grid-template-columns: 23.75rem 1fr;
+		gap: 1.5rem;
+		max-width: 48rem;
+	}
+
+	.panel {
+		background: var(--lp-surface);
+	}
+
+	.panel :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.module-text {
+		max-width: 24rem;
+	}
+
+	.module-text h3 {
+		margin: 0 0 0.5rem;
+		font-size: var(--step-body);
+		font-weight: 500;
+		line-height: 1.35;
+	}
+
+	.module-text p {
+		margin: 0 0 0.6rem;
+		max-width: 60ch;
+		color: var(--lp-soft);
+		font-size: var(--step-body);
+		line-height: 1.55;
+	}
+
+	@media (max-width: 48rem) {
+		.module {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+
+		.panel {
+			margin-right: -1.25rem;
+		}
+
+		.module-text {
+			max-width: none;
+		}
+
+		.features-head {
+			margin-bottom: 2.5rem;
+		}
+	}
+</style>

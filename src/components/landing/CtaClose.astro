@@ -1,0 +1,80 @@
+---
+import { landingCopy, releasesUrl } from '../../content/landing/copy';
+
+type Landing = typeof landingCopy.en;
+const { copy, guideHref, changelogHref } = Astro.props as {
+	copy: Landing;
+	guideHref: string;
+	changelogHref: string;
+};
+---
+
+<section class="close">
+	<div class="lp-wrap close-inner">
+		<p class="close-statement" data-reveal>{copy.cta.statement}</p>
+		<div class="close-actions" data-reveal style="--i:1">
+			<a class="lp-btn lp-focus" href={releasesUrl}>{copy.cta.button}</a>
+			<span class="close-note">{copy.cta.note}</span>
+		</div>
+		<p class="close-wordmark" aria-hidden="true">SeeLoggyPlus</p>
+		<div class="close-links" data-reveal style="--i:2">
+			<a class="lp-link lp-focus" href={guideHref}>{copy.cta.guide}</a>
+			<a class="lp-link lp-focus" href={changelogHref}>{copy.cta.changelog}</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.close {
+		padding-block: clamp(5rem, 14vh, 9rem);
+	}
+
+	.close-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.close-statement {
+		margin: 0 0 2.25rem;
+		max-width: 24ch;
+		font-size: var(--step-lead);
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+	}
+
+	.close-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.close-note {
+		color: var(--lp-soft);
+		font-size: var(--step-small);
+	}
+
+	.close-links {
+		display: flex;
+		gap: 1.75rem;
+	}
+
+	.close-wordmark {
+		margin: clamp(3.5rem, 10vh, 6rem) 0 0;
+		font-size: clamp(3rem, 9.5vw, 7.5rem);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: -0.03em;
+		color: var(--lp-ink);
+	}
+
+	.close-links {
+		margin-top: 2rem;
+	}
+</style>
