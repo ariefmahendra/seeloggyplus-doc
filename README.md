@@ -1,49 +1,35 @@
-# Starlight Starter Kit: Basics
+# SeeLoggyPlus Documentation
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Landing page and user documentation for [SeeLoggyPlus](https://github.com/ariefmahendra/seeloggyplus),
+a fast, modern and intelligent log viewer for local and remote (SSH) log files.
 
-```
-npm create astro@latest -- --template starlight
-```
+Built with [Astro](https://astro.build) + [Starlight](https://starlight.astro.build),
+deployed on Vercel. The content is bilingual: English (default, `/`) and Indonesian (`/id/`).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command | Action |
+| --- | --- |
+| `npm run dev` | Start the dev server at `localhost:4321` |
+| `npm run build` | Build the production site to `dist/` |
+| `npx astro check` | Run content and type checks |
+| `npm run preview` | Preview the production build locally |
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Structure
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+- `src/content/docs/` — English pages (root locale)
+- `src/content/docs/id/` — Indonesian pages (same slugs; keep both in sync)
+- `src/content/i18n/` — Starlight UI translation strings per language
+- `src/assets/screenshots/` — screenshots used throughout the guides
+- `src/styles/custom.css` — brand tokens ported from the application theme
+- `.agents/skills/` — project skills for AI agents (see `AGENTS.md`)
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Content sources
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+The guides are ported from the application repository's offline `help/` pages and its
+`README.md`. The changelog mirrors `docs/release-notes/` from the application repository.
+When the application UI changes, update both language trees.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+## License
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+© 2025–2026 SeeLoggyPlus

@@ -41,9 +41,14 @@ clear reason; **NEVER** = stop and choose another path.
 - Every page exists in BOTH languages: `src/content/docs/` (en) and
   `src/content/docs/id/` (id). A page is not done until its translation exists.
 - Frontmatter MUST have `title` and `description`; `description` feeds SEO.
-- Use Starlight components first (`Steps`, `Asides`, `Cards`, `Badges`, kbd); no raw
-  `<img>` — screenshots go through the shared Figure component with localized alt text.
-- Internal links only, as absolute site paths (for example `/guides/tail/`).
+- Use Starlight components first (`Steps`, `Asides`, `Cards`, `Badges`); keyboard
+  shortcuts use `<kbd>` elements (styled in `custom.css`).
+- Screenshots use Markdown image syntax with localized alt text
+  (`![Main window](../../assets/screenshots/main-window.png)`), optionally followed by a
+  `<p class="screenshot-caption">` caption. Never raw `<img>` except through Markdown.
+- Internal links use absolute site paths (`/guides/tail/`) so the link validator can check
+  them. Pages in the Indonesian tree link to their `/id/` counterparts
+  (`/id/guides/tail/`); inconsistent-locale links fail the build.
 - Keyboard shortcuts and preference names MUST match the application (source of truth:
   the app repository's `README.md` and `help/` content).
 - Guide pages stay task-oriented and concise; landing copy may be bolder.

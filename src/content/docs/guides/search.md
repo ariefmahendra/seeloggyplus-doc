@@ -1,0 +1,39 @@
+---
+title: Search & Filtering
+description: Filter the log with plain text, boolean terms or regex, navigate matches with F3, and use the Search Result Panel to jump between hits.
+---
+
+The search field in the toolbar filters the log and highlights every match.
+
+![Filtering on a term: highlights in the log, match counter in the toolbar and the result panel on the right](../../../assets/screenshots/search.png)
+
+<p class="screenshot-caption">Filtering on a term: highlights in the log, match counter in the toolbar and the result panel on the right.</p>
+
+| Feature | Description |
+| --- | --- |
+| Incremental search | Results update while you type (300 ms debounce); <kbd>Enter</kbd> applies immediately. |
+| Regex | Enable **Regex** to treat the query as a regular expression. |
+| Case Sensitive | Enable **Case Sensitive** for exact-case matching (off means case-insensitive). |
+| Boolean terms | Combine words with uppercase `AND`, `OR` and `NOT`, for example `ERROR AND timeout` or `WARN NOT retry`. |
+| Highlighting | Every matching term is highlighted in the log viewer. |
+| Navigation | <kbd>F3</kbd> / <kbd>Shift+F3</kbd> move to the next / previous match and wrap around at the ends. |
+| Match counter | The toolbar shows *"current / total"*. Counting stops after 50 000 matching lines and then reads *"50000+ matches"*; the result panel keeps listing the matches found so far. |
+| Clearing | <kbd>Escape</kbd> in the search field clears the filter, or click the clear button. |
+
+:::tip
+Plain text and boolean searches are the fastest. Use regex when you need it, and avoid
+patterns with heavy backtracking on multi-gigabyte files.
+:::
+
+## Search Result Panel
+
+While a search is active, a panel lists every matching line.
+
+![Matches with their line numbers and highlighted keywords](../../../assets/screenshots/search-result-panel.png)
+
+<p class="screenshot-caption">Matches with their line numbers and highlighted keywords.</p>
+
+- Each row shows the line number and content, with the matching text highlighted.
+- Click a row to jump to that line in the log viewer.
+- Long lines scroll horizontally; the panel is hidden again when the search is cleared.
+- During tailing, new matches are appended as lines arrive.
