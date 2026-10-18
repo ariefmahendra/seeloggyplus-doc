@@ -8,19 +8,21 @@ Sorotan utama setiap rilis dari sisi pengguna. Catatan lengkap dan unduhan terse
 
 ## 0.8.0
 
-SeeLoggyPlus 0.8.0 memperbarui antarmuka dengan tema Light dan Dark yang ringkas,
-memperbaiki navigasi file dan pemilihan teks, serta memindahkan Help ke website dokumentasi.
+**Fitur**
 
-### Fitur dan peningkatan
 - Breadcrumb folder responsif dengan menu subfolder dan navigasi folder induk tersembunyi.
 - Pemilihan dan penyalinan teks log per karakter, dengan sorotan pilihan yang konsisten.
 - Grup server yang sama pada Server Management dan File Manager.
+- Help online dengan panduan bahasa Inggris dan Indonesia di https://seeloggyplus-doc.vercel.app/.
+
+**Peningkatan**
+
 - Tema Light/Dark, kontrol ringkas, popup, ikon, field input dan splash mengikuti tema.
 - Preferences dibagi menjadi General, Log Viewer dan SSH; recent files dimuat di latar belakang.
 - Paket portable memakai konfigurasi launcher default, bukan pengaturan Java atau memori dari workspace pengembang.
-- Help online dengan panduan bahasa Inggris dan Indonesia di https://seeloggyplus-doc.vercel.app/.
 
-### Perbaikan
+**Perbaikan**
+
 - Baris log panjang tetap terbaca dan dapat dicari melewati batas pembacaan sebelumnya.
 - View Refresh memuat ulang file; hasil pencarian menunjukkan saat jumlah kecocokan dibatasi pemindaian.
 - Pemulihan lokasi remote dan navigasi keyboard tabel file diperbaiki.
@@ -29,13 +31,8 @@ memperbaiki navigasi file dan pemilihan teks, serta memindahkan Help ke website 
 - Launcher Windows menerima pengaturan Java kosong dan path Java dengan spasi. Script launcher lama yang dikenali diperbaiki setelah upgrade tanpa menimpa konfigurasi pengguna.
 - Launcher dan runtime bawaan Linux tetap memiliki izin eksekusi setelah instalasi dan update.
 
-### Pengujian
-- Regression suite aplikasi headless dan build rilis.
-- Kompatibilitas migrasi database, kredensial tersimpan dan preferensi tema.
-- Paket portable nyata diuji dengan updater 0.7.0, termasuk checksum, aktivasi, health dan rollback.
-- Pemeriksaan konten, build produksi dan tes browser dokumentasi dua bahasa.
+**Catatan upgrade**
 
-### Catatan upgrade
 - Skema database tetap versi 4; upgrade dari 0.7.0 tidak memerlukan perubahan skema.
 - Server, grup, favorit, riwayat dan konfigurasi parsing tetap dipertahankan.
 - Preferensi Graphite menjadi Light; pilihan Light dan Dark yang ada tetap dipertahankan.
