@@ -11,13 +11,7 @@ const en = {
 		button: 'Download for Windows',
 		link: 'Getting started',
 		note: 'Free to use. Portable on Windows and Linux, with or without a bundled Java runtime.',
-		demo: {
-			filename: 'payment-engine.log',
-			placeholder: 'Search this log',
-			empty: 'No lines match.',
-			count: '{{shown}} of {{total}} lines',
-			footnote: 'This is the app’s sample log, running in your browser.',
-		},
+		alt: 'The SeeLoggyPlus main window with local log files open, a search running, and a formatted JSON payload in the detail panel.',
 	},
 	features: {
 		heading: 'What it does',
@@ -152,13 +146,7 @@ const id: typeof en = {
 		button: 'Unduh untuk Windows',
 		link: 'Mulai',
 		note: 'Gratis. Portabel di Windows dan Linux, dengan atau tanpa Java bawaan.',
-		demo: {
-			filename: 'payment-engine.log',
-			placeholder: 'Cari di log ini',
-			empty: 'Tidak ada baris yang cocok.',
-			count: '{{shown}} dari {{total}} baris',
-			footnote: 'Ini log contoh aplikasi, berjalan langsung di browser Anda.',
-		},
+		alt: 'Jendela utama SeeLoggyPlus dengan file log lokal terbuka, pencarian berjalan, dan payload JSON terformat di panel detail.',
 	},
 	features: {
 		heading: 'Yang bisa dilakukannya',

@@ -28,10 +28,17 @@ clear reason; **NEVER** = stop and choose another path.
 | --- | --- |
 | Dev server | `npm run dev` |
 | Production build | `npm run build` |
+| UI tests (build + Playwright) | `npm test` |
+| UI tests only (existing build) | `npx playwright test` |
 | Content & type check | `npx astro check` |
 | Preview built site | `npm run preview` |
 
-- MUST run `npx astro check` and `npm run build` before reporting a change as done.
+- MUST write or extend a failing Playwright test in `tests/` BEFORE changing landing UI
+  behaviour or layout (run `npx playwright test`, watch it fail for the expected reason,
+  then implement until the whole suite is green). The suite covers text overflow, hero
+  and feature screenshot size/ratio/HD delivery, the live tail switch, the FAQ and
+  console errors.
+- MUST run `npx astro check` and `npm test` before reporting a change as done.
   `starlight-links-validator` turns broken internal links into build failures.
 - MUST verify user-visible UI changes in a browser (`agent-browser`) at desktop and
   mobile widths, light and dark themes, before calling them done.
@@ -49,10 +56,12 @@ clear reason; **NEVER** = stop and choose another path.
   `astro:assets`. Never raw `<img>`.
 - The landing page lives in `src/pages/index.astro` and `src/pages/id/index.astro`,
   built from `src/components/landing/` with all copy in `src/content/landing/copy.ts`
-  (both languages must stay in sync). Landing screenshots come from the app repository's
-  `LandingScreenshotGeneratorTest` (1440×900 at 2×) and live in `src/assets/landing/`;
-  never hand-edit them. The feature panels use pre-cropped regions in
-  `src/assets/landing/crops/`, cropped from those screenshots.
+  (both languages must stay in sync). The hero shows the real, theme-matched application
+  screenshots (`hero-light.png` / `hero-dark.png`), and the feature panels show the full
+  window screenshots, never cropped. All landing screenshots come from the app
+  repository's `LandingScreenshotGeneratorTest` (1440×900 at 2×) and live in
+  `src/assets/landing/`; never hand-edit them. Images MUST keep `quality={90}` and
+  width variants up to 2880 so retina screens get at least a 2× source.
 - The landing follows the "product performs" art direction: real, working interface
   fragments marked with `data-ui` (their product conventions, monospace and 1px borders,
   are intentional and exempt from the design house rules via `taste-skill-ignore`

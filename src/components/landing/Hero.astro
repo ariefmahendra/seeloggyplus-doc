@@ -1,5 +1,7 @@
 ---
-import LiveLogDemo from './LiveLogDemo.astro';
+import { Image } from 'astro:assets';
+import heroLight from '../../assets/landing/hero-light.png';
+import heroDark from '../../assets/landing/hero-dark.png';
 import { landingCopy, releasesUrl } from '../../content/landing/copy';
 
 type Landing = typeof landingCopy.en;
@@ -24,8 +26,27 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 	<div class="stage-outer">
 		<div class="hero-stage">
 			<div class="hero-stage-body">
-				<div class="hero-stage-fragment">
-					<LiveLogDemo copy={copy.hero.demo} />
+				<div class="hero-stage-shot">
+					<Image
+						class="hero-shot hero-shot-light"
+						src={heroLight}
+						alt={copy.hero.alt}
+						widths={[720, 1080, 1440, 2160, 2880]}
+						sizes="(min-width: 76rem) 1120px, calc(100vw - 2rem)"
+						quality={90}
+						loading="eager"
+						fetchpriority="high"
+					/>
+					<Image
+						class="hero-shot hero-shot-dark"
+						src={heroDark}
+						alt=""
+						aria-hidden="true"
+						widths={[720, 1080, 1440, 2160, 2880]}
+						sizes="(min-width: 76rem) 1120px, calc(100vw - 2rem)"
+						quality={90}
+						loading="lazy"
+					/>
 				</div>
 			</div>
 		</div>
@@ -102,16 +123,33 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 		margin-right: calc((100vw - 100%) / -2);
 	}
 
-	.hero-stage {
-		margin-bottom: clamp(-4rem, -7vh, -2.5rem);
-	}
-
 	.hero-stage-body {
-		min-height: clamp(21rem, 46vh, 30rem);
-		padding: clamp(1rem, 3vw, 3.5rem);
-		padding-bottom: 3.5rem;
+		padding: clamp(1rem, 2.5vw, 2.75rem);
 		background: var(--lp-stage);
 		clip-path: polygon(4.5rem 0, 100% 0, 100% 100%, 0 100%, 0 4.5rem);
+	}
+
+	.hero-stage-shot {
+		position: relative;
+	}
+
+	.hero-stage-shot :global(img),
+	.hero-stage-shot img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.hero-shot-dark {
+		display: none;
+	}
+
+	:global([data-theme='dark']) .hero-shot-light {
+		display: none;
+	}
+
+	:global([data-theme='dark']) .hero-shot-dark {
+		display: block;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -126,16 +164,12 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 
 	@supports (animation-timeline: view()) {
 		@media (prefers-reduced-motion: no-preference) {
-			.hero-stage-fragment {
+			.hero-stage-shot {
 				animation: lp-drift linear both;
 				animation-timeline: view();
 				animation-range: entry 0% exit 100%;
 			}
 		}
-	}
-
-	.hero-stage-fragment {
-		width: min(38.75rem, 100%);
 	}
 
 	@media (max-width: 56rem) {
@@ -146,12 +180,6 @@ const { copy, guideHref } = Astro.props as { copy: Landing; guideHref: string };
 
 		.hero-stage-body {
 			padding: 1rem;
-			padding-bottom: 5.5rem;
-		}
-
-		.hero-stage-fragment {
-			width: 38.75rem;
-			max-width: none;
 		}
 	}
 </style>

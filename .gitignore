@@ -20,5 +20,9 @@ pnpm-debug.log*
 # agent working files
 .taste-skill/
 
+# test artifacts
+test-results/
+playwright-report/
+
 # macOS-specific files
 .DS_Store
