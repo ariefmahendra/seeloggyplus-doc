@@ -6,7 +6,7 @@ description: Tambahkan, edit, clone, dan hapus server SSH, kelompokkan ke dalam 
 Tambah, edit, clone, dan hapus server SSH melalui **Settings → Server Management...**
 (<kbd>Ctrl+M</kbd>).
 
-![Daftar server dengan grup di sebelah kiri dan detail server yang dipilih](../../../../assets/screenshots/server-management.png)
+![Daftar server dengan grup di sebelah kiri dan detail server yang dipilih](../../../../assets/screenshots/server-management-dark.png)
 
 <p class="screenshot-caption">Daftar server dengan grup di sebelah kiri dan detail server yang dipilih.</p>
 
@@ -20,7 +20,7 @@ Tambah, edit, clone, dan hapus server SSH melalui **Settings → Server Manageme
 | Server groups | Pohon di sebelah kiri mencerminkan grup File Manager: **New group...**, **Rename...**, **Delete group**, dan **Move selected server...**. Menghapus grup melepaskan server di dalamnya dari grup, bukan menghapusnya. |
 | Server Details | Ringkasan hanya-baca dari server yang dipilih, termasuk kapan server dibuat dan terakhir digunakan. |
 
-![Formulir add/edit dengan autentikasi password yang dipilih](../../../../assets/screenshots/server-edit.png)
+![Formulir add/edit dengan autentikasi password yang dipilih](../../../../assets/screenshots/server-edit-dark.png)
 
 <p class="screenshot-caption">Formulir add/edit dengan autentikasi password yang dipilih.</p>
 

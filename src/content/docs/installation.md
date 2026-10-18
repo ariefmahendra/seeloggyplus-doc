@@ -21,7 +21,7 @@ Download the latest packages from the [GitHub Releases](https://github.com/arief
 2. After that, double-click `SeeLoggyPlus.vbs` to start the app without a console window.
 3. For diagnostics, run `launcher.bat --console` to keep a console attached.
 
-**Linux/macOS**
+**Linux**
 
 Run `./launcher.sh`.
 
@@ -46,3 +46,7 @@ cd seeloggyplus
 # Linux/macOS
 ./gradlew --no-daemon runDev
 ```
+
+## Online help in 0.8.0
+
+**Help → Help Contents** or **F1** opens the [documentation website](https://seeloggyplus-doc.vercel.app/). Packages no longer include offline HTML help. Reading local logs does not require internet.

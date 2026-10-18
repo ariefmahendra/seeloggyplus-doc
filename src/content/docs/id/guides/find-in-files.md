@@ -7,7 +7,7 @@ Mencari kata kunci di dalam setiap file dalam folder remote — berguna saat And
 log mana yang memuat error. Tombol ini hanya aktif saat lokasi server remote dipilih;
 untuk saat ini, folder lokal dicari dari command line.
 
-![Kecocokan di seluruh folder remote dengan konteks di sekitarnya di preview](../../../../assets/screenshots/find-in-files.png)
+![Kecocokan di seluruh folder remote dengan konteks di sekitarnya di preview](../../../../assets/screenshots/find-in-files-dark.png)
 
 <p class="screenshot-caption">Kecocokan di seluruh folder remote dengan konteks di sekitarnya di preview.</p>
 

@@ -20,3 +20,7 @@ If a download fails (offline, proxy, blocked host) the installation is left unto
 you can retry later. Nothing is replaced until a verified package has been fully
 downloaded.
 :::
+
+## Upgrading to 0.8.0
+
+The Graphite preference becomes Light automatically; the database schema remains at version 4. User data and stored credentials are retained. Back up the complete data directory before manual upgrades. Help now opens the website and requires internet.

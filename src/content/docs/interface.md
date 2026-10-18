@@ -6,7 +6,7 @@ description: Tour of the SeeLoggyPlus workspace — panels, tabs, the log viewer
 The workspace is organised into several areas. Every panel can be hidden and comes back
 with its shortcut.
 
-![Layout overview: recent files, log viewer, search results and detail panel](../../assets/screenshots/interface-overview.png)
+![Layout overview: recent files, log viewer, search results and detail panel](../../assets/screenshots/interface-overview-dark.png)
 
 <p class="screenshot-caption">Layout overview: recent files, log viewer, search results and detail panel.</p>
 

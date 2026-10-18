@@ -6,6 +6,44 @@ description: Catatan rilis SeeLoggyPlus — ringkasan semua fitur, perbaikan, da
 Sorotan utama setiap rilis dari sisi pengguna. Catatan lengkap dan unduhan tersedia di halaman
 [GitHub Releases](https://github.com/ariefmahendra/seeloggyplus/releases).
 
+## 0.8.0
+
+SeeLoggyPlus 0.8.0 memperbarui antarmuka dengan tema Light dan Dark yang ringkas,
+memperbaiki navigasi file dan pemilihan teks, serta memindahkan Help ke website dokumentasi.
+
+### Fitur dan peningkatan
+- Breadcrumb folder responsif dengan menu subfolder dan navigasi folder induk tersembunyi.
+- Pemilihan dan penyalinan teks log per karakter, dengan sorotan pilihan yang konsisten.
+- Grup server yang sama pada Server Management dan File Manager.
+- Tema Light/Dark, kontrol ringkas, popup, ikon, field input dan splash mengikuti tema.
+- Preferences dibagi menjadi General, Log Viewer dan SSH; recent files dimuat di latar belakang.
+- Paket portable memakai konfigurasi launcher default, bukan pengaturan Java atau memori dari workspace pengembang.
+- Help online dengan panduan bahasa Inggris dan Indonesia di https://seeloggyplus-doc.vercel.app/.
+
+### Perbaikan
+- Baris log panjang tetap terbaca dan dapat dicari melewati batas pembacaan sebelumnya.
+- View Refresh memuat ulang file; hasil pencarian menunjukkan saat jumlah kecocokan dibatasi pemindaian.
+- Pemulihan lokasi remote dan navigasi keyboard tabel file diperbaiki.
+- Menu subfolder, field direktori unduhan dan posisi panah breadcrumb mengikuti tema.
+- Launcher Linux membaca data dan konfigurasi relatif terhadap direktori instalasi.
+
+### Pengujian
+- Regression suite aplikasi headless dan build rilis.
+- Kompatibilitas migrasi database, kredensial tersimpan dan preferensi tema.
+- Paket portable nyata diuji dengan updater 0.7.0, termasuk checksum, aktivasi, health dan rollback.
+- Pemeriksaan konten, build produksi dan tes browser dokumentasi dua bahasa.
+
+### Catatan upgrade
+- Skema database tetap versi 4; upgrade dari 0.7.0 tidak memerlukan perubahan skema.
+- Server, grup, favorit, riwayat dan konfigurasi parsing tetap dipertahankan.
+- Preferensi Graphite menjadi Light; pilihan Light dan Dark yang ada tetap dipertahankan.
+- Cadangkan seluruh direktori data setelah aplikasi ditutup, termasuk seeloggyplus.db, .keystore dan known_hosts.
+- Untuk upgrade manual, ekstrak paket ke folder baru yang dapat ditulis, lalu salin seluruh direktori data dan launcher.properties. Jangan menimpa paket baru dengan current atau versions dari instalasi lama.
+- Paket tidak lagi menyertakan Help HTML offline. F1 membuka website dan memerlukan internet; membaca log lokal tetap dapat dilakukan offline.
+- Tersedia paket Windows/Linux dengan runtime bawaan atau tanpa runtime (memerlukan Java 21 atau lebih baru).
+- Jika verifikasi unduhan update gagal, instalasi aktif tetap utuh.
+
+
 ## 0.7.0
 
 **Fitur**

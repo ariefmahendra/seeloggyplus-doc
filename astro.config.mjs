@@ -5,7 +5,7 @@ import starlightImageZoom from 'starlight-image-zoom';
 import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
-	site: 'https://seeloggyplus.vercel.app',
+	site: 'https://seeloggyplus-doc.vercel.app',
 	integrations: [
 		starlight({
 			title: 'SeeLoggyPlus',

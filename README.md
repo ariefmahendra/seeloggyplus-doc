@@ -31,10 +31,12 @@ deployed on Vercel. The content is bilingual: English (default, `/`) and Indones
 
 ## Content sources
 
-The guides are ported from the application repository's offline `help/` pages and its
+The guides describe the released application and its
 `README.md`. The changelog mirrors `docs/release-notes/` from the application repository.
 When the application UI changes, update both language trees.
 
 ## License
 
 © 2025–2026 SeeLoggyPlus
+
+Production documentation: https://seeloggyplus-doc.vercel.app/. Version 0.8.0 moves application Help to this website.

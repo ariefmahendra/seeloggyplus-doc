@@ -6,7 +6,7 @@ description: Baca konten lengkap baris yang dipilih di panel bawah, dengan prett
 Klik atau pindah dengan tombol panah ke sebuah baris untuk menampilkan isi lengkapnya di
 panel bawah, berguna untuk entri panjang dan data terstruktur yang disematkan.
 
-![Baris log yang berisi payload JSON, diformat oleh Auto Prettify JSON](../../../../assets/screenshots/detail-panel.png)
+![Baris log yang berisi payload JSON, diformat oleh Auto Prettify JSON](../../../../assets/screenshots/detail-panel-dark.png)
 
 <p class="screenshot-caption">Baris log yang berisi payload JSON, diformat oleh Auto Prettify JSON.</p>
 

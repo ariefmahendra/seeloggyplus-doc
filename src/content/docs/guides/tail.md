@@ -6,7 +6,7 @@ description: Stream new log entries in real time from local files or remote SSH 
 Tail mode streams new log entries as they are written, like `tail -f`. It works for
 local files and remote files over SSH.
 
-![Following a file in real time: the tab shows a green live dot next to its name](../../../assets/screenshots/tail-mode.png)
+![Following a file in real time: the tab shows a green live dot next to its name](../../../assets/screenshots/tail-mode-dark.png)
 
 <p class="screenshot-caption">Following a file in real time: the tab shows a green live dot next to its name.</p>
 

@@ -6,7 +6,7 @@ description: One browser for local drives and SSH servers — Locations panel, n
 One browser for local drives and SSH servers, opened with **File → Open...**. It is also
 where server groups and favourites live.
 
-![Browsing a local directory: Locations tree, breadcrumb, file table and footer actions](../../../assets/screenshots/open-local-file.png)
+![Browsing a local directory: Locations tree, breadcrumb, file table and footer actions](../../../assets/screenshots/open-local-file-dark.png)
 
 <p class="screenshot-caption">Browsing a local directory: Locations tree, breadcrumb, file table and footer actions.</p>
 
@@ -18,7 +18,7 @@ where server groups and favourites live.
 - Drag a server onto a group to move it, onto another server to join that server's group, or onto **Local Drive** / empty space to ungroup it. Dragging between two rows reorders the list; the order is saved.
 - The star button marks the current folder as a favourite; favourites are grouped per location in the **Favorite folders** pane at the bottom.
 
-![The same browser on an SSH server: Location tree, remote breadcrumb and file listing](../../../assets/screenshots/remote-file-browser.png)
+![The same browser on an SSH server: Location tree, remote breadcrumb and file listing](../../../assets/screenshots/remote-file-browser-dark.png)
 
 <p class="screenshot-caption">The same browser on an SSH server: Location tree, remote breadcrumb and file listing.</p>
 

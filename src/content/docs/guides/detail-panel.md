@@ -6,7 +6,7 @@ description: Read the full content of a selected line, with automatic JSON and X
 Click or arrow-key to a line to show its full content in the bottom panel, which is handy
 for long entries and embedded structured data.
 
-![A log line containing a JSON payload, formatted by Auto Prettify JSON](../../../assets/screenshots/detail-panel.png)
+![A log line containing a JSON payload, formatted by Auto Prettify JSON](../../../assets/screenshots/detail-panel-dark.png)
 
 <p class="screenshot-caption">A log line containing a JSON payload, formatted by Auto Prettify JSON.</p>
 

@@ -7,7 +7,7 @@ Searches a keyword inside every file under a remote folder — useful when you d
 which log contains the error yet. The button is enabled only while a remote server
 location is selected; local folders are searched from the command line for now.
 
-![Matches across a remote folder with surrounding context in the preview](../../../assets/screenshots/find-in-files.png)
+![Matches across a remote folder with surrounding context in the preview](../../../assets/screenshots/find-in-files-dark.png)
 
 <p class="screenshot-caption">Matches across a remote folder with surrounding context in the preview.</p>
 

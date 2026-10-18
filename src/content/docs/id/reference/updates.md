@@ -20,3 +20,7 @@ Jika unduhan gagal (offline, proxy, host yang diblokir), instalasi dibiarkan utu
 Anda dapat mencoba lagi nanti. Tidak ada yang diganti sampai paket terverifikasi
 selesai diunduh.
 :::
+
+## Upgrade 0.8.0
+
+Preferensi Graphite otomatis menjadi Light; skema database tetap versi 4. Data pengguna dan kredensial tersimpan dipertahankan. Cadangkan seluruh direktori data sebelum upgrade manual. Help sekarang membuka website dan memerlukan internet.

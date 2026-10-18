@@ -31,4 +31,10 @@ test suite and by portable installs).
 ## Backup and portability
 
 - Back up servers, groups, favourites and recent files by copying the data directory.
-- The portable package can be moved to another folder or machine; keep the `help/`, `current`, `versions/` and launcher files together.
+- The portable package can be moved to another folder or machine; keep the `current`, `versions/` and launcher files together.
+
+## Safe upgrade to 0.8.0
+
+The database schema remains at version 4. Close the application before copying the complete data directory, including the database, .keystore and known_hosts. Copying only the database loses access to encrypted credentials without the original keystore.
+
+For manual upgrades, extract the package into a new folder, copy the entire data directory and launcher.properties, then run the new launcher. Do not copy the old current pointer or versions directory into the new package. If using a custom data directory, preserve the same seeloggyplus.dataDir setting. Retain the old installation and backup until the upgrade is verified.

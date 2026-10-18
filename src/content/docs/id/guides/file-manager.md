@@ -6,7 +6,7 @@ description: Satu penjelajah untuk drive lokal dan server SSH — lengkap dengan
 Satu penjelajah untuk drive lokal dan server SSH, dibuka dengan **File → Open...**. Di
 sinilah grup server dan favorit juga berada.
 
-![Menelusuri direktori lokal: pohon Locations, breadcrumb, tabel file, dan aksi footer](../../../../assets/screenshots/open-local-file.png)
+![Menelusuri direktori lokal: pohon Locations, breadcrumb, tabel file, dan aksi footer](../../../../assets/screenshots/open-local-file-dark.png)
 
 <p class="screenshot-caption">Menelusuri direktori lokal: pohon Locations, breadcrumb, tabel file, dan aksi footer.</p>
 
@@ -24,7 +24,7 @@ sinilah grup server dan favorit juga berada.
 - Tombol bintang menandai folder saat ini sebagai favorit; favorit dikelompokkan per
   lokasi di panel **Favorite folders** di bagian bawah.
 
-![Browser yang sama pada server SSH: pohon Location, breadcrumb remote, dan daftar file](../../../../assets/screenshots/remote-file-browser.png)
+![Browser yang sama pada server SSH: pohon Location, breadcrumb remote, dan daftar file](../../../../assets/screenshots/remote-file-browser-dark.png)
 
 <p class="screenshot-caption">Browser yang sama pada server SSH: pohon Location, breadcrumb remote, dan daftar file.</p>
 

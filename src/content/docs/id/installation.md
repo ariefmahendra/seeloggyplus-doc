@@ -21,7 +21,7 @@ Unduh paket terbaru dari halaman [GitHub Releases](https://github.com/ariefmahen
 2. Setelah itu, klik dua kali `SeeLoggyPlus.vbs` untuk menjalankan aplikasi tanpa jendela konsol.
 3. Untuk diagnostik, jalankan `launcher.bat --console` agar jendela konsol tetap terbuka.
 
-**Linux/macOS**
+**Linux**
 
 Jalankan `./launcher.sh`.
 
@@ -46,3 +46,7 @@ cd seeloggyplus
 # Linux/macOS
 ./gradlew --no-daemon runDev
 ```
+
+## Bantuan online pada 0.8.0
+
+**Help → Help Contents** atau **F1** membuka [website dokumentasi](https://seeloggyplus-doc.vercel.app/). Paket tidak lagi menyertakan panduan HTML offline. Membaca log lokal tidak memerlukan internet.

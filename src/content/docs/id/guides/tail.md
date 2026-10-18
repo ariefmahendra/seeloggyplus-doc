@@ -6,7 +6,7 @@ description: Alirkan entri log baru secara real time dari file lokal atau remote
 Mode tail mengalirkan entri log baru begitu ditulis, seperti `tail -f`. Fitur ini berfungsi
 untuk file lokal dan file remote melalui SSH.
 
-![Mengikuti file secara real time: tab menampilkan titik hijau live di samping namanya](../../../../assets/screenshots/tail-mode.png)
+![Mengikuti file secara real time: tab menampilkan titik hijau live di samping namanya](../../../../assets/screenshots/tail-mode-dark.png)
 
 <p class="screenshot-caption">Mengikuti file secara real time: tab menampilkan titik hijau live di samping namanya.</p>
 

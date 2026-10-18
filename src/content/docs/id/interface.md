@@ -6,7 +6,7 @@ description: Panduan mengenal ruang kerja SeeLoggyPlus — tata letak panel, tab
 Ruang kerja terbagi menjadi beberapa area. Setiap panel dapat disembunyikan dan muncul
 kembali dengan pintasannya.
 
-![Ringkasan tata letak: file terbaru, log viewer, hasil pencarian, dan panel Detail](../../../assets/screenshots/interface-overview.png)
+![Ringkasan tata letak: file terbaru, log viewer, hasil pencarian, dan panel Detail](../../../assets/screenshots/interface-overview-dark.png)
 
 <p class="screenshot-caption">Ringkasan tata letak: file terbaru, log viewer, hasil pencarian, dan panel Detail.</p>
 

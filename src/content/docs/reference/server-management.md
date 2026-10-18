@@ -6,7 +6,7 @@ description: Add, edit, clone and remove SSH servers, organise them into groups,
 Add, edit, clone and remove SSH servers with **Settings → Server Management...**
 (<kbd>Ctrl+M</kbd>).
 
-![The server list with groups on the left and details for the selected server](../../../assets/screenshots/server-management.png)
+![The server list with groups on the left and details for the selected server](../../../assets/screenshots/server-management-dark.png)
 
 <p class="screenshot-caption">The server list with groups on the left and details for the selected server.</p>
 
@@ -20,7 +20,7 @@ Add, edit, clone and remove SSH servers with **Settings → Server Management...
 | Server groups | The tree on the left mirrors the File Manager groups: **New group...**, **Rename...**, **Delete group** and **Move selected server...**. Deleting a group ungroups its servers instead of deleting them. |
 | Server Details | Read-only summary of the selected server, including when it was created and last used. |
 
-![The add/edit form with password authentication selected](../../../assets/screenshots/server-edit.png)
+![The add/edit form with password authentication selected](../../../assets/screenshots/server-edit-dark.png)
 
 <p class="screenshot-caption">The add/edit form with password authentication selected.</p>
 

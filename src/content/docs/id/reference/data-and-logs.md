@@ -31,4 +31,10 @@ oleh test suite dan instalasi portabel).
 ## Pencadangan dan portabilitas
 
 - Cadangkan server, grup, favorit, dan file terbaru dengan menyalin direktori data.
-- Paket portabel dapat dipindahkan ke folder atau mesin lain; biarkan file `help/`, `current`, `versions/`, dan launcher tetap berada bersama.
+- Paket portabel dapat dipindahkan ke folder atau mesin lain; biarkan file `current`, `versions/`, dan launcher tetap berada bersama.
+
+## Upgrade aman ke 0.8.0
+
+Skema database tetap versi 4. Tutup aplikasi sebelum menyalin seluruh direktori data, termasuk database, .keystore dan known_hosts. Jangan menyalin database saja: kredensial memerlukan keystore aslinya.
+
+Untuk upgrade manual, ekstrak paket ke folder baru, salin seluruh direktori data dan launcher.properties, lalu jalankan launcher baru. Jangan salin current atau versions lama ke paket baru. Untuk direktori data khusus, pertahankan konfigurasi seeloggyplus.dataDir yang sama. Simpan instalasi dan backup lama sampai upgrade berhasil diverifikasi.
