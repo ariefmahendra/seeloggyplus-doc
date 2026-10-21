@@ -33,7 +33,7 @@ test suite and by portable installs).
 - Back up servers, groups, favourites and recent files by copying the data directory.
 - The portable package can be moved to another folder or machine; keep the `current`, `versions/` and launcher files together.
 
-## Safe upgrade to 0.8.0
+## Safe upgrade to 0.9.0
 
 The database schema remains at version 4. Close the application before copying the complete data directory, including the database, .keystore and known_hosts. Copying only the database loses access to encrypted credentials without the original keystore.
 

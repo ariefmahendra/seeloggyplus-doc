@@ -62,7 +62,7 @@ dibangun ulang, hapus entri-nya dari `known_hosts` di direktori data dan percaya
 
 - Naikkan **Max Memory** di **Preferences → General** dan restart aplikasi.
 - Gunakan mode Tail atau filter tampilan alih-alih menggulir jutaan baris.
-- Tutup tab yang tidak lagi diperlukan — setiap file yang terbuka menyimpan indeksnya — dan gunakan tombol **GC** untuk melepaskan memori.
+- Tutup tab yang tidak lagi diperlukan — setiap file yang terbuka menyimpan indeksnya — dan gunakan **Diagnostics → Run Garbage Collection** untuk melepaskan memori.
 
 ## Preferensi tampaknya tidak diterapkan
 

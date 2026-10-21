@@ -1,24 +1,20 @@
 ---
 title: Panel Detail
-description: Baca konten lengkap baris yang dipilih di panel bawah, dengan prettify JSON dan XML otomatis, serta tombol Copy dan Clear.
+description: Baca seluruh baris log dengan mode Raw dan Formatted, deteksi JSON/XML otomatis, Copy dan Clear.
 ---
 
-Klik atau pindah dengan tombol panah ke sebuah baris untuk menampilkan isi lengkapnya di
-panel bawah, berguna untuk entri panjang dan data terstruktur yang disematkan.
+Pilih baris untuk menampilkan isi lengkapnya di Detail. Buka/tutup dengan <kbd>Ctrl+J</kbd> atau ikon panel pada bar bawah. Pilih Auto, Right atau Bottom melalui **View → Results Position**. Jika Results dan Detail berbagi dock bawah, pilih tab Detail.
 
-![Baris log yang berisi payload JSON, diformat oleh Auto Prettify JSON](../../../../assets/screenshots/detail-panel-dark.png)
-
-<p class="screenshot-caption">Baris log yang berisi payload JSON, diformat oleh Auto Prettify JSON.</p>
+![Panel Detail menampilkan payload JSON yang dideteksi otomatis dalam mode Formatted](../../../../assets/screenshots/detail-panel-dark.png)
 
 | Kontrol | Aksi |
 | --- | --- |
-| Auto Prettify JSON | Memformat JSON yang disematkan pada baris yang ditampilkan. Payload besar diformat di latar belakang agar UI tetap responsif. |
-| Auto Prettify XML | Sama untuk XML yang disematkan, termasuk SOAP envelope dan namespace. |
-| Copy | Menyalin persis apa yang ditampilkan (hasil prettify atau mentah) ke clipboard. |
-| Clear | Mengosongkan panel tanpa menutupnya. |
-| Close | Menyembunyikan panel; tampilkan kembali dengan <kbd>Ctrl+J</kbd> atau toggle di toolbar. |
+| Raw | Menampilkan baris log asli secara utuh. |
+| Formatted | Mendeteksi dan memformat JSON/XML yang didukung secara langsung, dengan mempertahankan teks log di sekeliling payload. Payload besar diproses di latar belakang. |
+| Copy | Menyalin mode yang sedang ditampilkan: teks asli pada Raw atau hasil format pada Formatted. |
+| Clear | Mengosongkan Detail tanpa menutup panel. |
+| Close | Menyembunyikan Detail. Buka kembali dengan <kbd>Ctrl+J</kbd> atau ikon bar bawah. Results tetap terbuka secara terpisah. |
 
 :::tip
-Toggle diingat per sesi dan juga tersedia di **Preferences → Log Viewer**. Panel ini
-menggunakan font family dan ukuran dari **Preferences → General**.
+Atur apakah Detail dibuka dalam mode Formatted melalui **Preferences → Log Viewer**. Preferensi JSON/XML lama tetap menjadi fallback. Mode pilihan digunakan untuk baris berikutnya; konten yang tidak didukung atau rusak ditampilkan Raw dan tidak dapat mengaktifkan Formatted. Panel memakai pengaturan font dari **Preferences → General**.
 :::

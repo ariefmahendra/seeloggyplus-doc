@@ -33,7 +33,7 @@ oleh test suite dan instalasi portabel).
 - Cadangkan server, grup, favorit, dan file terbaru dengan menyalin direktori data.
 - Paket portabel dapat dipindahkan ke folder atau mesin lain; biarkan file `current`, `versions/`, dan launcher tetap berada bersama.
 
-## Upgrade aman ke 0.8.0
+## Upgrade aman ke 0.9.0
 
 Skema database tetap versi 4. Tutup aplikasi sebelum menyalin seluruh direktori data, termasuk database, .keystore dan known_hosts. Jangan menyalin database saja: kredensial memerlukan keystore aslinya.
 

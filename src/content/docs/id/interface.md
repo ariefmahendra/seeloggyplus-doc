@@ -13,12 +13,14 @@ kembali dengan pintasannya.
 | Area | Fungsi |
 | --- | --- |
 | Menu bar | Perintah File, View, Settings, dan Help. Akselerator menu berfungsi selama jendela dalam fokus. |
-| Toolbar | Tombol buka/tutup panel, kolom pencarian dengan **Regex** / **Case Sensitive**, navigator kecocokan, Reload, Tail, Smart Follow, dan Clear. |
+| Toolbar | Open/Servers, pencarian dengan **Regex** / **Case Sensitive**, navigator kecocokan, serta Tail/Follow. Reload dan Clear Log View ada di menu klik kanan tab log. |
 | Recent Log Files | File yang pernah dibuka, dikelompokkan berdasarkan sumber. Buka/tutup dengan <kbd>Ctrl+B</kbd>. |
-| Log viewer | Baris yang dirender di canvas dengan nomor baris, warna tingkat keparahan, bilah aksen kiri, dan warna lembut untuk WARN/ERROR/FATAL, plus sorotan pencarian. |
-| Search Result Panel | Muncul di sisi kanan saat pencarian aktif. Menampilkan baris yang cocok; klik salah satunya untuk melompat ke baris tersebut. |
-| Panel Detail | Isi lengkap baris yang dipilih dengan prettify JSON/XML dan Copy. Buka/tutup dengan <kbd>Ctrl+J</kbd>. |
-| Status bar | Baris saat ini dan totalnya, ukuran seleksi, tombol GC, dan penggunaan heap dengan bar berkode warna. |
+| Log viewer | Baris canvas dengan nomor baris, warna teks sesuai tingkat keparahan, selection per karakter, dan sorotan pencarian. |
+| Search Result Panel | Menampilkan kecocokan di dock Auto/Right/Bottom yang dipilih. Klik hasil untuk menuju baris tersebut. |
+| Panel Detail | Isi lengkap baris dengan mode Raw/Formatted dan Copy. Buka/tutup dengan <kbd>Ctrl+J</kbd>. |
+| Status bar | Tombol panel, baris saat ini dan totalnya, ukuran seleksi, Resources, dan heap dengan bar berkode warna. |
+
+Pilih **View → Results Position → Auto / Right / Bottom** untuk menempatkan Results dan Detail. Pada dock bawah bersama, gunakan tab panel untuk berpindah. **View → Reset Layout** mengembalikan layout awal.
 
 ## Tab
 
@@ -33,6 +35,7 @@ kembali dengan pintasannya.
 | --- | --- |
 | **Line: 143 / 175 (81.1%)** | Baris teratas yang terlihat, total baris pada tampilan saat ini, dan posisi gulir. Klik untuk membuka **Go To Line** (<kbd>Ctrl+G</kbd>). |
 | **Selected: 3 lines, 120 chars** | Muncul saat teks dipilih; lihat [Memilih & Menyalin Teks](/id/guides/selection/). |
-| **GC** | Menjalankan garbage collection — berguna saat file besar baru saja ditutup atau dibersihkan. |
+| **Ikon panel** | Buka/tutup Recent Files dan Detail; ikon aktif biru dengan latar abu-abu. |
+| **Resources** | Membuka detail heap dan sesi. Gunakan Diagnostics > Run Garbage Collection bila diperlukan. |
 | **Memory** | Heap terpakai / total dengan bar yang berubah kuning di atas 60% dan merah di atas 85%. |
 | **Pemberitahuan pembaruan** | Tautan yang dapat diklik muncul ketika rilis yang lebih baru tersedia. |

@@ -21,6 +21,6 @@ you can retry later. Nothing is replaced until a verified package has been fully
 downloaded.
 :::
 
-## Upgrading to 0.8.0
+## Upgrading to 0.9.0
 
-The Graphite preference becomes Light automatically; the database schema remains at version 4. User data and stored credentials are retained. Back up the complete data directory before manual upgrades. Help now opens the website and requires internet.
+The database schema remains at version 4 and existing data and credentials are retained. Older JSON/XML preferences remain a fallback for the default Formatted mode. Back up the complete data directory before manual upgrades. Tail history now uses temporary disk space; normal session close removes its spool files, while forced exits may leave them behind. Help continues to open the website.

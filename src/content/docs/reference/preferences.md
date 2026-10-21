@@ -30,7 +30,7 @@ Open with **Settings → Preferences...**. Settings are stored locally and apply
 | Font Family | Any installed family; monospace fonts work best for logs. |
 | Tail Window Size | 1000–100000 lines (default 20000). How many lines are loaded when tailing starts. |
 | Preview Line Limit | 1–10000 lines shown when previewing a file in the File Manager. |
-| Auto Prettify JSON / XML | Format structured payloads automatically in the Detail panel. |
+| Open Detail in Formatted mode | Detect and format supported JSON/XML automatically when selecting a line. Raw remains available. |
 
 ![Preferences - SSH](../../../assets/screenshots/preferences-ssh-dark.png)
 

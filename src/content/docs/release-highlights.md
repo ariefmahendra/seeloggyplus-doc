@@ -1,10 +1,10 @@
 ---
-title: Development Preview
-description: Preview the unreleased SeeLoggyPlus workbench, detail formatting, button colors and startup improvements on the dev branch.
+title: 0.9.0 Highlights
+description: 'SeeLoggyPlus 0.9.0 highlights: workspace docking, Raw/Formatted detail, button colors, startup and Tail memory improvements.'
 ---
 
-:::caution[Unreleased]
-This page describes the [development branch](https://github.com/ariefmahendra/seeloggyplus/tree/dev), not a published download. The latest stable version remains **0.8.0**. The rest of these guides describe that stable version. No new application release or automatic update is published by this documentation update.
+:::note[SeeLoggyPlus 0.9.0]
+These features are available in [release 0.9.0](https://github.com/ariefmahendra/seeloggyplus/releases/tag/0.9.0). Follow the [installation guide](/installation/) to install or upgrade.
 :::
 
 ## Workspace and panel controls
@@ -15,9 +15,9 @@ This page describes the [development branch](https://github.com/ariefmahendra/se
 - Reload and **Clear Log View** are available from the log tab's context menu; <kbd>F5</kbd> and **View → Refresh** remain available.
 - The Resources menu and heap usage remain readable in the bottom bar, including at narrow window widths.
 
-![Development workbench in Dark theme with blue active icons and gray button backgrounds](../../assets/screenshots/development-workbench-dark.png)
+![SeeLoggyPlus 0.9.0 workbench in Dark theme with blue active icons and gray button backgrounds](../../assets/screenshots/release-workbench-dark.png)
 
-<p class="screenshot-caption">Development build. The stable 0.8.0 interface differs from this preview.</p>
+<p class="screenshot-caption">SeeLoggyPlus 0.9.0 workspace in the Dark theme.</p>
 
 ## Raw and Formatted detail
 
@@ -31,7 +31,7 @@ Button icons become blue on hover, press, selection, open menus and keyboard foc
 
 Splash text renders at display resolution, including high-DPI scaling. The splash starts before workspace preparation and loads its animation in the background. The time from clicking a launcher still depends on JVM startup and the computer.
 
-![Development workbench in Light theme with gray controls and readable status text](../../assets/screenshots/development-workbench-light.png)
+![SeeLoggyPlus 0.9.0 workbench in Light theme with gray controls and readable status text](../../assets/screenshots/release-workbench-light.png)
 
 ## Search and memory
 

@@ -30,7 +30,7 @@ setelah **Save**; beberapa di antaranya memerlukan restart, seperti dijelaskan d
 | Font Family | Font family apa pun yang terpasang; font monospace paling cocok untuk log. |
 | Tail Window Size | 1000–100000 baris (default 20000). Jumlah baris yang dimuat saat tailing dimulai. |
 | Preview Line Limit | 1–10000 baris yang ditampilkan saat pratinjau file di File Manager. |
-| Auto Prettify JSON / XML | Format payload terstruktur secara otomatis di panel Detail. |
+| Open Detail in Formatted mode | Deteksi dan format JSON/XML yang didukung saat memilih baris. Raw tetap tersedia. |
 
 ![Preferensi - SSH](../../../../assets/screenshots/preferences-ssh-dark.png)
 

@@ -1,25 +1,20 @@
 ---
 title: Detail Panel
-description: Read the full content of a selected line, with automatic JSON and XML prettifying, Copy and Clear.
+description: Read the full selected log line using Raw and Formatted modes, automatic JSON/XML detection, Copy and Clear.
 ---
 
-Click or arrow-key to a line to show its full content in the bottom panel, which is handy
-for long entries and embedded structured data.
+Select a line to show its full content in Detail. Toggle the panel with <kbd>Ctrl+J</kbd> or its bottom-bar icon. Use **View → Results Position** to choose Auto, Right or Bottom docking. If Results and Detail share the bottom dock, select the Detail tab.
 
-![A log line containing a JSON payload, formatted by Auto Prettify JSON](../../../assets/screenshots/detail-panel-dark.png)
-
-<p class="screenshot-caption">A log line containing a JSON payload, formatted by Auto Prettify JSON.</p>
+![Detail panel displaying an automatically detected JSON payload in Formatted mode](../../../assets/screenshots/detail-panel-dark.png)
 
 | Control | Action |
 | --- | --- |
-| Auto Prettify JSON | Formats the embedded JSON of the shown line. Big payloads are formatted in the background so the UI stays responsive. |
-| Auto Prettify XML | Same for embedded XML, including SOAP envelopes and namespaces. |
-| Copy | Copies exactly what is shown (prettified or raw) to the clipboard. |
-| Clear | Empties the panel without closing it. |
-| Close | Hides the panel; bring it back with <kbd>Ctrl+J</kbd> or the toolbar toggle. |
+| Raw | Shows the exact original log line. |
+| Formatted | Detects and formats supported JSON/XML directly, preserving log text around the payload. Large payloads are processed in the background. |
+| Copy | Copies the currently displayed mode: original text in Raw, formatted text in Formatted. |
+| Clear | Empties Detail without closing it. |
+| Close | Hides Detail. Reopen it with <kbd>Ctrl+J</kbd> or the bottom-bar icon. Results remain open independently. |
 
 :::tip
-The toggles are remembered per session and are also available in
-**Preferences → Log Viewer**. The panel uses the font family and size from
-**Preferences → General**.
+Choose whether Detail opens in Formatted mode in **Preferences → Log Viewer**. Older JSON/XML preferences remain a fallback. The selected mode is reused for following lines; unsupported or malformed content is shown Raw and cannot enable Formatted. The panel uses the font settings from **Preferences → General**.
 :::

@@ -13,12 +13,14 @@ with its shortcut.
 | Area | Purpose |
 | --- | --- |
 | Menu bar | File, View, Settings and Help commands. Menu accelerators work whenever the window is focused. |
-| Toolbar | Panel toggles, the search field with **Regex** / **Case Sensitive**, the match navigator, Reload, Tail, Smart Follow and Clear. |
+| Toolbar | Open/Servers, the search field with **Regex** / **Case Sensitive**, match navigation, and Tail/Follow. Reload and Clear Log View are in the log tab context menu. |
 | Recent Log Files | Previously opened files, grouped by source. Toggle with <kbd>Ctrl+B</kbd>. |
-| Log viewer | Canvas-rendered lines with line numbers, severity colours, a left accent bar and a soft tint for WARN/ERROR/FATAL, plus search highlights. |
-| Search Result Panel | Appears on the right while a search is active. Lists matched lines; click one to jump to it. |
-| Detail panel | Full content of the selected line with JSON/XML prettify and Copy. Toggle with <kbd>Ctrl+J</kbd>. |
-| Status bar | Current line and total, the selection size, a GC button, and heap usage with a colour-coded bar. |
+| Log viewer | Canvas-rendered lines with line numbers, severity-colored text, character selection and search highlights. |
+| Search Result Panel | Lists matches in the configured Auto/Right/Bottom dock. Click a result to jump to its line. |
+| Detail panel | Full content of the selected line with Raw/Formatted modes and Copy. Toggle with <kbd>Ctrl+J</kbd>. |
+| Status bar | Panel toggles, current line and total, selection size, Resources, and heap usage with a colour-coded bar. |
+
+Choose **View → Results Position → Auto / Right / Bottom** to place Results and Detail. In a shared bottom dock, switch between their tabs. **View → Reset Layout** restores the default layout.
 
 ## Tabs
 
@@ -33,6 +35,7 @@ with its shortcut.
 | --- | --- |
 | **Line: 143 / 175 (81.1%)** | Top visible line, total lines in the current view and the scroll position. Click it to open **Go To Line** (<kbd>Ctrl+G</kbd>). |
 | **Selected: 3 lines, 120 chars** | Appears while text is selected; see [Selecting & Copying Text](/guides/selection/). |
-| **GC** | Runs a garbage collection — useful when a large file has just been closed or cleared. |
+| **Panel icons** | Toggle Recent Files and Detail, using blue active icons on gray backgrounds. |
+| **Resources** | Opens heap and session details. Use Diagnostics > Run Garbage Collection when needed. |
 | **Memory** | Used / total heap with a bar that turns amber above 60% and red above 85%. |
 | **Update notice** | A clickable link appears when a newer release is available. |

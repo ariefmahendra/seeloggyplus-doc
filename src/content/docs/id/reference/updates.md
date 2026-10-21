@@ -21,6 +21,6 @@ Anda dapat mencoba lagi nanti. Tidak ada yang diganti sampai paket terverifikasi
 selesai diunduh.
 :::
 
-## Upgrade 0.8.0
+## Upgrade 0.9.0
 
-Preferensi Graphite otomatis menjadi Light; skema database tetap versi 4. Data pengguna dan kredensial tersimpan dipertahankan. Cadangkan seluruh direktori data sebelum upgrade manual. Help sekarang membuka website dan memerlukan internet.
+Skema database tetap versi 4; data dan kredensial yang sudah ada dipertahankan. Preferensi JSON/XML lama tetap menjadi fallback untuk mode awal Formatted. Cadangkan seluruh direktori data sebelum upgrade manual. Riwayat Tail kini memakai ruang disk sementara; penutupan sesi normal menghapus spool, sedangkan penghentian paksa dapat meninggalkannya. Help tetap membuka website.

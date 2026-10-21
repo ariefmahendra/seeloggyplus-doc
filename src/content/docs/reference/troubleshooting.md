@@ -60,7 +60,7 @@ rebuilt, remove its entry from `known_hosts` in the data directory and trust the
 
 - Raise **Max Memory** in **Preferences → General** and restart the application.
 - Use Tail mode or filter the view instead of scrolling through millions of lines.
-- Close tabs you no longer need — each open file keeps its index — and use the **GC** button to release memory.
+- Close tabs you no longer need — each open file keeps its index — and use **Diagnostics → Run Garbage Collection** to release memory.
 
 ## Preferences do not seem to apply
 
@@ -71,7 +71,7 @@ rebuilt, remove its entry from `known_hosts` in the data directory and trust the
 ## A panel disappeared
 
 Panels toggle with <kbd>Ctrl+B</kbd> (Recent Log Files), <kbd>Ctrl+J</kbd> (Detail) or the
-two toolbar toggles; the View menu has the same entries. Split dividers are draggable and
+two bottom-bar panel buttons; the View menu has the same entries. Split dividers are draggable and
 remember their position per session.
 
 ## Double-clicking a file in the File Manager does not open it

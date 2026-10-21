@@ -95,7 +95,7 @@ clear reason; **NEVER** = stop and choose another path.
 - Docs describe the latest released application version; any version badge MUST match
   the app repository's `gradle.properties` version.
 - `src/content/docs/changelog/` mirrors the app repository's
-  `docs/release-notes/<version>.md` entries.
+  `release-notes/<version>.md` entries.
 
 ## 5. Commits (MUST)
 

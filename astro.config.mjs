@@ -6,6 +6,10 @@ import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
 	site: 'https://seeloggyplus-doc.vercel.app',
+	redirects: {
+		'/development-preview/': '/release-highlights/',
+		'/id/development-preview/': '/id/release-highlights/',
+	},
 	integrations: [
 		starlight({
 			title: 'SeeLoggyPlus',
@@ -70,7 +74,7 @@ export default defineConfig({
 				{
 					label: 'Project',
 					translations: { id: 'Proyek' },
-					items: ['changelog', 'development-preview'],
+					items: ['changelog', 'release-highlights'],
 				},
 			],
 		}),

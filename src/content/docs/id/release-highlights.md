@@ -1,10 +1,10 @@
 ---
-title: Pratinjau Pengembangan
-description: Pratinjau workbench, format detail, warna tombol, dan peningkatan startup SeeLoggyPlus yang belum dirilis di branch dev.
+title: Sorotan 0.9.0
+description: 'Fitur SeeLoggyPlus 0.9.0: dock workspace, format detail Raw/Formatted, warna tombol, startup dan memori Tail.'
 ---
 
-:::caution[Belum dirilis]
-Halaman ini menjelaskan [branch pengembangan](https://github.com/ariefmahendra/seeloggyplus/tree/dev), bukan unduhan yang sudah diterbitkan. Versi stabil terbaru tetap **0.8.0**. Panduan lainnya masih menjelaskan versi stabil tersebut. Pembaruan dokumentasi ini tidak menerbitkan rilis aplikasi atau pembaruan otomatis baru.
+:::note[SeeLoggyPlus 0.9.0]
+Fitur pada halaman ini tersedia pada [rilis 0.9.0](https://github.com/ariefmahendra/seeloggyplus/releases/tag/0.9.0). Ikuti [panduan instalasi](/id/installation/) untuk memasang atau memperbarui aplikasi.
 :::
 
 ## Workspace dan kontrol panel
@@ -15,9 +15,9 @@ Halaman ini menjelaskan [branch pengembangan](https://github.com/ariefmahendra/s
 - Reload dan **Clear Log View** tersedia dari menu klik kanan tab log; <kbd>F5</kbd> dan **View → Refresh** tetap tersedia.
 - Menu Resources dan penggunaan heap tetap terbaca di bar bawah, termasuk pada jendela sempit.
 
-![Workbench pengembangan tema Dark dengan ikon aktif biru dan latar tombol abu-abu](../../../assets/screenshots/development-workbench-dark.png)
+![Workbench SeeLoggyPlus 0.9.0 tema Dark dengan ikon aktif biru dan latar tombol abu-abu](../../../assets/screenshots/release-workbench-dark.png)
 
-<p class="screenshot-caption">Build pengembangan. Antarmuka versi stabil 0.8.0 berbeda dari pratinjau ini.</p>
+<p class="screenshot-caption">Workspace SeeLoggyPlus 0.9.0 dengan tema Dark.</p>
 
 ## Detail Raw dan Formatted
 
@@ -31,7 +31,7 @@ Ikon tombol menjadi biru saat hover, ditekan, dipilih, menu terbuka, dan fokus k
 
 Teks splash digambar pada resolusi layar, termasuk scaling high-DPI. Splash mulai sebelum persiapan workspace dan memuat animasi di latar belakang. Jeda sejak launcher diklik tetap bergantung pada startup JVM dan komputer.
 
-![Workbench pengembangan tema Light dengan kontrol abu-abu dan teks status yang terbaca](../../../assets/screenshots/development-workbench-light.png)
+![Workbench SeeLoggyPlus 0.9.0 tema Light dengan kontrol abu-abu dan teks status yang terbaca](../../../assets/screenshots/release-workbench-light.png)
 
 ## Pencarian dan memori
 

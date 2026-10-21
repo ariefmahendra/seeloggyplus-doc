@@ -6,9 +6,54 @@ description: Catatan rilis SeeLoggyPlus — ringkasan semua fitur, perbaikan, da
 Sorotan utama setiap rilis dari sisi pengguna. Catatan lengkap dan unduhan tersedia di halaman
 [GitHub Releases](https://github.com/ariefmahendra/seeloggyplus/releases).
 
-## Belum dirilis
+## 0.9.0
 
-[Pratinjau pengembangan](/id/development-preview/) menjelaskan workbench dengan dock, mode detail Raw/Formatted, ikon biru di atas latar tombol abu-abu, splash yang lebih tajam dan muncul lebih awal, perbaikan pencarian, serta perubahan memori Tail. Perubahan ini ada di `dev`; **0.8.0 tetap rilis stabil terbaru**.
+Lihat [Sorotan 0.9.0](/id/release-highlights/) untuk screenshot dan panduan workspace.
+
+**Ringkasan**
+
+SeeLoggyPlus 0.9.0 menghadirkan workspace adaptif, pemformatan log terstruktur yang lebih sederhana, warna interaksi yang jelas, serta peningkatan startup, pencarian dan pengelolaan memori Tail.
+
+**Fitur**
+
+- Results dan Detail dapat memakai posisi Auto, Right atau Bottom. Panel yang berbagi dock bawah memakai tab, dan layout pilihan disimpan.
+- Mode Raw dan Formatted mendeteksi JSON/XML langsung. Copy mengikuti mode tampilan dan payload besar diformat di latar belakang.
+- Menu Resources menampilkan informasi heap dan sesi pada bar bawah.
+
+**Peningkatan**
+
+- Toolbar dibagi menjadi Open/Servers, pencarian, serta Tail/Follow. Tombol Recent Files dan Detail berada di kiri bawah; Ctrl+B dan Ctrl+J tetap tersedia.
+- Ikon tombol menjadi biru saat hover, ditekan, dipilih dan fokus keyboard, dengan latar interaksi abu-abu netral pada Light/Dark.
+- Teks splash digambar pada resolusi layar termasuk high-DPI. Splash dimulai sebelum persiapan workspace; animasinya dimuat di latar belakang. Waktu startup JVM tetap bergantung pada komputer.
+- Riwayat Tail memakai hot cache berbatas ukuran dan file sementara untuk konten yang jarang diakses tanpa mengurangi batas riwayat. Beberapa workload indexing/pencarian masih lebih lambat daripada baseline; penghematan memori bergantung pada workload.
+- Alokasi sementara pencarian dan pembacaan baris dikurangi; isi penuh baris hasil yang panjang dipertahankan.
+
+**Perbaikan**
+
+- Pencarian lama tidak menimpa query baru, hasil tab lain, atau hasil yang sudah dibersihkan.
+- Selection panjang dan scrollbar hasil tetap terlihat di dalam panel bersudut membulat.
+- Tulisan Resources tidak terpotong atau bertabrakan dengan panahnya.
+- Pembaruan status memori memakai ulang Tooltip agar resource popup tidak menumpuk selama sesi panjang.
+- Pekerjaan format lama tidak menimpa pilihan baris baru atau mengisi kembali Detail yang sudah dibersihkan.
+
+**Tes**
+
+- Regresi headless untuk layout, startup, kontras tema, pencarian, pemformatan, selection, riwayat Tail dan pembacaan file.
+- Self-update memeriksa whitelist paket, checksum, unduhan, staging, aktivasi, kesehatan aplikasi dan rollback.
+- Gate paket Windows/Linux memakai updater rilis 0.7.0 yang sebenarnya.
+- Dokumentasi bilingual diperiksa melalui build, validasi link dan tes browser desktop/mobile.
+
+**Catatan upgrade**
+
+- Tidak diperlukan migrasi database dari 0.8.0; skema tetap versi 4. Server, kredensial, riwayat dan preferensi dipertahankan.
+- Preferensi JSON/XML lama tetap menjadi fallback untuk mode awal Formatted.
+- Reload dan Clear Log View tersedia dari menu klik kanan tab log. F5 dan View > Refresh tetap memuat ulang file aktif.
+- Spooling Tail memakai ruang disk sementara. Penutupan sesi normal menghapus file tersebut; crash atau penghentian paksa dapat meninggalkannya.
+- Tutup aplikasi sebelum mencadangkan seluruh direktori data, termasuk seeloggyplus.db, .keystore dan known_hosts.
+- Untuk upgrade manual, gunakan folder baru dan salin seluruh direktori data serta launcher.properties. Jangan menimpa instalasi baru dengan current atau versions lama.
+- Help online tetap di https://seeloggyplus-doc.vercel.app/; membuka log lokal tetap dapat dilakukan offline.
+
+**Changelog lengkap:** [0.8.0...0.9.0](https://github.com/ariefmahendra/seeloggyplus/compare/0.8.0...0.9.0)
 
 ## 0.8.0
 
