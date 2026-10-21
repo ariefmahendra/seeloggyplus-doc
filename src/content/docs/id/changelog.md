@@ -33,7 +33,7 @@ SeeLoggyPlus 0.9.0 menghadirkan workspace adaptif, pemformatan log terstruktur y
 - Pencarian lama tidak menimpa query baru, hasil tab lain, atau hasil yang sudah dibersihkan.
 - Selection panjang dan scrollbar hasil tetap terlihat di dalam panel bersudut membulat.
 - Tulisan Resources tidak terpotong atau bertabrakan dengan panahnya.
-- Pembaruan status memori memakai ulang Tooltip dan berhenti saat jendela disembunyikan, sehingga workspace yang ditutup tidak menahan resource popup.
+- Workspace yang ditutup atau dilepas membebaskan resource UI: pemantauan memori berhenti saat jendela tersembunyi, Tooltip dipakai ulang, dan shortcut dipasang saat scene tersedia.
 - Pekerjaan format lama tidak menimpa pilihan baris baru atau mengisi kembali Detail yang sudah dibersihkan.
 
 **Tes**
