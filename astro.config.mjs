@@ -70,7 +70,7 @@ export default defineConfig({
 				{
 					label: 'Project',
 					translations: { id: 'Proyek' },
-					items: ['changelog'],
+					items: ['changelog', 'development-preview'],
 				},
 			],
 		}),

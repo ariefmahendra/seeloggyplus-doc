@@ -6,6 +6,10 @@ description: Release notes for SeeLoggyPlus — the features, fixes and improvem
 User-facing highlights of every release. Full notes and downloads live on the
 [GitHub Releases](https://github.com/ariefmahendra/seeloggyplus/releases) page.
 
+## Unreleased
+
+The [development preview](/development-preview/) covers the upcoming dockable workbench, Raw/Formatted detail modes, blue icons on gray button backgrounds, sharper earlier splash, search fixes and Tail-memory changes. These changes are on `dev`; **0.8.0 remains the latest stable release**.
+
 ## 0.8.0
 
 **Features**

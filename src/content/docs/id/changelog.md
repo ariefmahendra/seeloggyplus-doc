@@ -6,6 +6,10 @@ description: Catatan rilis SeeLoggyPlus — ringkasan semua fitur, perbaikan, da
 Sorotan utama setiap rilis dari sisi pengguna. Catatan lengkap dan unduhan tersedia di halaman
 [GitHub Releases](https://github.com/ariefmahendra/seeloggyplus/releases).
 
+## Belum dirilis
+
+[Pratinjau pengembangan](/id/development-preview/) menjelaskan workbench dengan dock, mode detail Raw/Formatted, ikon biru di atas latar tombol abu-abu, splash yang lebih tajam dan muncul lebih awal, perbaikan pencarian, serta perubahan memori Tail. Perubahan ini ada di `dev`; **0.8.0 tetap rilis stabil terbaru**.
+
 ## 0.8.0
 
 **Fitur**
