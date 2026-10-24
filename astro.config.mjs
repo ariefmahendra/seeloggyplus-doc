@@ -74,7 +74,7 @@ export default defineConfig({
 				{
 					label: 'Project',
 					translations: { id: 'Proyek' },
-					items: ['changelog', 'release-highlights'],
+					items: ['changelog', 'release-highlights', 'privacy'],
 				},
 			],
 		}),
