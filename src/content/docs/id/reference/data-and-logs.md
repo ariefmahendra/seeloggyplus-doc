@@ -9,12 +9,14 @@ Pengaturan dan riwayat tersimpan di **direktori data**: `.data` di samping aplik
 default, atau folder yang diberikan oleh properti sistem `seeloggyplus.dataDir` (dipakai
 oleh test suite dan instalasi portabel).
 
+Edisi Microsoft Store menyimpan data di `%LOCALAPPDATA%\SeeLoggyPlus\Store` dan diagnostik di subfolder `logs/`. Profil Store dan portabel terpisah; pemasangan edisi Store tidak otomatis mengimpor data portabel.
+
 | Item | Isi |
 | --- | --- |
 | `seeloggyplus.db` | Database SQLite: file terbaru, server, grup, favorit, preferensi, dan metadata log. |
 | `.keystore` | Kata sandi SSH dan passphrase kunci yang terenkripsi. |
 | `known_hosts` | Host key SSH yang dipercaya. |
-| `updates/` | Area staging untuk paket pembaruan yang diunduh. |
+| `updates/` | Area staging lama dari versi dengan pembaruan di aplikasi. |
 
 ## Log aplikasi
 

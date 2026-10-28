@@ -62,8 +62,9 @@ for (const locale of ['', '/id']) {
 	test(`new readers can install before opening logs ${locale || 'en'}`, async ({ page }) => {
 		await page.goto(`${locale}/getting-started/`);
 		const steps = page.locator('.sl-steps');
+		await expect(steps.getByRole('link', { name: 'GitHub Releases', exact: true })).toHaveAttribute('href', 'https://github.com/ariefmahendra/seeloggyplus/releases/latest');
 		await expect(steps).toBeVisible();
-		await expect(steps.locator('li').first().getByRole('link')).toHaveAttribute('href', /github.com\/ariefmahendra\/seeloggyplus\/releases\/latest/);
+		await expect(steps.locator('li').first().getByRole('link')).toHaveAttribute('href', 'https://apps.microsoft.com/detail/9PDJ4N28SNT7');
 		await expect(steps.getByRole('link', { name: locale ? 'Instalasi' : 'Installation', exact: true })).toHaveAttribute('href', `${locale}/installation/`);
 	});
 

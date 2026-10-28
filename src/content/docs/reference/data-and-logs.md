@@ -9,12 +9,14 @@ Settings and history live in the **data directory**: `.data` next to the applica
 default, or the folder given by the `seeloggyplus.dataDir` system property (used by the
 test suite and by portable installs).
 
+The Microsoft Store edition keeps data in `%LOCALAPPDATA%\SeeLoggyPlus\Store` and diagnostics in its `logs/` subfolder. Store and portable profiles are separate; installing the Store edition does not import portable data automatically.
+
 | Item | Contents |
 | --- | --- |
 | `seeloggyplus.db` | SQLite database: recent files, servers, groups, favourites, preferences and log metadata. |
 | `.keystore` | Encrypted SSH passwords and key passphrases. |
 | `known_hosts` | Trusted SSH host keys. |
-| `updates/` | Staging area for downloaded update packages. |
+| `updates/` | Legacy staging area from versions with in-app updates. |
 
 ## Application logs
 

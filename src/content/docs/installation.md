@@ -1,10 +1,21 @@
 ---
 title: Installation
-description: Install SeeLoggyPlus from the portable packages, run the packaged app on Windows or Linux, or build it from source.
+description: Install SeeLoggyPlus from Microsoft Store on Windows, use portable packages on Windows or Linux, or build from source.
 ---
 
-SeeLoggyPlus ships as a **portable package** — there is no installer. Unzip it and run the
-launcher. Two variants are published for Windows and Linux:
+SeeLoggyPlus is available on **Microsoft Store** for Windows. Portable packages remain available for Windows and Linux.
+
+## Windows: Microsoft Store
+
+1. Open [SeeLoggyPlus on Microsoft Store](https://apps.microsoft.com/detail/9PDJ4N28SNT7) and install the app.
+2. Launch **SeeLoggyPlus** from the Start menu. Java is included.
+3. Microsoft Store manages updates according to your Store settings. **Help → Open Microsoft Store** opens the product page; it does not force an immediate update.
+
+Store and portable installations use separate data locations. Installing the Store edition does not automatically import a portable profile. See [Files, Data & Logs](/reference/data-and-logs/) before moving or backing up data.
+
+## Portable packages: Windows and Linux
+
+Extract the entire ZIP and run its launcher. Two variants are available:
 
 | Package | Notes |
 | --- | --- |
@@ -25,7 +36,7 @@ Download the latest packages from the [GitHub Releases](https://github.com/arief
 
 Run `./launcher.sh`.
 
-## Java and memory
+## Java and memory for portable packages
 
 Java is selected in this order: `java.home` in `launcher.properties`, then the bundled
 `jre/` folder, then `JAVA_HOME`, then `java` on `PATH`. The maximum heap size is set with

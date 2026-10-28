@@ -1,10 +1,21 @@
 ---
 title: Instalasi
-description: Pasang SeeLoggyPlus dari paket portabel, jalankan aplikasi siap pakai di Windows atau Linux, atau bangun aplikasi dari kode sumber.
+description: Pasang SeeLoggyPlus dari Microsoft Store di Windows, gunakan paket portabel di Windows atau Linux, atau bangun dari kode sumber.
 ---
 
-SeeLoggyPlus hadir sebagai **paket portabel** — tidak ada installer. Ekstrak isinya lalu
-jalankan launcher. Dua varian tersedia untuk Windows dan Linux:
+SeeLoggyPlus tersedia di **Microsoft Store** untuk Windows. Paket portabel tetap tersedia untuk Windows dan Linux.
+
+## Windows: Microsoft Store
+
+1. Buka [SeeLoggyPlus di Microsoft Store](https://apps.microsoft.com/detail/9PDJ4N28SNT7) dan pasang aplikasi.
+2. Jalankan **SeeLoggyPlus** dari menu Start. Java sudah disertakan.
+3. Microsoft Store mengelola pembaruan sesuai pengaturan Store Anda. **Help → Open Microsoft Store** membuka halaman produk; menu ini tidak memaksa pembaruan langsung.
+
+Instalasi Store dan portabel menggunakan lokasi data terpisah. Memasang edisi Store tidak otomatis mengimpor profil portabel. Lihat [File, Data & Log](/id/reference/data-and-logs/) sebelum memindahkan atau mencadangkan data.
+
+## Paket portabel: Windows dan Linux
+
+Ekstrak seluruh ZIP lalu jalankan launcher. Dua varian tersedia:
 
 | Paket | Catatan |
 | --- | --- |
@@ -25,7 +36,7 @@ Unduh paket terbaru dari halaman [GitHub Releases](https://github.com/ariefmahen
 
 Jalankan `./launcher.sh`.
 
-## Java dan memori
+## Java dan memori untuk paket portabel
 
 Java dipilih dengan urutan ini: `java.home` di `launcher.properties`, lalu folder `jre/`
 bawaan, kemudian `JAVA_HOME`, dan terakhir `java` pada `PATH`. Ukuran heap maksimum

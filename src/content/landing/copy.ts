@@ -18,7 +18,7 @@ const en = {
 			'A fast desktop log viewer for files on your machine and logs on servers, over SSH.',
 		button: 'Download for Windows / Linux',
 		link: 'Getting started',
-		note: 'Free to use. Portable on Windows and Linux, with or without a bundled Java runtime.',
+		note: 'Free to use. Available on Microsoft Store for Windows, with portable packages for Windows and Linux.',
 		alt: 'The SeeLoggyPlus main window with local log files open, a search running, and a formatted JSON payload in the detail panel.',
 	},
 	features: {
@@ -163,7 +163,7 @@ const en = {
 			},
 			{
 				q: 'Does it work offline?',
-				a: 'Reading local files works with no network at all. Remote logs need your server to be reachable, and update checks only run when they are enabled.',
+				a: 'Reading local files works with no network at all. Remote logs need your server to be reachable, and Microsoft Store installation and updates require internet.',
 			},
 			{
 				q: 'Where are credentials stored?',
@@ -179,7 +179,7 @@ const en = {
 			},
 			{
 				q: 'How do updates work?',
-				a: 'The app checks in the background, stages a verified package, and installs it on the next restart. A failed download leaves your installation untouched.',
+				a: 'Microsoft Store manages updates for the Store edition according to your Store settings. For portable installations, download a newer package manually from GitHub Releases.',
 			},
 		],
 	},
@@ -212,7 +212,7 @@ const id: typeof en = {
 			'Log viewer desktop yang cepat untuk file di komputer Anda dan log di server, melalui SSH.',
 		button: 'Unduh untuk Windows / Linux',
 		link: 'Mulai',
-		note: 'Gratis. Portabel di Windows dan Linux, dengan atau tanpa Java bawaan.',
+		note: 'Gratis. Tersedia di Microsoft Store untuk Windows, dengan paket portabel untuk Windows dan Linux.',
 		alt: 'Jendela utama SeeLoggyPlus dengan file log lokal terbuka, pencarian berjalan, dan payload JSON terformat di panel detail.',
 	},
 	features: {
@@ -357,7 +357,7 @@ const id: typeof en = {
 			},
 			{
 				q: 'Apakah bisa offline?',
-				a: 'Membaca file lokal sama sekali tidak butuh jaringan. Log remote memerlukan server yang dapat dijangkau, dan pemeriksaan pembaruan hanya berjalan bila diaktifkan.',
+				a: 'Membaca file lokal sama sekali tidak butuh jaringan. Log remote memerlukan server yang dapat dijangkau, serta instalasi dan pembaruan Microsoft Store membutuhkan internet.',
 			},
 			{
 				q: 'Di mana kredensial disimpan?',
@@ -373,7 +373,7 @@ const id: typeof en = {
 			},
 			{
 				q: 'Bagaimana pembaruannya?',
-				a: 'Aplikasi memeriksa di latar belakang, menyiapkan paket yang terverifikasi, lalu memasangnya saat restart berikutnya. Unduhan yang gagal tidak mengubah instalasi Anda.',
+				a: 'Microsoft Store mengelola pembaruan edisi Store sesuai pengaturan Store Anda. Untuk instalasi portabel, unduh paket terbaru secara manual dari GitHub Releases.',
 			},
 		],
 	},

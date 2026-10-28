@@ -1,26 +1,23 @@
 ---
 title: Pembaruan
-description: Pemeriksaan pembaruan otomatis dan manual, unduhan latar belakang, restart bertahap dengan keamanan rollback, dan dialog What's New.
+description: Pembaruan Microsoft Store untuk Windows dan upgrade portabel manual pada SeeLoggyPlus 0.10.0.
 ---
 
-Gunakan **Help → Check for Updates...** untuk pemeriksaan manual, atau biarkan opsi
-otomatis tetap aktif.
+## Microsoft Store
 
-| Opsi | Perilaku |
-| --- | --- |
-| Check for Updates Automatically | Memeriksa di latar belakang setelah aplikasi dimulai; tautan muncul di bilah status saat ada rilis yang lebih baru. |
-| Download Updates Automatically | Mengunduh paket di latar belakang sehingga restart berikutnya dapat memasangnya. |
-| Dialog pembaruan | Menampilkan versi baru, nama dan ukuran paket, catatan rilis, serta progres unduhan, dengan **Download**, **Skip this version**, **Later**, **Release Notes**, dan **Close**. |
-| Menerapkan pembaruan | Setelah unduhan selesai, konfirmasi restart. Versi baru disiapkan di samping versi saat ini dan diaktifkan saat restart. |
-| Keamanan rollback | Versi dipasang secara berdampingan (`versions/<version>` dengan penunjuk `current`), sehingga start yang gagal dapat kembali ke versi sebelumnya. |
-| What's New | Setelah peningkatan versi, sebuah dialog merangkum perubahan pada versi baru. |
+Microsoft Store mengelola pembaruan edisi Store sesuai pengaturan Store dan ketersediaan layanannya.
 
-:::tip
-Jika unduhan gagal (offline, proxy, host yang diblokir), instalasi dibiarkan utuh dan
-Anda dapat mencoba lagi nanti. Tidak ada yang diganti sampai paket terverifikasi
-selesai diunduh.
-:::
+Gunakan **Help → Open Microsoft Store** untuk membuka [halaman produk SeeLoggyPlus](https://apps.microsoft.com/detail/9PDJ4N28SNT7). Membuka halaman ini tidak memaksa pembaruan langsung.
 
-## Upgrade 0.9.0
+Setelah versi Store berubah, **What's New** menampilkan catatan rilis bawaan sekali. Dialog ini tidak muncul saat pertama kali aplikasi dijalankan.
 
-Skema database tetap versi 4; data dan kredensial yang sudah ada dipertahankan. Preferensi JSON/XML lama tetap menjadi fallback untuk mode awal Formatted. Cadangkan seluruh direktori data sebelum upgrade manual. Riwayat Tail kini memakai ruang disk sementara; penutupan sesi normal menghapus spool, sedangkan penghentian paksa dapat meninggalkannya. Help tetap membuka website.
+## Paket portabel
+
+Mulai 0.10.0, instalasi portabel tidak memeriksa pembaruan, menampilkan notifikasi pembaruan, atau mengunduh dan memasang penggantinya. Unduh paket terbaru secara manual dari [GitHub Releases](https://github.com/ariefmahendra/seeloggyplus/releases/latest).
+
+1. Tutup aplikasi dan cadangkan seluruh direktori data.
+2. Ekstrak paket baru ke folder baru.
+3. Salin seluruh direktori data dan `launcher.properties`. Pertahankan pengaturan khusus `seeloggyplus.dataDir`. Jangan salin penunjuk `current` atau direktori `versions/` lama.
+4. Jalankan paket baru dan periksa pengaturan serta profil server sebelum menghapus instalasi lama.
+
+Lihat [File, Data & Log](/id/reference/data-and-logs/) untuk rincian pencadangan. Instalasi Store dan portabel memakai lokasi data terpisah; memasang edisi Store tidak otomatis mengimpor data portabel.
